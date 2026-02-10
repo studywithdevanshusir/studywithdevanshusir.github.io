@@ -1,0 +1,28 @@
+# Study with Devanshu Sir - Robots.txt
+# Allow all search engines to crawl the site
+
+User-agent: *
+Allow: /
+
+# Disallow private or sensitive areas (if any)
+# Disallow: /admin/
+# Disallow: /private/
+
+# Crawl delay and request rate
+Crawl-delay: 1
+
+# Specify sitemap location
+Sitemap: https://studywithdevanshusir.github.io/sitemap.xml
+
+# Allow specific bots
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
