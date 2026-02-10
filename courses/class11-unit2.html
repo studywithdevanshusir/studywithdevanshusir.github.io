@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-74VNSC0NMX"></script> 
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-74VNSC0MNX');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit 2: Computational Thinking | Class 11 CS</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <script src="../assets/js/navigation.js" defer></script>
+    <style>
+        .page-header {
+            padding-top: 8rem;
+            padding-bottom: 2rem;
+            text-align: center;
+        }
+
+        .chapter-section {
+            padding: 4rem 1.5rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .chapter-card {
+            background: var(--bg-card);
+            border-radius: 1.5rem;
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .chapter-title {
+            color: var(--primary-color);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 0.5rem;
+        }
+
+        .story-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #cbd5e1;
+            margin-bottom: 1.5rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="navbar-placeholder"></div>
+
+    <section class="page-header" data-aos="fade-down">
+        <h1>Unit 2: Computational Thinking & Programming</h1>
+        <p style="font-size: 1.2rem; color: #94a3b8;">Class 11 CS (Code 083) - Python Basics</p>
+    </section>
+
+    <div class="chapter-section" data-aos="fade-up">
+
+        <!-- Section 1: Introduction to Python -->
+        <div class="chapter-card">
+            <h2 class="chapter-title">1. Introduction to Python</h2>
+            <p class="story-text">
+                Python ek high-level programming language hai jo Guido Van Rossum ne banayi thi. Ye simple English jaisi
+                hai aur bahut powerful hai.
+            </p>
+
+            <div class="code-block">
+                <pre><code class="language-python"><span class="comment"># First Python Program</span>
+print(<span class="string">"Hello, World!"</span>)
+print(<span class="string">"Welcome to Class 11 CS"</span>)</code></pre>
+            </div>
+        </div>
+
+        <!-- Section 2: Conditional Statements -->
+        <div class="chapter-card">
+            <h2 class="chapter-title">2. Conditional Statements (if-else)</h2>
+            <p class="story-text">
+                Decision lene ke liye hum if-else ka use karte hain. Jaise "Agar barish hui toh umbrella lo, varna mat
+                lo".
+            </p>
+
+            <div class="code-block">
+                <pre><code class="language-python">age = <span class="function">int</span>(input(<span class="string">"Enter your age: "</span>))
+
+<span class="keyword">if</span> age >= <span class="number">18</span>:
+    print(<span class="string">"You are eligible to vote!"</span>)
+<span class="keyword">else</span>:
+    print(<span class="string">"You are NOT eligible to vote."</span>)</code></pre>
+            </div>
+        </div>
+
+        <!-- Section 3: Loops -->
+        <div class="chapter-card">
+            <h2 class="chapter-title">3. Loops (for, while)</h2>
+            <p class="story-text">
+                Kisi kaam ko bar-bar repeat karne ke liye loop use hota hai.
+                <br><strong>for loop:</strong> Sequence par chalta hai.
+                <br><strong>while loop:</strong> Condition true hone tak chalta hai.
+            </p>
+
+            <div class="code-block">
+                <pre><code class="language-python"><span class="comment"># Printing numbers 1 to 5</span>
+<span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, <span class="number">6</span>):
+    print(i)</code></pre>
+            </div>
+            <!-- AdSense Placeholder -->
+            <div class="ad-slot">Google Ad Here</div>
+        </div>
+
+        <!-- Quiz Section -->
+        <div class="mcq-box">
+            <h2 style="color: #10b981; margin-bottom: 1.5rem;">Quiz Time!</h2>
+            <p class="mcq-question">Q1. Who developed Python?</p>
+            <div class="mcq-options">
+                <span>(a) Dennis Ritchie</span>
+                <span>(b) Guido Van Rossum</span>
+                <span>(c) James Gosling</span>
+                <span>(d) Bjarne Stroustrup</span>
+            </div>
+            <button class="btn btn-reveal" onclick="toggleAnswer('ans1')">Check Answer</button>
+            <div id="ans1" class="mcq-answer" style="display: none;">
+                <strong>Answer: (b) Guido Van Rossum</strong>
+            </div>
+        </div>
+
+        <div class="mcq-box">
+            <p class="mcq-question">Q2. Which keyword is used for loops?</p>
+            <div class="mcq-options">
+                <span>(a) loop</span>
+                <span>(b) repeat</span>
+                <span>(c) for</span>
+                <span>(d) next</span>
+            </div>
+            <button class="btn btn-reveal" onclick="toggleAnswer('ans2')">Check Answer</button>
+            <div id="ans2" class="mcq-answer" style="display: none;">
+                <strong>Answer: (c) for</strong>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="footer-placeholder"></div>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script src="../assets/js/script.js"></script>
+</body>
+
+</html>

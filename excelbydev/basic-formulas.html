@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-74VNSC0NMX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-74VNSC0NMX');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic Formulas | Excel Mastery</title>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
+
+    <style>
+        /* Shared Excel Theme */
+        body {
+            background-color: var(--bg-dark);
+        }
+
+        .excel-navbar {
+            background: #064e3b;
+            /* Dark Green */
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .lesson-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 280px;
+            background: rgba(30, 41, 59, 0.5);
+            border-right: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 3rem 4rem;
+            max-width: 900px;
+        }
+
+        .topic-link {
+            display: block;
+            padding: 0.8rem 1rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-bottom: 0.5rem;
+            transition: all 0.2s;
+        }
+
+        .topic-link:hover,
+        .topic-link.active {
+            background: rgba(16, 185, 129, 0.1);
+            color: #34d399;
+            padding-left: 1.2rem;
+        }
+
+        .content-card {
+            background: rgba(30, 41, 59, 0.6);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .formula-box {
+            background: #1e293b;
+            padding: 1rem;
+            border-left: 4px solid #10b981;
+            font-family: monospace;
+            color: #a5f3fc;
+            margin: 1rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .lesson-container {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+            }
+
+            .main-content {
+                padding: 2rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Simple Nav for Course -->
+    <nav class="excel-navbar">
+        <a href="index.html" style="color:white; text-decoration:none; display:flex; gap:0.5rem; align-items:center;">
+            <i class="fas fa-arrow-left"></i> Back to Hub
+        </a>
+        <h2 style="color:white; font-size:1.2rem; margin:0;">Module 1: Basic Formulas</h2>
+        <div></div> <!-- Spacer -->
+    </nav>
+
+    <div class="lesson-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <h3 style="color:white; margin-bottom:1.5rem;">Topics</h3>
+            <a href="#intro" class="topic-link active">1. Introduction to Formulas</a>
+            <a href="#sum" class="topic-link">2. The AutoSum Feature</a>
+            <a href="#average" class="topic-link">3. AVERAGE & COUNT</a>
+            <a href="#refs" class="topic-link">4. Relative vs Absolute Refs</a>
+            <a href="#practice" class="topic-link" style="margin-top:2rem; color:#facc15;"><i class="fas fa-star"></i>
+                Practice Exercise</a>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+
+            <section id="intro" class="content-card" data-aos="fade-up">
+                <h1 style="font-size: 2.5rem; color: #34d399; margin-bottom: 1rem;">1. Introduction to Formulas</h1>
+                <p style="color: #cbd5e1; font-size: 1.1rem; line-height: 1.7;">
+                    Formulas are the heart of Excel. Every formula must start with an equals sign (<b>=</b>). Without
+                    it, Excel treats your entry as plain text.
+                </p>
+                <div class="formula-box">
+                    =A1 + B1 <span style="color: #64748b;">// Adds value in Cell A1 to B1</span>
+                </div>
+            </section>
+
+            <section id="sum" class="content-card" data-aos="fade-up">
+                <h2 style="font-size: 1.8rem; color: white; margin-bottom: 1rem;">2. The SUM Function</h2>
+                <p style="color: #cbd5e1; margin-bottom: 1rem;">
+                    Instead of adding cells one by one (A1+A2+A3...), use the SUM function for ranges.
+                </p>
+                <div class="formula-box">
+                    =SUM(A1:A10) <span style="color: #64748b;">// Adds all cells from A1 to A10</span>
+                </div>
+            </section>
+
+            <section id="average" class="content-card" data-aos="fade-up">
+                <h2 style="font-size: 1.8rem; color: white; margin-bottom: 1rem;">3. AVERAGE & COUNT</h2>
+                <p style="color: #cbd5e1; margin-bottom: 1rem;">
+                    Statistical functions are just as easy.
+                </p>
+                <ul style="color: #94a3b8; margin-left: 1.5rem; margin-bottom: 1rem;">
+                    <li style="margin-bottom:0.5rem;"><b>AVERAGE(range)</b>: Calculates the mean.</li>
+                    <li><b>COUNT(range)</b>: Counts how many cells contain <i>numbers</i>.</li>
+                </ul>
+                <div class="formula-box">
+                    =AVERAGE(B2:B20)<br>
+                    =COUNT(C2:C20)
+                </div>
+            </section>
+
+            <section id="refs" class="content-card" data-aos="fade-up">
+                <h2 style="font-size: 1.8rem; color: #f472b6; margin-bottom: 1rem;">4. Absolute Referencing ($)</h2>
+                <p style="color: #cbd5e1; margin-bottom: 1rem;">
+                    When you copy a formula, Excel changes the cell references automatically (Relative). To lock a cell
+                    (like a Tax Rate), use the Dollar Sign ($).
+                </p>
+                <div class="formula-box">
+                    =A1 * $B$1 <span style="color: #64748b;">// B1 is locked. Even if dragged down, it stays B1.</span>
+                </div>
+                <p style="color: #94a3b8; font-size: 0.9rem;">
+                    <i>Tip: Press <b>F4</b> to toggle absolute referencing automatically!</i>
+                </p>
+            </section>
+
+            <section id="practice" class="content-card" style="border-color: #facc15;" data-aos="fade-up">
+                <h2 style="font-size: 1.8rem; color: #facc15; margin-bottom: 1rem;"><i class="fas fa-dumbbell"></i>
+                    Practice Task</h2>
+                <p style="color: #cbd5e1; margin-bottom: 1rem;">
+                    Create a "Monthly Expense" sheet. List 5 items, their cost, and calculate the Total using SUM and
+                    Average Cost using AVERAGE.
+                </p>
+                <button class="btn btn-primary" onclick="alert('Download started... (Demo)')">Download Practice
+                    Sheet</button>
+            </section>
+
+        </main>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 800, once: true });
+
+        // Simple Sidebar Active State on Scroll (Intersection Observer)
+        const sections = document.querySelectorAll('.content-card');
+        const navLinks = document.querySelectorAll('.topic-link');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (scrollY >= sectionTop - 150) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').includes(current)) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

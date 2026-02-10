@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-74VNSC0NMX"></script> 
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-74VNSC0MNX');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python: The Core Blueprint | Interactive Infographic</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Chart Container Styling - Mandatory Requirements */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            /* Base height */
+            max-height: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #3b82f6;
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #2563eb;
+        }
+
+        /* Flowchart Connector Styles (NO SVG) */
+        .flow-line-vertical {
+            width: 2px;
+            background-color: #cbd5e1;
+            margin: 0 auto;
+        }
+
+        .flow-arrow-down {
+            width: 0;
+            height: 0;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-top: 8px solid #cbd5e1;
+            margin: 0 auto;
+        }
+    </style>
+    <!-- Chosen Palette: "Energetic & Playful" (Vibrant Blues, Sunny Yellows, Active Greens) -->
+    <!-- Application Structure Plan: 
+         The infographic flows logically from the atomic structure of Python to its dynamic behavior:
+         1. The Header: Sets the energetic tone.
+         2. The Foundation (Tokens): Uses a Doughnut chart to visualize the composition of Python's grammar.
+         3. The Mechanics (Operators): Uses a Polar Area chart to compare the volume/utility of different operator types.
+         4. The Data Landscape (Types): Uses a Pie chart to dramatically show the Mutable vs Immutable split.
+         5. The Logic Flow (Control): Visualizes decision paths using structured HTML/CSS blocks (No SVG).
+         6. The Dynamic Lab (Random): Uses a Bar chart to demonstrate the output of the random module.
+         Each section includes context, a visualization, and key takeaways.
+    -->
+    <!-- Visualization & Content Choices:
+         - Token Composition -> Goal: Inform -> Doughnut Chart -> Shows parts of a whole (lexical units).
+         - Operator Toolbox -> Goal: Compare -> Polar Area Chart -> Compares the number of tools in each category.
+         - Mutability Split -> Goal: Compare -> Pie Chart -> Highlights the binary nature of data types.
+         - Logic Pathways -> Goal: Organize -> HTML/CSS Flowchart -> Visualizes process without banned SVG/Mermaid.
+         - Random Distribution -> Goal: Relationships -> Bar Chart -> Shows frequency distribution of random events.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <script src="../assets/js/navigation.js" defer></script>
+</head>
+
+<body class="bg-slate-50 text-slate-800 pt-20">
+    <div id="navbar-placeholder"></div>
+
+    <!-- HERO SECTION -->
+    <header class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-12 px-4 shadow-lg">
+        <div class="max-w-6xl mx-auto text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4 tracking-tight">Python: The Core Blueprint</h1>
+            <p class="text-xl md:text-2xl font-light opacity-90">A visual revision tour of Class 12 Python Basics</p>
+            <div class="mt-8 flex justify-center gap-4">
+                <div class="bg-white/20 backdrop-blur-sm rounded-full px-6 py-2 text-sm font-semibold">Interpreted</div>
+                <div class="bg-white/20 backdrop-blur-sm rounded-full px-6 py-2 text-sm font-semibold">Interactive</div>
+                <div class="bg-white/20 backdrop-blur-sm rounded-full px-6 py-2 text-sm font-semibold">Object-Oriented
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTAINER -->
+    <main class="max-w-7xl mx-auto px-4 py-12 space-y-16">
+
+        <!-- SECTION 1: THE ATOMIC STRUCTURE (TOKENS) -->
+        <section>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="space-y-4">
+                    <h2 class="text-3xl font-bold text-indigo-800 border-l-4 border-yellow-400 pl-4">1. The Atomic
+                        Structure: Tokens</h2>
+                    <p class="text-slate-600 leading-relaxed text-lg">
+                        Just as sentences are made of words, a Python program is built from <strong>Tokens</strong>—the
+                        smallest lexical units the interpreter can process. Understanding these is the first step to
+                        mastering the language syntax.
+                    </p>
+                    <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-blue-500">
+                        <h3 class="font-bold text-lg mb-2 text-slate-800">Key Insight</h3>
+                        <p class="text-slate-600 text-sm">
+                            <strong>Keywords</strong> are reserved and cannot be used as <strong>Identifiers</strong>.
+                            <strong>Literals</strong> are the raw data, while <strong>Operators</strong> provide the
+                            action.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl shadow-lg">
+                    <div class="chart-container">
+                        <canvas id="tokensChart"></canvas>
+                    </div>
+                    <p class="text-center text-xs text-slate-400 mt-4">Visual breakdown of Python's Lexical Units</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: THE OPERATOR TOOLBOX -->
+        <section class="bg-white rounded-3xl shadow-xl p-8 md:p-12 overflow-hidden relative">
+            <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-green-400 to-blue-500"></div>
+
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <h2 class="text-3xl font-bold text-indigo-800 mb-4">2. The Operator Toolbox</h2>
+                <p class="text-slate-600 text-lg">
+                    Operators are the engines of logic and calculation. Python provides a rich set of symbols to perform
+                    arithmetic, comparisons, and logical decisions.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="chart-container order-2 md:order-1">
+                    <canvas id="operatorsChart"></canvas>
+                </div>
+
+                <div class="space-y-6 order-1 md:order-2">
+                    <h3 class="text-2xl font-bold text-slate-800">Tool Categories</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <div
+                                class="w-10 h-10 rounded-lg bg-blue-100 text-blue-600 flex items-center justify-center font-bold text-xl mr-4 mt-1">
+                                +</div>
+                            <div>
+                                <h4 class="font-bold text-slate-700">Arithmetic</h4>
+                                <p class="text-sm text-slate-500">For math: +, -, *, /, %, **, //</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div
+                                class="w-10 h-10 rounded-lg bg-green-100 text-green-600 flex items-center justify-center font-bold text-xl mr-4 mt-1">
+                                ==</div>
+                            <div>
+                                <h4 class="font-bold text-slate-700">Relational</h4>
+                                <p class="text-sm text-slate-500">For comparison: ==, !=, >, <,>=, <=< /p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div
+                                class="w-10 h-10 rounded-lg bg-purple-100 text-purple-600 flex items-center justify-center font-bold text-xl mr-4 mt-1">
+                                &</div>
+                            <div>
+                                <h4 class="font-bold text-slate-700">Logical</h4>
+                                <p class="text-sm text-slate-500">For complex logic: and, or, not</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: DATA LANDSCAPE (MUTABILITY) -->
+        <section>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6">
+                    <h2 class="text-3xl font-bold text-indigo-800 border-l-4 border-red-400 pl-4">3. The Data Landscape
+                    </h2>
+                    <p class="text-slate-600 leading-relaxed text-lg">
+                        In Python, data types determine not just what values a variable can hold, but whether those
+                        values can be changed. This concept is known as <strong>Mutability</strong>.
+                    </p>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-red-50 p-4 rounded-xl border border-red-100">
+                            <h4 class="font-bold text-red-800 mb-1">Immutable</h4>
+                            <p class="text-xs text-red-600">Cannot change after creation. <br>(e.g., String, Tuple)</p>
+                        </div>
+                        <div class="bg-green-50 p-4 rounded-xl border border-green-100">
+                            <h4 class="font-bold text-green-800 mb-1">Mutable</h4>
+                            <p class="text-xs text-green-600">Can be modified in place. <br>(e.g., List, Dict)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl shadow-lg">
+                    <div class="chart-container">
+                        <canvas id="mutabilityChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: LOGIC FLOW (CONTROL STRUCTURES) -->
+        <section class="bg-indigo-900 text-white rounded-3xl p-8 md:p-12 shadow-2xl">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl font-bold mb-4 text-yellow-400">4. Controlling the Flow</h2>
+                <p class="text-indigo-200 max-w-2xl mx-auto">
+                    Programs aren't just straight lines. They branch and loop. Flow control statements like
+                    <code>if-else</code> and loops (<code>for</code>, <code>while</code>) dictate the execution path.
+                </p>
+            </div>
+
+            <!-- HTML/CSS Flowchart (No SVG/Mermaid) -->
+            <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+
+                <!-- Decision Flow -->
+                <div class="bg-indigo-800/50 p-6 rounded-xl border border-indigo-700">
+                    <h3 class="text-xl font-bold mb-6 text-center text-white">Decision Making (if..else)</h3>
+                    <div class="flex flex-col items-center">
+                        <div class="bg-blue-500 text-white px-6 py-2 rounded-full font-mono text-sm shadow-lg mb-2">
+                            Start</div>
+                        <div class="flow-line-vertical h-4"></div>
+                        <div class="flow-arrow-down mb-2"></div>
+
+                        <div
+                            class="bg-yellow-500 text-white px-4 py-3 transform rotate-0 rounded-lg font-mono text-sm shadow-lg mb-2">
+                            Condition True?</div>
+
+                        <div class="grid grid-cols-2 gap-8 w-full">
+                            <div class="flex flex-col items-center">
+                                <div class="text-xs text-green-300 mb-1">Yes</div>
+                                <div class="w-0.5 h-4 bg-green-300"></div>
+                                <div class="bg-green-600 text-white p-2 rounded text-xs mt-1 w-full text-center">Execute
+                                    If Block</div>
+                            </div>
+                            <div class="flex flex-col items-center">
+                                <div class="text-xs text-red-300 mb-1">No</div>
+                                <div class="w-0.5 h-4 bg-red-300"></div>
+                                <div class="bg-red-600 text-white p-2 rounded text-xs mt-1 w-full text-center">Execute
+                                    Else Block</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Loop Flow -->
+                <div class="bg-indigo-800/50 p-6 rounded-xl border border-indigo-700">
+                    <h3 class="text-xl font-bold mb-6 text-center text-white">Iteration (Loops)</h3>
+                    <div class="flex flex-col items-center">
+                        <div class="bg-purple-500 text-white px-6 py-2 rounded-full font-mono text-sm shadow-lg mb-2">
+                            For Item in Sequence</div>
+                        <div class="flow-line-vertical h-4"></div>
+                        <div class="flow-arrow-down mb-2"></div>
+
+                        <div
+                            class="bg-pink-500 text-white px-4 py-3 rounded-lg font-mono text-sm shadow-lg mb-2 w-full text-center">
+                            Execute Loop Body</div>
+
+                        <div class="flow-line-vertical h-4"></div>
+                        <div class="flow-arrow-down mb-2"></div>
+                        <div class="bg-gray-600 text-white px-6 py-2 rounded-md font-mono text-xs shadow-lg">Repeat
+                            until end</div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION 5: DYNAMIC LAB (RANDOM MODULE) -->
+        <section>
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-10">
+                    <h2 class="text-3xl font-bold text-indigo-800 mb-4">5. The Random Factor</h2>
+                    <p class="text-slate-600">
+                        The <code>random</code> module is essential for simulations, games, and security.
+                        The chart below visualizes the distribution of rolling a 6-sided die 1000 times using
+                        <code>random.randint(1, 6)</code>.
+                    </p>
+                </div>
+
+                <div class="bg-white p-6 md:p-8 rounded-2xl shadow-xl border border-slate-100">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="font-bold text-slate-700">Random Distribution Simulation</h3>
+                        <div class="bg-yellow-100 text-yellow-800 text-xs font-bold px-3 py-1 rounded-full">Live Data
+                        </div>
+                    </div>
+
+                    <div class="chart-container">
+                        <canvas id="randomChart"></canvas>
+                    </div>
+
+                    <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
+                        <div class="bg-slate-50 p-3 rounded-lg">
+                            <div class="font-mono text-blue-600 font-bold">random()</div>
+                            <div class="text-xs text-slate-500">Float 0.0 to 1.0</div>
+                        </div>
+                        <div class="bg-slate-50 p-3 rounded-lg">
+                            <div class="font-mono text-blue-600 font-bold">randint(a,b)</div>
+                            <div class="text-xs text-slate-500">Int a to b (inclusive)</div>
+                        </div>
+                        <div class="bg-slate-50 p-3 rounded-lg">
+                            <div class="font-mono text-blue-600 font-bold">randrange(a,b)</div>
+                            <div class="text-xs text-slate-500">Int a to b (excl. upper)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <!-- FOOTER -->
+    <div id="footer-placeholder"></div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // --- Shared Chart Config ---
+        Chart.defaults.font.family = "'Poppins', sans-serif";
+        Chart.defaults.color = '#64748b';
+
+        // --- Label Wrapping Helper ---
+        // Splits long labels into arrays for multiline support
+        function wrapLabel(label, maxLength = 16) {
+            if (label.length <= maxLength) return label;
+            const words = label.split(' ');
+            const lines = [];
+            let currentLine = words[0];
+
+            for (let i = 1; i < words.length; i++) {
+                if (currentLine.length + 1 + words[i].length <= maxLength) {
+                    currentLine += ' ' + words[i];
+                } else {
+                    lines.push(currentLine);
+                    currentLine = words[i];
+                }
+            }
+            lines.push(currentLine);
+            return lines;
+        }
+
+        // --- Tooltip Callback Helper ---
+        const tooltipConfig = {
+            callbacks: {
+                title: function (tooltipItems) {
+                    const item = tooltipItems[0];
+                    let label = item.chart.data.labels[item.dataIndex];
+                    if (Array.isArray(label)) {
+                        return label.join(' ');
+                    } else {
+                        return label;
+                    }
+                }
+            }
+        };
+
+        // --- 1. Tokens Chart (Doughnut) ---
+        const ctxTokens = document.getElementById('tokensChart').getContext('2d');
+        new Chart(ctxTokens, {
+            type: 'doughnut',
+            data: {
+                labels: ['Keywords', 'Identifiers', 'Literals', 'Operators', 'Punctuators'],
+                datasets: [{
+                    data: [35, 25, 15, 15, 10], // Representative weights
+                    backgroundColor: [
+                        '#3b82f6', // Blue
+                        '#10b981', // Green
+                        '#f59e0b', // Yellow
+                        '#8b5cf6', // Purple
+                        '#ef4444'  // Red
+                    ],
+                    borderWidth: 0,
+                    hoverOffset: 10
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'bottom' },
+                    tooltip: tooltipConfig,
+                    title: {
+                        display: true,
+                        text: 'Composition of Python Tokens'
+                    }
+                },
+                cutout: '70%'
+            }
+        });
+
+        // --- 2. Operators Chart (Polar Area) ---
+        const ctxOps = document.getElementById('operatorsChart').getContext('2d');
+        new Chart(ctxOps, {
+            type: 'polarArea',
+            data: {
+                labels: ['Arithmetic (+, -, *, /)', 'Relational (==, >, <)', 'Logical (and, or)', 'Assignment (=, +=)'],
+                datasets: [{
+                    data: [7, 6, 3, 8], // Count of operators in chapter
+                    backgroundColor: [
+                        'rgba(59, 130, 246, 0.7)', // Blue
+                        'rgba(16, 185, 129, 0.7)', // Green
+                        'rgba(139, 92, 246, 0.7)', // Purple
+                        'rgba(245, 158, 11, 0.7)'  // Yellow
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'bottom' },
+                    tooltip: tooltipConfig,
+                    title: {
+                        display: true,
+                        text: 'Operator Category Volume'
+                    }
+                },
+                scales: {
+                    r: {
+                        ticks: { display: false },
+                        grid: { color: '#e2e8f0' }
+                    }
+                }
+            }
+        });
+
+        // --- 3. Mutability Chart (Pie) ---
+        // Labels wrapped to ensure they fit
+        const immutables = wrapLabel('Immutable Types (Int, Float, String, Tuple)', 20);
+        const mutables = wrapLabel('Mutable Types (List, Dictionary, Set)', 20);
+
+        const ctxMutable = document.getElementById('mutabilityChart').getContext('2d');
+        new Chart(ctxMutable, {
+            type: 'pie',
+            data: {
+                labels: [immutables, mutables],
+                datasets: [{
+                    data: [6, 3], // Roughly 6 immutable types vs 3 mutable discussed
+                    backgroundColor: [
+                        '#ef4444', // Red (Stop/Static)
+                        '#22c55e'  // Green (Go/Change)
+                    ],
+                    borderWidth: 2,
+                    borderColor: '#ffffff'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'bottom' },
+                    tooltip: tooltipConfig,
+                    title: {
+                        display: true,
+                        text: 'Data Type Mutability Ratio'
+                    }
+                }
+            }
+        });
+
+        // --- 5. Random Distribution Chart (Bar) ---
+        // Simulating data generation
+        const randomCounts = [0, 0, 0, 0, 0, 0];
+        for (let i = 0; i < 1000; i++) {
+            const roll = Math.floor(Math.random() * 6);
+            randomCounts[roll]++;
+        }
+
+        const ctxRandom = document.getElementById('randomChart').getContext('2d');
+        new Chart(ctxRandom, {
+            type: 'bar',
+            data: {
+                labels: ['1', '2', '3', '4', '5', '6'],
+                datasets: [{
+                    label: 'Frequency (1000 Rolls)',
+                    data: randomCounts,
+                    backgroundColor: '#3b82f6',
+                    borderRadius: 5
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: tooltipConfig,
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: { display: false }
+                    },
+                    x: {
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
+
+    </script>
+    <script src="../assets/js/navigation.js"></script>
+</body>
+
+</html>

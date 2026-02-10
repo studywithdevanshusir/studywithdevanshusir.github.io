@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Charts & Graphs | Excel Mastery</title>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
+
+    <style>
+        /* Shared Excel Theme */
+        body {
+            background-color: var(--bg-dark);
+        }
+
+        .excel-navbar {
+            background: #be185d;
+            /* Pink for Charts */
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .lesson-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 280px;
+            background: rgba(30, 41, 59, 0.5);
+            border-right: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 3rem 4rem;
+            max-width: 900px;
+        }
+
+        .topic-link {
+            display: block;
+            padding: 0.8rem 1rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-bottom: 0.5rem;
+            transition: all 0.2s;
+        }
+
+        .topic-link:hover,
+        .topic-link.active {
+            background: rgba(244, 114, 182, 0.1);
+            color: #f472b6;
+            padding-left: 1.2rem;
+        }
+
+        .content-card {
+            background: rgba(30, 41, 59, 0.6);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        @media (max-width: 768px) {
+            .lesson-container {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+            }
+
+            .main-content {
+                padding: 2rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="excel-navbar">
+        <a href="index.html" style="color:white; text-decoration:none; display:flex; gap:0.5rem; align-items:center;">
+            <i class="fas fa-arrow-left"></i> Back to Hub
+        </a>
+        <h2 style="color:white; font-size:1.2rem; margin:0;">Module 3: Data Visualization</h2>
+        <div></div>
+    </nav>
+
+    <div class="lesson-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <h3 style="color:white; margin-bottom:1.5rem;">Topics</h3>
+            <a href="#types" class="topic-link active">1. Chart Types</a>
+            <a href="#custom" class="topic-link">2. Customizing Charts</a>
+            <a href="#pivot" class="topic-link">3. Pivot Tables</a>
+            <a href="#slicer" class="topic-link">4. Slicers & Timelines</a>
+            <a href="#dashboard" class="topic-link" style="margin-top:2rem; color:#facc15;"><i class="fas fa-star"></i>
+                Build a Dashboard</a>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+
+            <section id="types" class="content-card" data-aos="fade-up">
+                <h1 style="font-size: 2.5rem; color: #f472b6; margin-bottom: 1rem;">1. Selecting the Right Chart</h1>
+                <p style="color: #cbd5e1; font-size: 1.1rem; line-height: 1.7; margin-bottom: 1rem;">
+                    Not all data fits a Pie Chart. Choosing the right visual is 90% of the work.
+                </p>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div style="background:var(--bg-dark); padding:1rem; border-radius:0.5rem; text-align:center;">
+                        <i class="fas fa-chart-bar" style="font-size:2rem; color:#60a5fa; margin-bottom:0.5rem;"></i>
+                        <h4 style="color:white;">Column Chart</h4>
+                        <p style="color:#94a3b8; font-size:0.9rem;">Comparison over time or categories.</p>
+                    </div>
+                    <div style="background:var(--bg-dark); padding:1rem; border-radius:0.5rem; text-align:center;">
+                        <i class="fas fa-chart-pie" style="font-size:2rem; color:#f472b6; margin-bottom:0.5rem;"></i>
+                        <h4 style="color:white;">Pie Chart</h4>
+                        <p style="color:#94a3b8; font-size:0.9rem;">Parts of a whole (Market Share).</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="pivot" class="content-card" data-aos="fade-up">
+                <h2 style="font-size: 1.8rem; color: white; margin-bottom: 1rem;">3. Pivot Tables</h2>
+                <p style="color: #cbd5e1; margin-bottom: 1rem;">
+                    Summarize 50,000 rows of data in 5 seconds. Pivot Tables let you drag-and-drop to find answers.
+                </p>
+                <ul style="color: #94a3b8; margin-left: 1.5rem;">
+                    <li style="margin-bottom:0.5rem;">Insert > Pivot Table</li>
+                    <li style="margin-bottom:0.5rem;">Drag "Region" to Rows</li>
+                    <li>Drag "Sales" to Values</li>
+                </ul>
+            </section>
+
+            <section id="dashboard" class="content-card" style="border-color: #facc15;" data-aos="fade-up">
+                <h2 style="font-size: 1.8rem; color: #facc15; margin-bottom: 1rem;"><i
+                        class="fas fa-tachometer-alt"></i> Build a Dashboard</h2>
+                <p style="color: #cbd5e1; margin-bottom: 1rem;">
+                    Combine Slicers, Pivot Charts, and clean layout to create an interactive Report for your boss (or
+                    teacher).
+                </p>
+                <button class="btn btn-primary" style="background:#be185d;">View Sample Dashboard</button>
+            </section>
+
+        </main>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 800, once: true });
+
+        // Sidebar Active Switcher
+        const sections = document.querySelectorAll('.content-card');
+        const navLinks = document.querySelectorAll('.topic-link');
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (scrollY >= sectionTop - 150) current = section.getAttribute('id');
+            });
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').includes(current)) link.classList.add('active');
+            });
+        });
+    </script>
+</body>
+
+</html>

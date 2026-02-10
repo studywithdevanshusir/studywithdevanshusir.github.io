@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-74VNSC0NMX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-74VNSC0NMX');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CS Toolkit | Interactive Calculators by Devanshu Sir</title>
+    <meta name="description"
+        content="Free Number System Converter (Binary, Decimal, Hex) and Data Size Calculator for Computer Science Students.">
+
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <div id="navbar-placeholder"></div>
+
+    <!-- HERO SECTION -->
+    <header class="page-header home" data-aos="fade-down" style="padding-top: 100px;">
+        <div style="text-align: center;">
+            <h1 class="text-gradient" style="font-size: 3rem; margin-bottom: 1rem;">
+                CS Toolkit 🛠️
+            </h1>
+            <p style="color: var(--text-secondary); font-size: 1.2rem; max-width: 700px; margin: 0 auto 2rem;">
+                Interactive tools to perform complex calculations in seconds.<br>
+                Essential for <span style="color: var(--accent-color);">Class 11 & 12 Computer Science</span>.
+            </p>
+        </div>
+    </header>
+
+    <!-- TOOLS CONTAINER -->
+    <section class="container" style="max-width: 1000px; margin: 0 auto; padding: 4rem 1.5rem;">
+
+        <!-- 1. NUMBER SYSTEM CONVERTER -->
+        <div class="glass-effect" data-aos="fade-up"
+            style="padding: 2.5rem; border-radius: 1.5rem; margin-bottom: 4rem; border: 1px solid rgba(96, 165, 250, 0.2);">
+            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem;">
+                <div
+                    style="background: rgba(96, 165, 250, 0.2); color: #60A5FA; width: 50px; height: 50px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">
+                    <i class="fas fa-calculator"></i>
+                </div>
+                <h2 style="color: white; margin: 0;">Number System Converter</h2>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem;">
+
+                <!-- Decimal -->
+                <div>
+                    <label style="display: block; color: var(--text-secondary); margin-bottom: 0.5rem;">Decimal (Base
+                        10)</label>
+                    <input type="number" id="decimal-input" placeholder="e.g., 255" oninput="convertFromDecimal()"
+                        style="width: 100%; padding: 1rem; background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255,255,255,0.1); border-radius: 0.5rem; color: white; outline: none;">
+                </div>
+
+                <!-- Binary -->
+                <div>
+                    <label style="display: block; color: var(--text-secondary); margin-bottom: 0.5rem;">Binary (Base
+                        2)</label>
+                    <input type="text" id="binary-input" placeholder="e.g., 11111111" oninput="convertFromBinary()"
+                        style="width: 100%; padding: 1rem; background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255,255,255,0.1); border-radius: 0.5rem; color: #10B981; font-family: monospace; outline: none;">
+                </div>
+
+                <!-- Hexadecimal -->
+                <div>
+                    <label style="display: block; color: var(--text-secondary); margin-bottom: 0.5rem;">Hexadecimal
+                        (Base 16)</label>
+                    <input type="text" id="hex-input" placeholder="e.g., FF" oninput="convertFromHex()"
+                        style="width: 100%; padding: 1rem; background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255,255,255,0.1); border-radius: 0.5rem; color: #F472B6; font-family: monospace; outline: none; text-transform: uppercase;">
+                </div>
+
+                <!-- Octal -->
+                <div>
+                    <label style="display: block; color: var(--text-secondary); margin-bottom: 0.5rem;">Octal (Base
+                        8)</label>
+                    <input type="number" id="octal-input" placeholder="e.g., 377" oninput="convertFromOctal()"
+                        style="width: 100%; padding: 1rem; background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255,255,255,0.1); border-radius: 0.5rem; color: #FACC15; font-family: monospace; outline: none;">
+                </div>
+
+            </div>
+        </div>
+
+        <!-- 2. DATA SIZE CONVERTER -->
+        <div class="glass-effect" data-aos="fade-up"
+            style="padding: 2.5rem; border-radius: 1.5rem; border: 1px solid rgba(16, 185, 129, 0.2);">
+            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem;">
+                <div
+                    style="background: rgba(16, 185, 129, 0.2); color: #10B981; width: 50px; height: 50px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">
+                    <i class="fas fa-server"></i>
+                </div>
+                <h2 style="color: white; margin: 0;">Data Size Converter</h2>
+            </div>
+
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                <div style="flex: 1; min-width: 200px;">
+                    <input type="number" id="size-input" placeholder="Value" oninput="convertSize()"
+                        style="width: 100%; padding: 1rem; background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255,255,255,0.1); border-radius: 0.5rem; color: white; outline: none;">
+                </div>
+                <div style="width: 100px;">
+                    <select id="size-unit" onchange="convertSize()"
+                        style="width: 100%; padding: 1rem; background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255,255,255,0.1); border-radius: 0.5rem; color: white; outline: none;">
+                        <option value="KB">KB</option>
+                        <option value="MB">MB</option>
+                        <option value="GB">GB</option>
+                        <option value="TB">TB</option>
+                    </select>
+                </div>
+            </div>
+
+            <div
+                style="margin-top: 2rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem;">
+                <div class="result-box">
+                    <span style="color: var(--text-secondary); font-size: 0.9rem;">Bytes</span>
+                    <div id="res-bytes" style="color: white; font-weight: bold; font-family: monospace;">-</div>
+                </div>
+                <div class="result-box">
+                    <span style="color: var(--text-secondary); font-size: 0.9rem;">Kilobytes (KB)</span>
+                    <div id="res-kb" style="color: #60A5FA; font-weight: bold; font-family: monospace;">-</div>
+                </div>
+                <div class="result-box">
+                    <span style="color: var(--text-secondary); font-size: 0.9rem;">Megabytes (MB)</span>
+                    <div id="res-mb" style="color: #10B981; font-weight: bold; font-family: monospace;">-</div>
+                </div>
+                <div class="result-box">
+                    <span style="color: var(--text-secondary); font-size: 0.9rem;">Gigabytes (GB)</span>
+                    <div id="res-gb" style="color: #FACC15; font-weight: bold; font-family: monospace;">-</div>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- FOOTER will be injected here -->
+    <div id="footer-placeholder"></div>
+
+    <!-- SCRIPTS -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 800, once: true });
+    </script>
+    <script src="assets/js/navigation.js"></script>
+    <script src="assets/js/script.js"></script>
+
+    <!-- CALCULATOR LOGIC -->
+    <script>
+        // Number System Logic
+        function convertFromDecimal() {
+            let decimal = parseInt(document.getElementById('decimal-input').value);
+            if (isNaN(decimal)) resetNumInputs();
+            else {
+                document.getElementById('binary-input').value = decimal.toString(2);
+                document.getElementById('hex-input').value = decimal.toString(16).toUpperCase();
+                document.getElementById('octal-input').value = decimal.toString(8);
+            }
+        }
+        function convertFromBinary() {
+            let binary = document.getElementById('binary-input').value;
+            let decimal = parseInt(binary, 2);
+            if (isNaN(decimal)) return;
+            document.getElementById('decimal-input').value = decimal;
+            document.getElementById('hex-input').value = decimal.toString(16).toUpperCase();
+            document.getElementById('octal-input').value = decimal.toString(8);
+        }
+        function convertFromHex() {
+            let hex = document.getElementById('hex-input').value;
+            let decimal = parseInt(hex, 16);
+            if (isNaN(decimal)) return;
+            document.getElementById('decimal-input').value = decimal;
+            document.getElementById('binary-input').value = decimal.toString(2);
+            document.getElementById('octal-input').value = decimal.toString(8);
+        }
+        function convertFromOctal() {
+            let octal = document.getElementById('octal-input').value;
+            let decimal = parseInt(octal, 8);
+            if (isNaN(decimal)) return;
+            document.getElementById('decimal-input').value = decimal;
+            document.getElementById('binary-input').value = decimal.toString(2);
+            document.getElementById('hex-input').value = decimal.toString(16).toUpperCase();
+        }
+        function resetNumInputs() {
+            document.getElementById('binary-input').value = "";
+            document.getElementById('hex-input').value = "";
+            document.getElementById('octal-input').value = "";
+        }
+
+        // Data Size Logic
+        function convertSize() {
+            let val = parseFloat(document.getElementById('size-input').value);
+            let unit = document.getElementById('size-unit').value;
+
+            if (isNaN(val)) {
+                ['bytes', 'kb', 'mb', 'gb'].forEach(id => document.getElementById(`res-${id}`).innerText = "-");
+                return;
+            }
+
+            // Convert everything to Bytes first
+            let bytes = 0;
+            if (unit === 'KB') bytes = val * 1024;
+            if (unit === 'MB') bytes = val * 1024 * 1024;
+            if (unit === 'GB') bytes = val * 1024 * 1024 * 1024;
+            if (unit === 'TB') bytes = val * 1024 * 1024 * 1024 * 1024;
+
+            // Update UI
+            document.getElementById('res-bytes').innerText = bytes.toLocaleString();
+            document.getElementById('res-kb').innerText = (bytes / 1024).toFixed(2);
+            document.getElementById('res-mb').innerText = (bytes / (1024 * 1024)).toFixed(4);
+            document.getElementById('res-gb').innerText = (bytes / (1024 * 1024 * 1024)).toFixed(6);
+        }
+    </script>
+
+</body>
+
+</html>

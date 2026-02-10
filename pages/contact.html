@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-74VNSC0NMX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-74VNSC0NMX');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | Study with Devanshu Sir</title>
+    <meta name="description" content="Get in touch with Devanshu Sir for classes, doubts, or collaborations.">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <style>
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.8rem;
+            background: var(--bg-dark);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-md);
+            color: white;
+            font-family: inherit;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .social-grid {
+            margin-top: 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .social-card {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 1.5rem;
+            border-radius: var(--radius-md);
+            text-align: center;
+            transition: all 0.3s ease;
+            display: block;
+        }
+
+        .social-card:hover {
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateY(-3px);
+        }
+
+        .social-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="navbar-placeholder"></div>
+
+    <section style="margin-top: 80px;" data-aos="fade-left">
+        <h1 class="text-gradient" style="text-align: center; margin-bottom: 1rem;">Get In Touch</h1>
+        <p style="text-align: center; color: var(--text-secondary); margin-bottom: 3rem;">Have a doubt or want to join
+            my classes? Drop a message!</p>
+
+        <div style="display: grid; grid-template-columns: 1fr; gap: 4rem; max-width: 800px; margin: 0 auto;">
+
+            <!-- Contact Form -->
+            <div class="card" data-aos="flip-right">
+                <form name="contact" method="POST" data-netlify="true" id="contactForm">
+                    <div class="form-group">
+                        <label class="form-label">Name</label>
+                        <input type="text" class="form-control" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Phone</label>
+                        <input type="tel" name="phone" class="form-control" placeholder="Mobile Number" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Email</label>
+                        <input type="email" name="email" class="form-control" placeholder="your@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Subject</label>
+                        <select name="subject" class="form-control">
+                            <option>Python Programming</option>
+                            <option>Class 10 IT Tuition</option>
+                            <option>Collaboration</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Message</label>
+                        <textarea name="message" class="form-control" rows="5" placeholder="How can I help you?"
+                            required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
+                </form>
+            </div>
+
+            <!-- Social Hub -->
+            <div>
+                <h2 style="text-align: center; margin-bottom: 2rem;">Connect with Me</h2>
+                <div class="social-grid">
+                    <a href="https://www.youtube.com/@DevanshuSirCS" target="_blank" class="social-card">
+                        <div class="social-icon" style="color: #FF0000;"><i class="fab fa-youtube"></i></div>
+                        <h3>YouTube</h3>
+                    </a>
+                    <a href="https://www.instagram.com/divyanshu_pratap5/" target="_blank" class="social-card">
+                        <div class="social-icon" style="color: #E1306C;"><i class="fab fa-instagram"></i></div>
+                        <h3>Instagram</h3>
+                    </a>
+                    <a href="https://github.com/devanshu5" target="_blank" class="social-card">
+                        <div class="social-icon" style="color: #fff;"><i class="fab fa-github"></i></div>
+                        <h3>GitHub</h3>
+                    </a>
+                    <a href="https://devahelper.blogspot.com/" target="_blank" class="social-card">
+                        <div class="social-icon" style="color: #FACC15;"><i class="fas fa-rss"></i></div>
+                        <h3>Blog</h3>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script src="../assets/js/script.js"></script>
+    <div id="footer-placeholder"></div>
+    <script src="../assets/js/navigation.js"></script>
+</body>
+
+</html>

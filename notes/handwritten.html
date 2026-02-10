@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-74VNSC0NMX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-74VNSC0NMX');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Handwritten Notes | Study with Devanshu Sir</title>
+
+    <!-- SEO -->
+    <meta name="description"
+        content="Free Handwritten Notes for Class 11-12 CS and Class 9-10 IT. Scanned copies of topper's notes for quick revision and deep learning.">
+    <meta name="keywords"
+        content="Handwritten Notes, Python Notes, Topper Notes Class 12, CS Notes PDF, Devanshu Sir Handwritten">
+    <meta name="author" content="Devanshu Pratap">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
+
+    <style>
+        /* Handwritten Specific Styles */
+        body {
+            /* Texture overlay handled by CSS, but we can enhance specific sections */
+            background-color: #0f172a;
+        }
+
+        .paper-texture {
+            background-image: linear-gradient(#1e293b 1px, transparent 1px), linear-gradient(90deg, #1e293b 1px, transparent 1px);
+            background-size: 20px 20px;
+            background-position: center;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            padding: 2rem 0;
+        }
+
+        .gallery-item {
+            position: relative;
+            background: #fff;
+            padding: 1rem;
+            border-radius: 4px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            transform: rotate(-2deg);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .gallery-item:nth-child(even) {
+            transform: rotate(2deg);
+        }
+
+        .gallery-item:hover {
+            transform: rotate(0) scale(1.05);
+            z-index: 10;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .gallery-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 2px solid #eee;
+            margin-bottom: 0.5rem;
+            filter: sepia(0.2);
+        }
+
+        .gallery-caption {
+            color: #333;
+            font-family: 'Patrick Hand', cursive, sans-serif;
+            /* Fallback if not loaded */
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        /* Lightbox */
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 10002;
+            padding: 2rem;
+        }
+
+        .lightbox.active {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 90vh;
+            border-radius: 8px;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .close-lightbox {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 3rem;
+            cursor: pointer;
+            z-index: 10003;
+        }
+
+        /* Paper Font */
+        @import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap');
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <div id="navbar-placeholder"></div>
+
+    <!-- HEADER -->
+    <header class="page-header" data-aos="fade-in"
+        style="background: radial-gradient(circle at center, rgba(16, 185, 129, 0.1), transparent 70%); padding-top: 120px;">
+        <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; text-align: center;">
+            <h1 class="text-gradient"
+                style="font-size: 3.5rem; margin-bottom: 1rem; font-weight: 800; background: linear-gradient(135deg, #facc15, #10b981); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                Handwritten Notes ✍️
+            </h1>
+            <p style="color: var(--text-secondary); font-size: 1.1rem; max-width: 600px; margin: 0 auto;">
+                Authentic, scanned notes from toppers. <br>
+                The best way to understand how to write in exams.
+            </p>
+        </div>
+    </header>
+
+    <!-- CONTENT -->
+    <section class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 1.5rem 4rem;">
+
+        <div class="paper-texture" style="padding: 2rem; border-radius: 1rem; margin-top: 2rem;">
+            <h2
+                style="color: white; text-align: center; margin-bottom: 2rem; font-family: 'Patrick Hand', cursive; font-size: 2.5rem;">
+                My Notebook Collection
+            </h2>
+
+            <div class="gallery-grid" data-aos="fade-up">
+                <!-- Gallery Item 1 -->
+                <div class="gallery-item"
+                    onclick="openLightbox('../assets/images/notes/handwritten_1.jpg', 'Chapter 1: Python Basics')">
+                    <div
+                        style="height: 200px; background: #f0f0f0; display: flex; align-items: center; justify-content: center; margin-bottom: 0.5rem;">
+                        <i class="fas fa-pen-fancy" style="font-size: 3rem; color: #cbd5e1;"></i>
+                    </div>
+                    <div class="gallery-caption">Python Basics (XI)</div>
+                </div>
+
+                <!-- Gallery Item 2 -->
+                <div class="gallery-item"
+                    onclick="openLightbox('../assets/images/notes/handwritten_2.jpg', 'Chapter 5: SQL Commands')">
+                    <div
+                        style="height: 200px; background: #f0f0f0; display: flex; align-items: center; justify-content: center; margin-bottom: 0.5rem;">
+                        <i class="fas fa-database" style="font-size: 3rem; color: #cbd5e1;"></i>
+                    </div>
+                    <div class="gallery-caption">SQL Commands (XII)</div>
+                </div>
+
+                <!-- Gallery Item 3 -->
+                <div class="gallery-item"
+                    onclick="openLightbox('../assets/images/notes/handwritten_3.jpg', 'Networking Diagrams')">
+                    <div
+                        style="height: 200px; background: #f0f0f0; display: flex; align-items: center; justify-content: center; margin-bottom: 0.5rem;">
+                        <i class="fas fa-network-wired" style="font-size: 3rem; color: #cbd5e1;"></i>
+                    </div>
+                    <div class="gallery-caption">Networking Diagrams</div>
+                </div>
+
+                <!-- Gallery Item 4 -->
+                <div class="gallery-item"
+                    onclick="openLightbox('../assets/images/notes/handwritten_4.jpg', 'IT 402 Unit 1')">
+                    <div
+                        style="height: 200px; background: #f0f0f0; display: flex; align-items: center; justify-content: center; margin-bottom: 0.5rem;">
+                        <i class="fas fa-file-alt" style="font-size: 3rem; color: #cbd5e1;"></i>
+                    </div>
+                    <div class="gallery-caption">IT 402 Unit 1 (X)</div>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 3rem;">
+                <p style="color: var(--text-secondary); margin-bottom: 1rem;">Want the full PDF set?</p>
+                <a href="digital.html" class="btn btn-primary">Go to Digital Notes</a>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- LIGHTBOX -->
+    <div class="lightbox" id="lightbox">
+        <span class="close-lightbox" onclick="closeLightbox()">&times;</span>
+        <img src="" alt="Note Preview" class="lightbox-content" id="lightboxImg">
+        <div id="lightboxCaption"
+            style="position: absolute; bottom: 30px; color: white; font-size: 1.5rem; font-family: 'Patrick Hand', cursive;">
+        </div>
+    </div>
+
+
+    <!-- FOOTER -->
+    <div id="footer-placeholder"></div>
+
+    <!-- SCRIPTS -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 800, once: true });
+
+        // Lightbox Logic
+        function openLightbox(src, caption) {
+            const lightbox = document.getElementById('lightbox');
+            const img = document.getElementById('lightboxImg');
+            const cap = document.getElementById('lightboxCaption');
+
+            // For demo purposes, if image doesn't exist, show a placeholder alert
+            // In real usage, src would be valid.
+            // img.src = src; 
+            // We will use a placeholder service if actual image is missing
+            img.src = "https://via.placeholder.com/800x1000/1e293b/ffffff?text=Handwritten+Note+Preview";
+
+            cap.innerText = caption;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close on background click
+        document.getElementById('lightbox').addEventListener('click', (e) => {
+            if (e.target === e.currentTarget) closeLightbox();
+        });
+    </script>
+    <script src="../assets/js/navigation.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-74VNSC0NMX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-74VNSC0NMX');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Notes | Study with Devanshu Sir</title>
+
+    <!-- SEO -->
+    <meta name="description"
+        content="Download Premium Digital Notes for Class 9-10 IT (402) and Class 11-12 CS (083). Chapter-wise PDFs, Python Tutorials, and Board Exam Material.">
+    <meta name="keywords"
+        content="Digital Notes, Class 12 CS Notes, IT 402 PDF, Python Notes, Devanshu Sir, CBSE Board Exam Material">
+    <meta name="author" content="Devanshu Pratap">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
+
+    <style>
+        /* Specific Styles for Notes Page */
+        .page-header {
+            padding-top: 120px;
+            padding-bottom: 60px;
+            text-align: center;
+            background: radial-gradient(circle at top, rgba(99, 102, 241, 0.15), transparent 70%);
+        }
+
+        .filters-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .filter-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-secondary);
+            padding: 0.5rem 1.5rem;
+            border-radius: 9999px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--nav-accent);
+            color: white;
+            border-color: var(--nav-accent);
+            box-shadow: 0 0 15px rgba(99, 102, 241, 0.3);
+        }
+
+        .search-container {
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            padding-left: 3rem;
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 1rem;
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--nav-accent);
+            background: rgba(30, 41, 59, 1);
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-secondary);
+        }
+
+        .notes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .note-card {
+            background: rgba(30, 41, 59, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 1rem;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .note-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+            border-color: rgba(99, 102, 241, 0.3);
+        }
+
+        .note-preview {
+            height: 180px;
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .note-preview i {
+            font-size: 4rem;
+            color: rgba(255, 255, 255, 0.1);
+        }
+
+        .preview-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--nav-accent);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 0.5rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .note-content {
+            padding: 1.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .note-category {
+            font-size: 0.8rem;
+            color: var(--nav-accent);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .note-title {
+            font-size: 1.25rem;
+            color: white;
+            margin-bottom: 0.75rem;
+            line-height: 1.4;
+        }
+
+        .note-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            flex: 1;
+        }
+
+        .note-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: auto;
+        }
+
+        .btn-sm {
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+            border-radius: 0.5rem;
+            flex: 1;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+    </style>
+</head>
+
+<body style="background-color: #0f172a; color: #f1f5f9;">
+
+    <!-- NAVBAR -->
+    <div id="navbar-placeholder"></div>
+
+    <!-- HEADER -->
+    <header class="page-header" data-aos="fade-in">
+        <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 1.5rem;">
+            <h1 class="text-gradient"
+                style="font-size: 3.5rem; margin-bottom: 1rem; font-weight: 800; background: linear-gradient(135deg, #fff, #94a3b8); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                Premium Digital Notes
+            </h1>
+            <p style="color: var(--text-secondary); font-size: 1.1rem; max-width: 600px; margin: 0 auto;">
+                High-quality, computer-typed notes organized by chapter. <br>
+                Optimized for quick revision and deep understanding.
+            </p>
+        </div>
+    </header>
+
+    <!-- CONTENT SECTION -->
+    <section class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 1.5rem 4rem;">
+
+        <!-- Search -->
+        <div class="search-container" data-aos="fade-up" data-aos-delay="100">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" id="searchInput" class="search-input"
+                placeholder="Search for chapters, topics, or subjects...">
+        </div>
+
+        <!-- Filters -->
+        <div class="filters-container" id="filtersContainer" data-aos="fade-up" data-aos-delay="200">
+            <button class="filter-btn active" data-filter="all">All Notes</button>
+            <button class="filter-btn" data-filter="class9">Class 9 IT</button>
+            <button class="filter-btn" data-filter="class10">Class 10 IT</button>
+            <button class="filter-btn" data-filter="class11">Class 11 CS</button>
+            <button class="filter-btn" data-filter="class12">Class 12 CS</button>
+            <button class="filter-btn" data-filter="python">Python</button>
+            <button class="filter-btn" data-filter="sql">SQL</button>
+        </div>
+
+        <!-- Notes Grid -->
+        <div class="notes-grid" id="notesGrid" data-aos="fade-up" data-aos-delay="300">
+            <!-- Content will be injected by JS -->
+        </div>
+
+        <!-- Empty State -->
+        <div id="emptyState" style="text-align: center; padding: 3rem; display: none;">
+            <i class="fas fa-folder-open"
+                style="font-size: 3rem; color: var(--text-secondary); margin-bottom: 1rem; opacity: 0.5;"></i>
+            <p style="color: var(--text-secondary);">No notes found matching your search.</p>
+        </div>
+
+    </section>
+
+    <!-- FOOTER -->
+    <div id="footer-placeholder"></div>
+
+    <!-- SCRIPTS -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 800, once: true });
+    </script>
+    <script src="../assets/js/navigation.js"></script>
+    <!-- Automatic Footer Injection handled by navigation.js/footer.js -->
+
+    <!-- NOTES DATA & LOGIC -->
+    <script>
+        // Sample Data - In a real app, this could come from a JSON file or API
+        const notesData = [
+            {
+                id: 1,
+                title: "Information Technology - Unit 1",
+                category: "class10",
+                categoryLabel: "Class 10 IT (402)",
+                description: "Digital Documentation (Advanced). Covers styles, images, and templates.",
+                pages: 12,
+                preview: true,
+                downloadUrl: "../assets/docs/class10-it-unit1.pdf"
+            },
+            {
+                id: 2,
+                title: "Python Fundamentals",
+                category: "class11",
+                categoryLabel: "Class 11 CS (083)",
+                description: "Complete guide to Python basics: Variables, Data Types, and Operators.",
+                pages: 18,
+                preview: true,
+                downloadUrl: "../assets/docs/class11-python-basics.pdf"
+            },
+            {
+                id: 3,
+                title: "Database Management (SQL)",
+                category: "class12",
+                categoryLabel: "Class 12 CS (083)",
+                description: "SQL Commands, Joins, and Interface with Python. Board Exam Special.",
+                pages: 24,
+                preview: true,
+                downloadUrl: "../assets/docs/class12-sql-notes.pdf"
+            },
+            {
+                id: 4,
+                title: "Electronic Spreadsheet (Advanced)",
+                category: "class10",
+                categoryLabel: "Class 10 IT (402)",
+                description: "Data analysis, Goal Seek, Solver, and Macros in OpenOffice Calc.",
+                pages: 15,
+                preview: true,
+                downloadUrl: "../assets/docs/class10-it-unit2.pdf"
+            },
+            {
+                id: 5,
+                title: "Computer Networks",
+                category: "class12",
+                categoryLabel: "Class 12 CS (083)",
+                description: "Networking concepts, devices, protocols, and security. Full Unit covered.",
+                pages: 20,
+                preview: true,
+                downloadUrl: "../assets/docs/class12-networks.pdf"
+            },
+            {
+                id: 6,
+                title: "Python List & Dictionary",
+                category: "python",
+                categoryLabel: "Python Programming",
+                description: "Deep dive into mutable data structures in Python with 50+ examples.",
+                pages: 14,
+                preview: true,
+                downloadUrl: "../assets/docs/python-list-dict.pdf"
+            },
+            {
+                id: 7,
+                title: "Web Applications & Security",
+                category: "class10",
+                categoryLabel: "Class 10 IT (402)",
+                description: "Accessibility options, networking basics, and instant messaging.",
+                pages: 10,
+                preview: true,
+                downloadUrl: "../assets/docs/class10-it-unit4.pdf"
+            },
+            {
+                id: 8,
+                title: "File Handling in Python",
+                category: "class12",
+                categoryLabel: "Class 12 CS (083)",
+                description: "Text files, Binary files, and CSV file handling operations.",
+                pages: 16,
+                preview: true,
+                downloadUrl: "../assets/docs/class12-file-handling.pdf"
+            }
+        ];
+
+        // Filtering Logic
+        const grid = document.getElementById('notesGrid');
+        const searchInput = document.getElementById('searchInput');
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const emptyState = document.getElementById('emptyState');
+
+        function renderNotes(data) {
+            grid.innerHTML = '';
+
+            if (data.length === 0) {
+                emptyState.style.display = 'block';
+                return;
+            } else {
+                emptyState.style.display = 'none';
+            }
+
+            data.forEach(note => {
+                const card = document.createElement('div');
+                card.className = 'note-card';
+                card.innerHTML = `
+                    <div class="note-preview">
+                        <div class="preview-badge">${note.pages} Pages</div>
+                        <i class="fas fa-file-pdf"></i>
+                    </div>
+                    <div class="note-content">
+                        <div class="note-category">${note.categoryLabel}</div>
+                        <h3 class="note-title">${note.title}</h3>
+                        <p class="note-desc">${note.description}</p>
+                        <div class="note-actions">
+                            <button onclick="alert('Preview functionality coming soon!')" class="btn btn-secondary btn-sm" style="border:1px solid rgba(255,255,255,0.2); color:white;">
+                                <i class="fas fa-eye"></i> Preview
+                            </button>
+                            <a href="${note.downloadUrl}" download onclick="event.stopPropagation()" class="btn btn-primary btn-sm">
+                                <i class="fas fa-download"></i> Download
+                            </a>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function filterNotes() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const activeCategory = document.querySelector('.filter-btn.active').dataset.filter;
+
+            const filtered = notesData.filter(note => {
+                const matchesSearch = note.title.toLowerCase().includes(searchTerm) ||
+                    note.description.toLowerCase().includes(searchTerm);
+                const matchesCategory = activeCategory === 'all' ||
+                    note.category === activeCategory ||
+                    (activeCategory === 'class9' && note.category === 'class9') ||
+                    (activeCategory === 'class10' && note.category === 'class10') ||
+                    (activeCategory === 'sql' && note.title.toLowerCase().includes('sql')); // Simple fallback mapping
+
+                return matchesSearch && matchesCategory;
+            });
+
+            renderNotes(filtered);
+        }
+
+        // Event Listeners
+        searchInput.addEventListener('input', filterNotes);
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelector('.filter-btn.active').classList.remove('active');
+                btn.classList.add('active');
+                filterNotes();
+            });
+        });
+
+        // Initial Render
+        renderNotes(notesData);
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-74VNSC0NMX"></script> 
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-74VNSC0MNX');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit 3: Database Management | Class 12 CS</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <script src="../assets/js/navigation.js" defer></script>
+    <style>
+        .page-header {
+            padding-top: 8rem;
+            padding-bottom: 2rem;
+            text-align: center;
+        }
+
+        .chapter-section {
+            padding: 4rem 1.5rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .chapter-card {
+            background: var(--bg-card);
+            border-radius: 1.5rem;
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .chapter-title {
+            color: var(--primary-color);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 0.5rem;
+        }
+
+        .story-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #cbd5e1;
+            margin-bottom: 1.5rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="navbar-placeholder"></div>
+
+    <section class="page-header" data-aos="fade-down">
+        <h1>Unit 3: Database Management</h1>
+        <p style="font-size: 1.2rem; color: #94a3b8;">Class 12 CS (Code 083) - SQL & Python</p>
+    </section>
+
+    <div class="chapter-section" data-aos="fade-up">
+
+        <!-- Section 1: DBMS Concepts -->
+        <div class="chapter-card">
+            <h2 class="chapter-title">1. DBMS Basics</h2>
+            <p class="story-text">
+                <strong>Database:</strong> Organized collection of data.
+                <br><strong>RDBMS:</strong> Relational Database (Data stored in tables). Example: MySQL.
+                <br><strong>Keys:</strong>
+                <br> - <em>Primary Key:</em> Unique identifier for a record.
+                <br> - <em>Candidate Key:</em> Keys jo Primary Key ban sakti hain.
+                <br> - <em>Foreign Key:</em> Used to link two tables.
+            </p>
+        </div>
+
+        <!-- Section 2: SQL Commands -->
+        <div class="chapter-card">
+            <h2 class="chapter-title">2. SQL Commands</h2>
+            <p class="story-text">
+                SQL (Structured Query Language) database se baat karne ki language hai.
+            </p>
+
+            <div class="code-block" style="font-family: 'Consolas', monospace;">
+                <pre><code class="language-sql"><span class="comment">-- Create Table</span>
+CREATE TABLE Student (
+    RollNo INT PRIMARY KEY,
+    Name VARCHAR(50),
+    Marks INT
+);
+
+<span class="comment">-- Insert Data</span>
+INSERT INTO Student VALUES (1, 'Amit', 95);
+
+<span class="comment">-- Select Data (Query)</span>
+SELECT * FROM Student WHERE Marks > 90;</code></pre>
+            </div>
+        </div>
+
+        <!-- Section 3: Python-SQL Connectivity -->
+        <div class="chapter-card">
+            <h2 class="chapter-title">3. Python-SQL Connectivity</h2>
+            <p class="story-text">
+                Python ko database se connect karne ke liye `mysql.connector` library use hoti hai.
+            </p>
+
+            <div class="code-block">
+                <pre><code class="language-python"><span class="keyword">import</span> mysql.connector
+
+mydb = mysql.connector.connect(
+  host=<span class="string">"localhost"</span>,
+  user=<span class="string">"root"</span>,
+  password=<span class="string">"1234"</span>,
+  database=<span class="string">"school"</span>
+)
+
+cursor = mydb.cursor()
+cursor.execute(<span class="string">"SELECT * FROM Student"</span>)
+<span class="keyword">for</span> x <span class="keyword">in</span> cursor:
+  print(x)</code></pre>
+            </div>
+            <!-- AdSense Placeholder -->
+            <div class="ad-slot">Google Ad Here</div>
+        </div>
+
+        <!-- Quiz Section -->
+        <div class="mcq-box">
+            <h2 style="color: #10b981; margin-bottom: 1.5rem;">Quiz Time!</h2>
+            <p class="mcq-question">Q1. Which command is used to fetch data?</p>
+            <div class="mcq-options">
+                <span>(a) FETCH</span>
+                <span>(b) GET</span>
+                <span>(c) SELECT</span>
+                <span>(d) EXTRACT</span>
+            </div>
+            <button class="btn btn-reveal" onclick="toggleAnswer('ans1')">Check Answer</button>
+            <div id="ans1" class="mcq-answer" style="display: none;">
+                <strong>Answer: (c) SELECT</strong>
+            </div>
+        </div>
+
+        <div class="mcq-box">
+            <p class="mcq-question">Q2. Which key cannot have NULL values?</p>
+            <div class="mcq-options">
+                <span>(a) Foreign Key</span>
+                <span>(b) Primary Key</span>
+                <span>(c) Alternate Key</span>
+                <span>(d) Candidate Key</span>
+            </div>
+            <button class="btn btn-reveal" onclick="toggleAnswer('ans2')">Check Answer</button>
+            <div id="ans2" class="mcq-answer" style="display: none;">
+                <strong>Answer: (b) Primary Key</strong>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="footer-placeholder"></div>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script src="../assets/js/script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-74VNSC0NMX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-74VNSC0MNX');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practice & Quizzes | Test Your Knowledge with Devanshu Sir</title>
+
+    <!-- SEO -->
+    <meta name="description"
+        content="Free Practice MCQs and Quizzes for Class 10 IT (402) and Class 12 Computer Science (083). Test your Python logic, SQL queries, and theory concepts daily.">
+    <meta name="keywords"
+        content="Class 10 IT MCQ, Class 12 Python Quiz, Computer Science Practice Questions, CBSE Board Exam MCQ, Devanshu Sir Quiz">
+    <meta name="author" content="Devanshu Pratap">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
+    <style>
+        /* Quiz Modal Styles */
+        .quiz-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+        }
+
+        .quiz-box {
+            background: #1e293b;
+            width: 100%;
+            max-width: 600px;
+            padding: 2rem;
+            border-radius: 1rem;
+            border: 1px solid var(--nav-border);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            position: relative;
+        }
+
+        .quiz-option {
+            width: 100%;
+            padding: 1rem;
+            margin-bottom: 0.8rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            text-align: left;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 1rem;
+        }
+
+        .quiz-option:hover:not(:disabled) {
+            background: rgba(255, 255, 255, 0.1);
+            padding-left: 1.2rem;
+        }
+
+        .quiz-option.correct {
+            border: 1px solid #10b981;
+            background: rgba(16, 185, 129, 0.2);
+        }
+
+        .quiz-option.wrong {
+            border: 1px solid #ef4444;
+            background: rgba(239, 68, 68, 0.2);
+        }
+
+        .close-quiz {
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            font-size: 1.5rem;
+            color: #ef4444;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <div id="navbar-placeholder"></div>
+
+    <!-- HERO SECTION -->
+    <header class="page-header home" data-aos="fade-down" style="padding-top: 100px;">
+        <div style="text-align: center;">
+            <h1 class="text-gradient" style="font-size: 3rem; margin-bottom: 1rem;">
+                Practice Makes Perfect 🎯
+            </h1>
+            <p style="color: var(--text-secondary); font-size: 1.2rem; max-width: 700px; margin: 0 auto 2rem;">
+                Don't just read notes. <span style="color: #10B981;">Challenge Yourself.</span> <br>
+                Daily MCQs to keep your brain sharp for Board Exams.
+            </p>
+        </div>
+    </header>
+
+    <!-- QUIZ SELECTION -->
+    <section class="container" style="padding: 4rem 1.5rem;" data-aos="fade-up">
+        <h2 class="section-title" style="text-align: center;">Choose Your <span
+                style="color: var(--accent-color);">Arena</span> 🏟️</h2>
+
+        <div class="card-grid">
+
+            <!-- Class 10 IT -->
+            <div class="card content-card">
+                <div class="card-icon" style="color: #FACC15;"><i class="fas fa-laptop-code"></i></div>
+                <h3>Class 10 IT Quiz</h3>
+                <p>Digital Documentation, Spreadsheet, DBMS & Web Apps.</p>
+                <button class="btn btn-secondary" style="width: 100%; margin-top: 1rem;"
+                    onclick="startQuiz('class10')">Start Quiz</button>
+            </div>
+
+            <!-- Class 12 CS -->
+            <div class="card content-card">
+                <div class="card-icon" style="color: #60A5FA;"><i class="fab fa-python"></i></div>
+                <h3>Class 12 CS Quiz</h3>
+                <p>Python Functions, File Handling, SQL & Networks.</p>
+                <button class="btn btn-secondary" style="width: 100%; margin-top: 1rem;"
+                    onclick="startQuiz('class12')">Start Quiz</button>
+            </div>
+
+            <!-- Logic Building -->
+            <div class="card content-card">
+                <div class="card-icon" style="color: #F472B6;"><i class="fas fa-brain"></i></div>
+                <h3>Logic Builder</h3>
+                <p>Guess the Output & Find the Error challenges.</p>
+                <button class="btn btn-secondary" style="width: 100%; margin-top: 1rem;"
+                    onclick="startQuiz('logic')">Start Challenge</button>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SELF EVALUATION PROMPT -->
+    <section style="background: rgba(30, 41, 59, 0.5); padding: 4rem 1.5rem; text-align: center; margin-top: 2rem;"
+        data-aos="zoom-in">
+        <h2 style="color: white; margin-bottom: 1.5rem;">Did you check your Board Readiness?</h2>
+        <p style="color: #cbd5e1; max-width: 600px; margin: 0 auto 2rem;">
+            Solving previous year questions is the best way to evaluate yourself.
+            Download our handwritten notes which include PYQs.
+        </p>
+        <a href="notes/handwritten.html" class="btn btn-primary">
+            Download PYQs Notes
+        </a>
+    </section>
+
+    <!-- FOOTER will be injected here -->
+    <div id="footer-placeholder"></div>
+
+    <!-- QUIZ MODAL -->
+    <div id="quiz-modal" class="quiz-modal">
+        <div class="quiz-box">
+            <span class="close-quiz" onclick="closeQuiz()">&times;</span>
+
+            <div id="quiz-content">
+                <h3 id="quiz-title" style="color: var(--accent-color); margin-bottom: 1.5rem;">Quiz Title</h3>
+
+                <p id="question-text" style="font-size: 1.2rem; margin-bottom: 2rem; color:white;">
+                    <!-- Question goes here -->
+                </p>
+
+                <div id="options-container">
+                    <!-- Options go here -->
+                </div>
+
+                <div style="text-align: right; margin-top: 1rem; font-size: 0.9rem; color: #64748b;">
+                    Question <span id="question-count">1 of 5</span>
+                </div>
+            </div>
+
+            <div id="result-container" style="display: none; text-align: center;">
+                <i class="fas fa-trophy" style="font-size: 4rem; color: #FACC15; margin-bottom: 1rem;"></i>
+                <h2 style="margin-bottom: 1rem; color:white;">Quiz Completed!</h2>
+                <div id="score-text" style="font-size: 1.5rem; margin-bottom: 1rem; color: #cbd5e1;"></div>
+                <p id="result-msg" style="color: #94a3b8; margin-bottom: 2rem;"></p>
+                <button class="btn btn-primary" onclick="closeQuiz()">Close</button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- SCRIPTS -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 800, once: true });
+    </script>
+    <script src="assets/js/navigation.js"></script>
+    <script src="assets/js/script.js"></script>
+    <script src="assets/js/quiz.js"></script>
+
+</body>
+
+</html>

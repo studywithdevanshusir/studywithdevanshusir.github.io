@@ -1,80 +1,117 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Core Pages -->
   <url>
-    <loc>https://studywithdevanshusir.github.io/</loc>
+    <loc>https://studywithdevanshusir.netlify.app/</loc>
     <lastmod>2026-02-10</lastmod>
-    <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
-  
   <url>
-    <loc>https://studywithdevanshusir.github.io/class9.html</loc>
+    <loc>https://studywithdevanshusir.netlify.app/about.html</loc>
     <lastmod>2026-02-10</lastmod>
-    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://studywithdevanshusir.netlify.app/contact.html</loc>
+    <lastmod>2026-02-10</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://studywithdevanshusir.netlify.app/practice.html</loc>
+    <lastmod>2026-02-10</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://studywithdevanshusir.netlify.app/tools.html</loc>
+    <lastmod>2026-02-10</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://studywithdevanshusir.netlify.app/youtube.html</loc>
+    <lastmod>2026-02-10</lastmod>
     <priority>0.9</priority>
   </url>
-  
+
+  <!-- Courses -->
   <url>
-    <loc>https://studywithdevanshusir.github.io/class10.html</loc>
+    <loc>https://studywithdevanshusir.netlify.app/courses/index.html</loc>
     <lastmod>2026-02-10</lastmod>
-    <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
-  
   <url>
-    <loc>https://studywithdevanshusir.github.io/class11.html</loc>
+    <loc>https://studywithdevanshusir.netlify.app/class9-10.html</loc>
     <lastmod>2026-02-10</lastmod>
-    <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
-  
   <url>
-    <loc>https://studywithdevanshusir.github.io/class12.html</loc>
+    <loc>https://studywithdevanshusir.netlify.app/class11.html</loc>
     <lastmod>2026-02-10</lastmod>
-    <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
-  
   <url>
-    <loc>https://studywithdevanshusir.github.io/robots.txt</loc>
+    <loc>https://studywithdevanshusir.netlify.app/class12.html</loc>
     <lastmod>2026-02-10</lastmod>
-    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://studywithdevanshusir.netlify.app/courses/python-course.html</loc>
+    <lastmod>2026-02-10</lastmod>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Excel Hub -->
+  <url>
+    <loc>https://studywithdevanshusir.netlify.app/excelbydev/index.html</loc>
+    <lastmod>2026-02-10</lastmod>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://studywithdevanshusir.netlify.app/excelbydev/basic-formulas.html</loc>
+    <lastmod>2026-02-10</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://studywithdevanshusir.netlify.app/excelbydev/advanced-excel.html</loc>
+    <lastmod>2026-02-10</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://studywithdevanshusir.netlify.app/excelbydev/charts-graphs.html</loc>
+    <lastmod>2026-02-10</lastmod>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Notes & Resources -->
+  <url>
+    <loc>https://studywithdevanshusir.netlify.app/notes/digital.html</loc>
+    <lastmod>2026-02-10</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://studywithdevanshusir.netlify.app/notes/handwritten.html</loc>
+    <lastmod>2026-02-10</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://studywithdevanshusir.netlify.app/presentations/python-presentations.html</loc>
+    <lastmod>2026-02-10</lastmod>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Legal -->
+  <url>
+    <loc>https://studywithdevanshusir.netlify.app/privacy.html</loc>
+    <lastmod>2026-02-10</lastmod>
     <priority>0.5</priority>
   </url>
-
-  <!-- Premium Redesign URLs -->
   <url>
-    <loc>https://studywithdevanshusir.github.io/premium-index.html</loc>
+    <loc>https://studywithdevanshusir.netlify.app/terms.html</loc>
     <lastmod>2026-02-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
+    <priority>0.5</priority>
   </url>
-
   <url>
-    <loc>https://studywithdevanshusir.github.io/premium-class9.html</loc>
+    <loc>https://studywithdevanshusir.netlify.app/disclaimer.html</loc>
     <lastmod>2026-02-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://studywithdevanshusir.github.io/premium-class10.html</loc>
-    <lastmod>2026-02-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://studywithdevanshusir.github.io/premium-class11.html</loc>
-    <lastmod>2026-02-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://studywithdevanshusir.github.io/premium-class12.html</loc>
-    <lastmod>2026-02-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.5</priority>
   </url>
 </urlset>

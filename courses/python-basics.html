@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-74VNSC0NMX"></script> 
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-74VNSC0MNX');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PyLab: Interactive Python Revision Tour</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Custom Chart Container Styles as per requirements */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+
+        /* Custom Scrollbar for code blocks */
+        .code-scroll::-webkit-scrollbar {
+            height: 8px;
+            width: 8px;
+        }
+
+        .code-scroll::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        .code-scroll::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+
+        .code-scroll::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+
+        /* Interactive Element Transitions */
+        .interactive-box {
+            transition: all 0.3s ease;
+        }
+
+        .interactive-box:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Index Box Styling for String Slicer */
+        .index-box.active {
+            background-color: #3b82f6;
+            color: white;
+            border-color: #2563eb;
+        }
+    </style>
+    <!-- Chosen Palette: Warm Neutrals with Python Accents (Blue/Yellow) -->
+    <!-- Application Structure Plan: The app is divided into 5 logical modules corresponding to the chapter flow. 
+         1. Environment & Tokens: Introduces the "where" and "what" of Python.
+         2. Variables & Operators: Interactive calculators and type checkers.
+         3. Flow Control: Visual simulations of logic.
+         4. Data Structures: Hands-on manipulation of strings, lists, dictionaries.
+         5. Advanced: Functions and Random module visualization.
+         This structure transforms static text into active experimentation. -->
+    <!-- Visualization & Content Choices:
+         - Intro: Tabbed interface for text-heavy content to reduce clutter.
+         - Operators: Dynamic table (Goal: Compare) to show real-time results.
+         - Flow Control: Step-by-step visualizers (Goal: Change) to explain loops.
+         - Strings: Custom UI with grid boxes (Goal: Relationships) to visualize indices.
+         - Random: Bar Chart (Goal: Inform/Analyze) using Chart.js to show distribution of random numbers.
+         - NO SVG/Mermaid used. Unicode icons and Tailwind shapes employed. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+
+<body class="bg-[#fdfbf7] text-gray-800 font-sans antialiased min-h-screen flex flex-col pt-20">
+    <div id="navbar-placeholder"></div>
+
+    <!-- Header -->
+    <header class="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <span class="text-3xl">🐍</span>
+                <h1 class="text-xl font-bold text-gray-900 tracking-tight">PyLab <span
+                        class="font-normal text-gray-500">| Class 12 Python Review</span></h1>
+            </div>
+            <nav class="hidden md:flex space-x-6 text-sm font-medium">
+                <button onclick="navTo('intro')" class="hover:text-blue-600 transition-colors">Basics</button>
+                <button onclick="navTo('vars')" class="hover:text-blue-600 transition-colors">Variables & Ops</button>
+                <button onclick="navTo('flow')" class="hover:text-blue-600 transition-colors">Flow Control</button>
+                <button onclick="navTo('datastruct')" class="hover:text-blue-600 transition-colors">Data
+                    Structures</button>
+                <button onclick="navTo('funcs')" class="hover:text-blue-600 transition-colors">Functions &
+                    Random</button>
+            </nav>
+            <div class="md:hidden">
+                <button id="mobile-menu-btn" class="text-gray-500 hover:text-gray-900 focus:outline-none">
+                    ☰
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <button onclick="navTo('intro')"
+                    class="block w-full text-left px-3 py-2 text-base font-medium hover:bg-gray-50 rounded-md">Basics</button>
+                <button onclick="navTo('vars')"
+                    class="block w-full text-left px-3 py-2 text-base font-medium hover:bg-gray-50 rounded-md">Variables
+                    & Ops</button>
+                <button onclick="navTo('flow')"
+                    class="block w-full text-left px-3 py-2 text-base font-medium hover:bg-gray-50 rounded-md">Flow
+                    Control</button>
+                <button onclick="navTo('datastruct')"
+                    class="block w-full text-left px-3 py-2 text-base font-medium hover:bg-gray-50 rounded-md">Data
+                    Structures</button>
+                <button onclick="navTo('funcs')"
+                    class="block w-full text-left px-3 py-2 text-base font-medium hover:bg-gray-50 rounded-md">Functions
+                    & Random</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+
+        <!-- SECTION 1: INTRODUCTION & TOKENS -->
+        <section id="intro" class="space-y-8 animate-fade-in">
+            <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 md:p-8">
+                <h2 class="text-2xl font-bold text-gray-900 mb-4 border-l-4 border-blue-500 pl-4">1. The Python
+                    Environment</h2>
+                <p class="text-gray-600 mb-6 leading-relaxed">
+                    Welcome to the Python Revision Tour. This section recapitulates the basics of Python, an interpreted
+                    high-level language.
+                    Explore the two modes of operation provided by IDLE and understand the fundamental building blocks
+                    (Tokens) of the language.
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Interactive vs Script Mode -->
+                    <div class="bg-gray-50 rounded-lg p-6 border border-gray-200 interactive-box">
+                        <h3 class="font-semibold text-lg mb-3">Working Modes</h3>
+                        <div class="flex space-x-2 mb-4 bg-gray-200 p-1 rounded-lg inline-flex">
+                            <button onclick="switchMode('interactive')" id="btn-interactive"
+                                class="px-4 py-2 rounded-md text-sm font-medium bg-white shadow-sm text-blue-600">Interactive
+                                Mode</button>
+                            <button onclick="switchMode('script')" id="btn-script"
+                                class="px-4 py-2 rounded-md text-sm font-medium text-gray-600 hover:text-gray-900">Script
+                                Mode</button>
+                        </div>
+
+                        <div id="mode-display"
+                            class="bg-gray-900 text-green-400 font-mono text-sm p-4 rounded-lg h-48 overflow-y-auto code-scroll shadow-inner">
+                            <span class="text-gray-500">Python 3.6.5 Shell</span><br>
+                            Type "copyright", "credits" or "license()" for more information.<br>
+                            >>> print("Hello")<br>
+                            Hello<br>
+                            >>> 10 + 50<br>
+                            60<br>
+                            >>> <span class="animate-pulse">_</span>
+                        </div>
+                        <p id="mode-desc" class="mt-3 text-sm text-gray-600 italic">Interactive mode executes commands
+                            line-by-line. Great for testing.</p>
+                    </div>
+
+                    <!-- Tokens Explorer -->
+                    <div class="bg-white rounded-lg p-6 border border-gray-200 shadow-sm interactive-box">
+                        <h3 class="font-semibold text-lg mb-3">Python Tokens</h3>
+                        <p class="text-sm text-gray-500 mb-4">The smallest lexical units in a program.</p>
+                        <div class="grid grid-cols-2 gap-3 text-sm">
+                            <div class="p-3 bg-blue-50 text-blue-800 rounded border border-blue-100 cursor-pointer hover:bg-blue-100"
+                                onclick="showTokenInfo('keywords')">
+                                <strong>Keywords</strong><br>Reserved words (e.g., if, else, True)
+                            </div>
+                            <div class="p-3 bg-green-50 text-green-800 rounded border border-green-100 cursor-pointer hover:bg-green-100"
+                                onclick="showTokenInfo('identifiers')">
+                                <strong>Identifiers</strong><br>Names for variables, functions
+                            </div>
+                            <div class="p-3 bg-yellow-50 text-yellow-800 rounded border border-yellow-100 cursor-pointer hover:bg-yellow-100"
+                                onclick="showTokenInfo('literals')">
+                                <strong>Literals</strong><br>Fixed values (10, "Hello")
+                            </div>
+                            <div class="p-3 bg-purple-50 text-purple-800 rounded border border-purple-100 cursor-pointer hover:bg-purple-100"
+                                onclick="showTokenInfo('operators')">
+                                <strong>Operators</strong><br>Symbols for computation (+, -, *)
+                            </div>
+                        </div>
+                        <div id="token-detail"
+                            class="mt-4 p-3 bg-gray-50 text-gray-700 text-sm rounded border border-gray-200">
+                            Click a token type above to see examples and rules.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: VARIABLES, DATA TYPES & OPERATORS -->
+        <section id="vars" class="hidden space-y-8 animate-fade-in">
+            <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 md:p-8">
+                <h2 class="text-2xl font-bold text-gray-900 mb-4 border-l-4 border-yellow-500 pl-4">2. Variables, Types
+                    & Operators</h2>
+                <p class="text-gray-600 mb-6">
+                    Python uses <strong>Dynamic Typing</strong>, meaning you don't declare types explicitly. Variables
+                    are created when you assign values.
+                    Explore how Python handles data and performs operations below.
+                </p>
+
+                <!-- Data Types Playground -->
+                <div class="mb-8">
+                    <h3 class="text-lg font-semibold mb-3 flex items-center">
+                        <span class="bg-yellow-100 text-yellow-800 text-xs font-bold mr-2 px-2.5 py-0.5 rounded">TRY
+                            IT</span>
+                        Dynamic Typing Detective
+                    </h3>
+                    <div
+                        class="flex flex-col md:flex-row gap-4 items-start bg-gray-50 p-6 rounded-lg border border-gray-200">
+                        <div class="w-full md:w-1/2">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Enter a value:</label>
+                            <input type="text" id="type-input" placeholder="e.g., 10, 'Hello', [1,2]"
+                                class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 font-mono"
+                                oninput="checkType()">
+                            <p class="text-xs text-gray-500 mt-2">Try: <code
+                                    class="bg-gray-100 px-1 rounded">123</code>, <code
+                                    class="bg-gray-100 px-1 rounded">12.5</code>, <code
+                                    class="bg-gray-100 px-1 rounded">"Python"</code>, <code
+                                    class="bg-gray-100 px-1 rounded">[1,2]</code></p>
+                        </div>
+                        <div class="w-full md:w-1/2">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Detected Type:</label>
+                            <div id="type-output"
+                                class="p-3 bg-white border border-gray-300 rounded-md font-mono text-blue-600 h-12 flex items-center">
+                                &lt;class 'str'&gt; (Default input is string)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Operators Table -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-3">Operator Lab</h3>
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                        <div class="bg-white p-4 border rounded-lg shadow-sm">
+                            <h4 class="font-medium text-gray-900 mb-3">Inputs</h4>
+                            <div class="space-y-3">
+                                <div>
+                                    <label class="text-xs font-bold text-gray-500 uppercase">Variable a</label>
+                                    <input type="number" id="op-a" value="10"
+                                        class="w-full p-2 border rounded font-mono" oninput="updateOperators()">
+                                </div>
+                                <div>
+                                    <label class="text-xs font-bold text-gray-500 uppercase">Variable b</label>
+                                    <input type="number" id="op-b" value="3" class="w-full p-2 border rounded font-mono"
+                                        oninput="updateOperators()">
+                                </div>
+                            </div>
+                        </div>
+                        <div
+                            class="lg:col-span-2 bg-gray-900 text-gray-100 p-4 rounded-lg font-mono text-sm overflow-x-auto">
+                            <h4 class="text-gray-400 mb-2 border-b border-gray-700 pb-1">Output Console</h4>
+                            <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                                <div>a + b = <span id="res-add" class="text-yellow-400">13</span></div>
+                                <div>a - b = <span id="res-sub" class="text-yellow-400">7</span></div>
+                                <div>a * b = <span id="res-mul" class="text-yellow-400">30</span></div>
+                                <div>a / b = <span id="res-div" class="text-green-400">3.333</span></div>
+                                <div>a // b = <span id="res-floor" class="text-green-400">3</span> (Floor)</div>
+                                <div>a % b = <span id="res-mod" class="text-green-400">1</span> (Mod)</div>
+                                <div>a ** b = <span id="res-pow" class="text-purple-400">1000</span></div>
+                                <div>a == b : <span id="res-eq" class="text-blue-400">False</span></div>
+                                <div>a > b : <span id="res-gt" class="text-blue-400">True</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: CONTROL FLOW -->
+        <section id="flow" class="hidden space-y-8 animate-fade-in">
+            <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 md:p-8">
+                <h2 class="text-2xl font-bold text-gray-900 mb-4 border-l-4 border-purple-500 pl-4">3. Control Flow</h2>
+                <p class="text-gray-600 mb-6">
+                    Control structures guide the execution path of a program. Use the simulators below to visualize
+                    <strong>Decision Making</strong> (if..elif..else) and <strong>Iteration</strong> (Loops).
+                </p>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- IF-ELSE Simulator -->
+                    <div class="border border-gray-200 rounded-lg p-6 bg-gray-50">
+                        <h3 class="font-bold text-lg mb-4 text-gray-800">Vote Eligibility Checker (if-else)</h3>
+                        <div class="flex items-center space-x-4 mb-4">
+                            <label class="text-sm font-medium">Age:</label>
+                            <input type="number" id="age-input" value="16" class="p-2 border rounded w-20"
+                                oninput="checkVote()">
+                        </div>
+
+                        <!-- Visual Logic Path -->
+                        <div class="space-y-2 font-mono text-sm">
+                            <div id="logic-1" class="p-2 rounded bg-white border border-gray-300">if age >= 18:</div>
+                            <div id="logic-2" class="ml-4 p-2 rounded text-gray-500 border-l-2 border-gray-300">
+                                print("Eligible")</div>
+                            <div id="logic-3" class="p-2 rounded bg-white border border-gray-300">else:</div>
+                            <div id="logic-4" class="ml-4 p-2 rounded text-gray-500 border-l-2 border-gray-300">
+                                print("Not Eligible")</div>
+                        </div>
+                        <div id="vote-result"
+                            class="mt-4 p-3 rounded bg-red-100 text-red-800 font-bold text-center transition-colors">
+                            Not Eligible
+                        </div>
+                    </div>
+
+                    <!-- LOOP Simulator -->
+                    <div class="border border-gray-200 rounded-lg p-6 bg-gray-50">
+                        <h3 class="font-bold text-lg mb-4 text-gray-800">For Loop Visualizer</h3>
+                        <div class="mb-4 text-sm font-mono bg-gray-900 text-gray-100 p-3 rounded">
+                            <span class="text-purple-400">for</span> i <span class="text-purple-400">in</span> range(1,
+                            6):<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;print(i)
+                        </div>
+                        <div class="flex space-x-2 mb-4">
+                            <button onclick="runLoop()"
+                                class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition">Run
+                                Loop</button>
+                            <button onclick="resetLoop()"
+                                class="px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300 transition">Reset</button>
+                        </div>
+                        <!-- Loop Output Visualization -->
+                        <div class="flex space-x-2 h-16 items-end" id="loop-container">
+                            <!-- Bars will be injected here -->
+                            <div
+                                class="w-10 h-2 bg-gray-200 rounded-t flex items-center justify-center text-xs text-gray-400">
+                                1</div>
+                            <div
+                                class="w-10 h-2 bg-gray-200 rounded-t flex items-center justify-center text-xs text-gray-400">
+                                2</div>
+                            <div
+                                class="w-10 h-2 bg-gray-200 rounded-t flex items-center justify-center text-xs text-gray-400">
+                                3</div>
+                            <div
+                                class="w-10 h-2 bg-gray-200 rounded-t flex items-center justify-center text-xs text-gray-400">
+                                4</div>
+                            <div
+                                class="w-10 h-2 bg-gray-200 rounded-t flex items-center justify-center text-xs text-gray-400">
+                                5</div>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-2">Note: range(1, 6) excludes the upper limit 6.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: DATA STRUCTURES -->
+        <section id="datastruct" class="hidden space-y-8 animate-fade-in">
+            <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 md:p-8">
+                <h2 class="text-2xl font-bold text-gray-900 mb-4 border-l-4 border-green-500 pl-4">4. Data Structures
+                </h2>
+                <p class="text-gray-600 mb-6">
+                    Organizing data is crucial. Here we explore <strong>Strings (Immutable)</strong>, <strong>Lists
+                        (Mutable)</strong>, and <strong>Dictionaries</strong>.
+                    Interact with the tools below to understand slicing and methods.
+                </p>
+
+                <!-- String Slicer Tool -->
+                <div class="mb-10">
+                    <h3 class="text-lg font-semibold mb-3">String Slicing Laboratory</h3>
+                    <div class="bg-gray-900 p-6 rounded-xl shadow-lg text-white">
+                        <div class="text-center mb-6">
+                            <span class="text-gray-400 text-sm">Target String S = </span>
+                            <span class="font-mono text-2xl font-bold tracking-widest text-yellow-400">"PYTHON"</span>
+                        </div>
+
+                        <!-- Visual Indices -->
+                        <div class="flex justify-center mb-2 space-x-1" id="string-boxes">
+                            <!-- Boxes generated by JS -->
+                        </div>
+                        <div class="flex justify-center mb-6 space-x-1 text-xs text-gray-500 font-mono"
+                            id="positive-indices">
+                            <!-- Indices generated by JS -->
+                        </div>
+
+                        <!-- Controls -->
+                        <div class="grid grid-cols-3 gap-4 max-w-md mx-auto mb-6">
+                            <div>
+                                <label class="block text-xs text-gray-400 mb-1">Start</label>
+                                <input type="number" id="slice-start" value="0"
+                                    class="w-full bg-gray-800 border border-gray-700 rounded p-1 text-center"
+                                    oninput="updateSlice()">
+                            </div>
+                            <div>
+                                <label class="block text-xs text-gray-400 mb-1">Stop</label>
+                                <input type="number" id="slice-stop" value="6"
+                                    class="w-full bg-gray-800 border border-gray-700 rounded p-1 text-center"
+                                    oninput="updateSlice()">
+                            </div>
+                            <div>
+                                <label class="block text-xs text-gray-400 mb-1">Step</label>
+                                <input type="number" id="slice-step" value="1"
+                                    class="w-full bg-gray-800 border border-gray-700 rounded p-1 text-center"
+                                    oninput="updateSlice()">
+                            </div>
+                        </div>
+
+                        <div class="text-center">
+                            <div class="inline-block bg-black px-4 py-2 rounded font-mono border border-gray-700">
+                                S[<span id="disp-start">0</span> : <span id="disp-stop">6</span> : <span
+                                    id="disp-step">1</span>]
+                                = <span class="text-green-400 text-xl font-bold" id="slice-result">"PYTHON"</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- List Manipulator -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+                        <h3 class="font-bold text-gray-800 mb-2">List Operations (Mutable)</h3>
+                        <p class="text-sm text-gray-600 mb-4">Current List: <code
+                                class="bg-white px-2 py-1 rounded shadow-sm border"
+                                id="list-display">[10, 20, 30]</code></p>
+
+                        <div class="grid grid-cols-2 gap-2">
+                            <button onclick="listOp('append')"
+                                class="px-3 py-2 bg-blue-100 text-blue-800 rounded hover:bg-blue-200 text-sm font-medium">.append(50)</button>
+                            <button onclick="listOp('pop')"
+                                class="px-3 py-2 bg-red-100 text-red-800 rounded hover:bg-red-200 text-sm font-medium">.pop()</button>
+                            <button onclick="listOp('reverse')"
+                                class="px-3 py-2 bg-yellow-100 text-yellow-800 rounded hover:bg-yellow-200 text-sm font-medium">.reverse()</button>
+                            <button onclick="listOp('sort')"
+                                class="px-3 py-2 bg-green-100 text-green-800 rounded hover:bg-green-200 text-sm font-medium">.sort()</button>
+                        </div>
+                        <div class="mt-4 text-xs text-gray-500 italic">
+                            *Lists change in-place
+                        </div>
+                    </div>
+
+                    <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+                        <h3 class="font-bold text-gray-800 mb-2">Dictionary (Key-Value)</h3>
+                        <p class="text-sm text-gray-600 mb-4">Grade Book</p>
+                        <div id="dict-display"
+                            class="bg-white p-3 rounded border border-gray-300 font-mono text-sm mb-4 min-h-[60px]">
+                            {'Math': 90, 'Eng': 85}
+                        </div>
+                        <div class="flex space-x-2">
+                            <input type="text" id="dict-key" placeholder="Subject"
+                                class="w-24 p-2 text-sm border rounded">
+                            <input type="number" id="dict-val" placeholder="Score"
+                                class="w-20 p-2 text-sm border rounded">
+                            <button onclick="updateDict()"
+                                class="px-4 py-2 bg-purple-600 text-white rounded text-sm hover:bg-purple-700">Set/Update</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 5: FUNCTIONS & RANDOM -->
+        <section id="funcs" class="hidden space-y-8 animate-fade-in">
+            <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 md:p-8">
+                <h2 class="text-2xl font-bold text-gray-900 mb-4 border-l-4 border-red-500 pl-4">5. Functions & Modules
+                </h2>
+                <p class="text-gray-600 mb-6">
+                    Functions promote reusability. Modules like `random` extend capabilities.
+                    Below, visualize how `random.randint()` behaves over many trials.
+                </p>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <h3 class="text-lg font-semibold mb-3">Random Distribution Visualizer</h3>
+                        <p class="text-sm text-gray-600 mb-4">
+                            Click "Generate" to simulate rolling a 6-sided die 100 times using
+                            <code>random.randint(1, 6)</code>.
+                            The chart shows the frequency of each number.
+                        </p>
+                        <div class="bg-gray-900 p-4 rounded-lg font-mono text-sm text-gray-300 mb-4">
+                            import random<br>
+                            counts = [0] * 7<br>
+                            for _ in range(100):<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;roll = random.randint(1, 6)<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;counts[roll] += 1
+                        </div>
+                        <button onclick="generateRandomData()"
+                            class="w-full py-3 bg-red-500 text-white rounded-lg shadow hover:bg-red-600 font-medium transition transform active:scale-95">
+                            🎲 Roll Dice 100 Times
+                        </button>
+                    </div>
+
+                    <!-- Chart Container -->
+                    <div class="bg-white p-2 rounded-lg">
+                        <div class="chart-container">
+                            <canvas id="randomChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <!-- Footer -->
+    <div id="footer-placeholder"></div>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // --- Navigation Logic ---
+        function navTo(sectionId) {
+            // Hide all sections
+            const sections = ['intro', 'vars', 'flow', 'datastruct', 'funcs'];
+            sections.forEach(id => {
+                document.getElementById(id).classList.add('hidden');
+            });
+
+            // Show target section
+            const target = document.getElementById(sectionId);
+            target.classList.remove('hidden');
+
+            // Scroll to top
+            window.scrollTo(0, 0);
+
+            // Re-render chart if navigating to random section to ensure size correct
+            if (sectionId === 'funcs' && window.myRandomChart) {
+                window.myRandomChart.resize();
+            }
+        }
+
+        // Mobile Menu Toggle
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        // --- SECTION 1: Intro Logic ---
+        function switchMode(mode) {
+            const display = document.getElementById('mode-display');
+            const desc = document.getElementById('mode-desc');
+            const btnInteractive = document.getElementById('btn-interactive');
+            const btnScript = document.getElementById('btn-script');
+
+            if (mode === 'interactive') {
+                display.innerHTML = `<span class="text-gray-500">Python 3.6.5 Shell</span><br>>>> print("Hello")<br>Hello<br>>>> 10 + 50<br>60<br>>>> <span class="animate-pulse">_</span>`;
+                desc.innerText = "Interactive mode executes commands line-by-line. Great for testing.";
+                btnInteractive.className = "px-4 py-2 rounded-md text-sm font-medium bg-white shadow-sm text-blue-600";
+                btnScript.className = "px-4 py-2 rounded-md text-sm font-medium text-gray-600 hover:text-gray-900";
+            } else {
+                display.innerHTML = `<span class="text-gray-500">File: welcome.py</span><br>print("Welcome")<br>print("To Script Mode")<br><br><span class="text-green-600"># Output after Run Module (F5)</span><br>Welcome<br>To Script Mode`;
+                desc.innerText = "Script mode allows writing and saving lengthy programs in .py files.";
+                btnScript.className = "px-4 py-2 rounded-md text-sm font-medium bg-white shadow-sm text-blue-600";
+                btnInteractive.className = "px-4 py-2 rounded-md text-sm font-medium text-gray-600 hover:text-gray-900";
+            }
+        }
+
+        function showTokenInfo(type) {
+            const detail = document.getElementById('token-detail');
+            const info = {
+                keywords: "<strong>Keywords:</strong> Reserved words with special meaning. Cannot be used as names.<br><em>Examples:</em> <code>if, else, while, def, True, None</code>",
+                identifiers: "<strong>Identifiers:</strong> Names given to variables, functions, etc.<br><em>Rules:</em> A-Z, 0-9, _. Cannot start with digit. Case-sensitive.",
+                literals: "<strong>Literals:</strong> Fixed data values.<br><em>Types:</em> String ('Hello'), Integer (10), Float (12.5), Boolean (True).",
+                operators: "<strong>Operators:</strong> Symbols for computation.<br><em>Arithmetic:</em> +, -, *, /, %, **, //<br><em>Relational:</em> ==, >, <"
+            };
+            detail.innerHTML = info[type];
+        }
+
+        // --- SECTION 2: Variables Logic ---
+        function checkType() {
+            const input = document.getElementById('type-input').value;
+            const output = document.getElementById('type-output');
+
+            if (input === '') {
+                output.innerText = "<class 'str'> (Empty)";
+                return;
+            }
+
+            // Simple regex heuristics for demo
+            if (/^-?\d+$/.test(input)) {
+                output.innerHTML = `<span class="font-bold">int</span> &nbsp;(Integer)`;
+            } else if (/^-?\d*\.\d+$/.test(input)) {
+                output.innerHTML = `<span class="font-bold">float</span> &nbsp;(Floating Point)`;
+            } else if ((input.startsWith('[') && input.endsWith(']'))) {
+                output.innerHTML = `<span class="font-bold">list</span> &nbsp;(List)`;
+            } else if ((input.startsWith('{') && input.endsWith('}'))) {
+                output.innerHTML = `<span class="font-bold">dict</span> &nbsp;(Dictionary)`;
+            } else if (input === 'True' || input === 'False') {
+                output.innerHTML = `<span class="font-bold">bool</span> &nbsp;(Boolean)`;
+            } else {
+                output.innerHTML = `<span class="font-bold">str</span> &nbsp;(String)`;
+            }
+        }
+
+        function updateOperators() {
+            const a = parseFloat(document.getElementById('op-a').value) || 0;
+            const b = parseFloat(document.getElementById('op-b').value) || 0;
+
+            document.getElementById('res-add').innerText = a + b;
+            document.getElementById('res-sub').innerText = a - b;
+            document.getElementById('res-mul').innerText = a * b;
+
+            // Handle division by zero visually
+            if (b !== 0) {
+                document.getElementById('res-div').innerText = (a / b).toFixed(3);
+                document.getElementById('res-floor').innerText = Math.floor(a / b);
+                document.getElementById('res-mod').innerText = a % b;
+            } else {
+                document.getElementById('res-div').innerText = "Err";
+                document.getElementById('res-floor').innerText = "Err";
+                document.getElementById('res-mod').innerText = "Err";
+            }
+
+            document.getElementById('res-pow').innerText = Math.pow(a, b);
+            document.getElementById('res-eq').innerText = (a == b) ? "True" : "False";
+            document.getElementById('res-gt').innerText = (a > b) ? "True" : "False";
+        }
+
+        // --- SECTION 3: Control Flow Logic ---
+        function checkVote() {
+            const age = parseInt(document.getElementById('age-input').value) || 0;
+            const logic1 = document.getElementById('logic-1'); // if
+            const logic2 = document.getElementById('logic-2'); // print eligible
+            const logic3 = document.getElementById('logic-3'); // else
+            const logic4 = document.getElementById('logic-4'); // print not eligible
+            const result = document.getElementById('vote-result');
+
+            // Reset styles
+            [logic1, logic2, logic3, logic4].forEach(el => el.className = "p-2 rounded bg-white border border-gray-300 ml-0");
+            logic2.classList.add("ml-4", "text-gray-500", "border-l-2");
+            logic4.classList.add("ml-4", "text-gray-500", "border-l-2");
+
+            if (age >= 18) {
+                logic1.className = "p-2 rounded bg-green-100 border border-green-500 font-bold";
+                logic2.className = "ml-4 p-2 rounded bg-green-50 text-green-800 border-l-4 border-green-500";
+                result.innerText = "You are eligible to vote.";
+                result.className = "mt-4 p-3 rounded bg-green-100 text-green-800 font-bold text-center";
+            } else {
+                logic1.className = "p-2 rounded bg-red-50 border border-red-200 text-gray-400 decoration-line-through";
+                logic3.className = "p-2 rounded bg-red-100 border border-red-500 font-bold";
+                logic4.className = "ml-4 p-2 rounded bg-red-50 text-red-800 border-l-4 border-red-500";
+                result.innerText = "You are not eligible to vote.";
+                result.className = "mt-4 p-3 rounded bg-red-100 text-red-800 font-bold text-center";
+            }
+        }
+
+        function resetLoop() {
+            const container = document.getElementById('loop-container');
+            container.innerHTML = `
+                <div class="w-10 h-2 bg-gray-200 rounded-t flex items-center justify-center text-xs text-gray-400">1</div>
+                <div class="w-10 h-2 bg-gray-200 rounded-t flex items-center justify-center text-xs text-gray-400">2</div>
+                <div class="w-10 h-2 bg-gray-200 rounded-t flex items-center justify-center text-xs text-gray-400">3</div>
+                <div class="w-10 h-2 bg-gray-200 rounded-t flex items-center justify-center text-xs text-gray-400">4</div>
+                <div class="w-10 h-2 bg-gray-200 rounded-t flex items-center justify-center text-xs text-gray-400">5</div>
+            `;
+        }
+
+        async function runLoop() {
+            resetLoop();
+            const container = document.getElementById('loop-container');
+            const bars = container.children;
+
+            for (let i = 0; i < 5; i++) {
+                // Highlight current
+                bars[i].className = "w-10 bg-purple-500 rounded-t flex items-center justify-center text-white font-bold transition-all duration-300 h-16 shadow-lg";
+                await new Promise(r => setTimeout(r, 600));
+                // Dim previous
+                bars[i].className = "w-10 bg-purple-200 rounded-t flex items-center justify-center text-purple-800 transition-all duration-300 h-8";
+            }
+        }
+
+        // --- SECTION 4: Strings Logic ---
+        const targetStr = "PYTHON";
+
+        function initStringSlicer() {
+            const boxContainer = document.getElementById('string-boxes');
+            const idxContainer = document.getElementById('positive-indices');
+
+            boxContainer.innerHTML = '';
+            idxContainer.innerHTML = '';
+
+            for (let i = 0; i < targetStr.length; i++) {
+                // Character Box
+                const box = document.createElement('div');
+                box.innerText = targetStr[i];
+                box.id = `char-${i}`;
+                box.className = "w-10 h-10 flex items-center justify-center bg-gray-800 border border-gray-600 rounded font-mono font-bold text-lg index-box";
+                boxContainer.appendChild(box);
+
+                // Index Label
+                const idx = document.createElement('div');
+                idx.innerText = i;
+                idx.className = "w-10 text-center";
+                idxContainer.appendChild(idx);
+            }
+        }
+
+        function updateSlice() {
+            let start = parseInt(document.getElementById('slice-start').value);
+            let stop = parseInt(document.getElementById('slice-stop').value);
+            let step = parseInt(document.getElementById('slice-step').value);
+
+            // Handle defaults/empties
+            if (isNaN(start)) start = 0;
+            if (isNaN(stop)) stop = targetStr.length;
+            if (isNaN(step) || step === 0) step = 1;
+
+            // Display values
+            document.getElementById('disp-start').innerText = start;
+            document.getElementById('disp-stop').innerText = stop;
+            document.getElementById('disp-step').innerText = step;
+
+            // Reset Styles
+            for (let i = 0; i < targetStr.length; i++) {
+                document.getElementById(`char-${i}`).className = "w-10 h-10 flex items-center justify-center bg-gray-800 border border-gray-600 rounded font-mono font-bold text-lg index-box";
+            }
+
+            // Calculate Result & Highlight
+            let result = "";
+
+            if (step > 0) {
+                for (let i = start; i < stop && i < targetStr.length; i += step) {
+                    if (i >= 0) {
+                        result += targetStr[i];
+                        const el = document.getElementById(`char-${i}`);
+                        if (el) el.classList.add('active');
+                    }
+                }
+            } else {
+                // Negative slicing (Simplified for demo)
+                // Adjust for Python negative indexing logic visualizer is tricky, keeping simple range for now
+                // Or basic support:
+                for (let i = start; i > stop && i >= 0; i += step) {
+                    if (i < targetStr.length) {
+                        result += targetStr[i];
+                        const el = document.getElementById(`char-${i}`);
+                        if (el) el.classList.add('active');
+                    }
+                }
+            }
+
+            document.getElementById('slice-result').innerText = `"${result}"`;
+        }
+
+        // List Logic
+        let myList = [10, 20, 30];
+
+        function listOp(op) {
+            if (op === 'append') {
+                myList.push(50);
+            } else if (op === 'pop') {
+                myList.pop();
+            } else if (op === 'reverse') {
+                myList.reverse();
+            } else if (op === 'sort') {
+                myList.sort((a, b) => a - b);
+            }
+            document.getElementById('list-display').innerText = JSON.stringify(myList);
+        }
+
+        // Dict Logic
+        let myDict = { 'Math': 90, 'Eng': 85 };
+        function updateDict() {
+            const key = document.getElementById('dict-key').value;
+            const val = document.getElementById('dict-val').value;
+            if (key && val) {
+                myDict[key] = parseInt(val);
+                document.getElementById('dict-display').innerText = JSON.stringify(myDict).replace(/,/g, ', ');
+            }
+        }
+
+        // --- SECTION 5: Random/Chart Logic ---
+        let myRandomChart = null;
+
+        function generateRandomData() {
+            const counts = [0, 0, 0, 0, 0, 0]; // Indices 0-5 mapping to Dice 1-6
+            for (let i = 0; i < 100; i++) {
+                const roll = Math.floor(Math.random() * 6) + 1;
+                counts[roll - 1]++;
+            }
+
+            const ctx = document.getElementById('randomChart').getContext('2d');
+
+            if (myRandomChart) {
+                myRandomChart.destroy();
+            }
+
+            myRandomChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['1', '2', '3', '4', '5', '6'],
+                    datasets: [{
+                        label: 'Frequency (100 Rolls)',
+                        data: counts,
+                        backgroundColor: [
+                            'rgba(239, 68, 68, 0.6)',
+                            'rgba(245, 158, 11, 0.6)',
+                            'rgba(250, 204, 21, 0.6)',
+                            'rgba(16, 185, 129, 0.6)',
+                            'rgba(59, 130, 246, 0.6)',
+                            'rgba(139, 92, 246, 0.6)'
+                        ],
+                        borderColor: [
+                            'rgb(239, 68, 68)',
+                            'rgb(245, 158, 11)',
+                            'rgb(250, 204, 21)',
+                            'rgb(16, 185, 129)',
+                            'rgb(59, 130, 246)',
+                            'rgb(139, 92, 246)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Count'
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Dice Face'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    }
+                }
+            });
+        }
+
+        // Initialization
+        window.onload = function () {
+            initStringSlicer();
+            checkVote();
+            // Load intro
+            navTo('intro');
+        };
+
+    </script>
+    <script src="../assets/js/navigation.js"></script>
+</body>
+
+</html>

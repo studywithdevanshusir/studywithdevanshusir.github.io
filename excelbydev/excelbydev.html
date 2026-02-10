@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-74VNSC0NMX"></script> 
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-74VNSC0MNX');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Excel Hero: Zero to Hero Practical Trainer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;600&family=Inter:wght@300;400;600;800&display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .font-mono {
+            font-family: 'Roboto Mono', monospace;
+        }
+
+        /* Excel Grid Styles */
+        .excel-grid {
+            display: grid;
+            grid-template-columns: 40px repeat(6, 1fr);
+            grid-auto-rows: 30px;
+            border-top: 1px solid #d1d5db;
+            border-left: 1px solid #d1d5db;
+            background: white;
+            user-select: none;
+        }
+
+        .cell {
+            border-right: 1px solid #e5e7eb;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            align-items: center;
+            padding: 0 6px;
+            font-size: 14px;
+            color: #374151;
+            position: relative;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .header-col {
+            background: #f3f4f6;
+            font-weight: 600;
+            justify-content: center;
+            color: #4b5563;
+        }
+
+        .header-row {
+            background: #f3f4f6;
+            font-weight: 600;
+            justify-content: center;
+            color: #4b5563;
+        }
+
+        /* Animations */
+        .active-cell {
+            outline: 2px solid #10b981;
+            z-index: 10;
+            box-shadow: 0 0 0 1px #fff inset;
+        }
+
+        .typing-cursor::after {
+            content: '|';
+            animation: blink 1s infinite;
+            color: black;
+        }
+
+        @keyframes blink {
+            50% {
+                opacity: 0;
+            }
+        }
+
+        .highlight-range {
+            background-color: rgba(16, 185, 129, 0.2);
+            border: 1px dashed #10b981;
+        }
+
+        .slide-transition {
+            transition: all 0.3s ease-in-out;
+        }
+    </style>
+    <!-- Chosen Palette: Professional Excel Green & Clean White -->
+    <!-- Application Structure Plan: 
+         - A unified "Classroom Interface" split into two:
+           Left: Slide Content (The Lesson) - Changes dynamically.
+           Right: Live Excel Simulator - Responds to the lesson.
+         - 'Step Engine': A JS array containing 65 steps. Each step defines the text, the simulation action (type, select, format), and the next state.
+         - 'Auto-Typing': Functions to simulate keystrokes for formulas to make it feel like a real demo.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+</head>
+
+<body class="bg-gray-100 h-screen flex flex-col overflow-hidden">
+
+    <!-- Top Bar -->
+    <header class="bg-emerald-700 text-white p-3 flex justify-between items-center shadow-md z-20">
+        <div class="flex items-center gap-3">
+            <div class="bg-white text-emerald-700 font-bold px-2 py-1 rounded text-sm">XL</div>
+            <h1 class="font-bold text-lg tracking-wide">Teacher's Training: Zero to Hero</h1>
+        </div>
+        <div class="text-sm opacity-90" id="progress-indicator">Slide 1 / 65</div>
+    </header>
+
+    <!-- Main Workspace -->
+    <div class="flex-1 flex flex-col md:flex-row overflow-hidden">
+
+        <!-- LEFT PANEL: Slide Content (Theory & Guide) -->
+        <div class="w-full md:w-1/3 bg-white border-r border-gray-200 flex flex-col z-10 shadow-lg md:shadow-none">
+            <div class="flex-1 overflow-y-auto p-6 md:p-8 relative">
+                <!-- Module Badge -->
+                <span id="module-badge"
+                    class="inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-4 bg-gray-100 text-gray-500">Module
+                    1: Intro</span>
+
+                <!-- Main Heading -->
+                <h2 id="slide-title" class="text-2xl md:text-3xl font-extrabold text-gray-800 mb-6 slide-transition">
+                    Welcome Teachers</h2>
+
+                <!-- Content Body -->
+                <div id="slide-content"
+                    class="space-y-4 text-gray-600 leading-relaxed slide-transition text-sm md:text-base">
+                    <p>Aaj hum Excel ko bilkul zero se seekhenge.</p>
+                    <ul class="list-disc pl-5 space-y-2">
+                        <li>Basics</li>
+                        <li>Data Entry</li>
+                        <li>Formulas</li>
+                    </ul>
+                </div>
+
+                <!-- Teacher's Note (Bottom) -->
+                <div class="mt-8 p-4 bg-amber-50 border-l-4 border-amber-400 rounded-r">
+                    <p class="text-xs font-bold text-amber-800 uppercase mb-1">Teacher's Action</p>
+                    <p id="slide-action" class="text-sm text-amber-900 italic">Sabhi se Excel open karwayein.</p>
+                </div>
+            </div>
+
+            <!-- Navigation Controls -->
+            <div class="p-4 bg-gray-50 border-t border-gray-200 flex items-center justify-between">
+                <button onclick="prevSlide()" id="btn-prev"
+                    class="px-4 py-2 bg-white border border-gray-300 rounded text-gray-600 hover:bg-gray-100 disabled:opacity-50 text-sm font-semibold">
+                    ← Back
+                </button>
+                <div class="flex gap-2">
+                    <button onclick="toggleAutoPlay()" id="btn-autoplay"
+                        class="px-3 py-2 bg-purple-100 text-purple-700 rounded hover:bg-purple-200 text-sm font-semibold"
+                        title="Auto Play Demo">
+                        ▶ Auto
+                    </button>
+                    <button onclick="nextSlide()" id="btn-next"
+                        class="px-6 py-2 bg-emerald-600 text-white rounded shadow hover:bg-emerald-700 text-sm font-semibold flex items-center gap-2">
+                        Next Step →
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- RIGHT PANEL: Live Simulator -->
+        <div class="flex-1 bg-gray-100 flex flex-col relative overflow-hidden">
+
+            <!-- Excel Interface Mockup -->
+            <div
+                class="flex-1 m-4 bg-white rounded-lg shadow-xl border border-gray-300 flex flex-col overflow-hidden relative">
+
+                <!-- Ribbon (Simplified) -->
+                <div
+                    class="h-12 bg-white border-b border-gray-200 flex items-center px-4 gap-4 overflow-x-auto whitespace-nowrap">
+                    <div class="px-3 py-1 bg-emerald-50 text-emerald-700 rounded font-semibold text-xs cursor-pointer">
+                        Home</div>
+                    <div class="px-3 py-1 hover:bg-gray-50 text-gray-600 rounded text-xs cursor-pointer">Insert</div>
+                    <div class="px-3 py-1 hover:bg-gray-50 text-gray-600 rounded text-xs cursor-pointer">Page Layout
+                    </div>
+                    <div class="px-3 py-1 hover:bg-gray-50 text-gray-600 rounded text-xs cursor-pointer">Formulas</div>
+                    <div class="px-3 py-1 hover:bg-gray-50 text-gray-600 rounded text-xs cursor-pointer">Data</div>
+                </div>
+
+                <!-- Formula Bar -->
+                <div class="h-10 bg-gray-50 border-b border-gray-200 flex items-center px-2 gap-2">
+                    <div class="w-10 text-center text-xs font-bold text-gray-500" id="name-box">A1</div>
+                    <div class="text-gray-400">|</div>
+                    <div class="text-gray-400 italic font-serif">fx</div>
+                    <div class="flex-1 bg-white border border-gray-300 h-6 px-2 flex items-center text-sm font-mono shadow-inner"
+                        id="formula-bar"></div>
+                </div>
+
+                <!-- The Grid -->
+                <div class="flex-1 relative overflow-auto bg-gray-200 p-1">
+                    <div class="excel-grid bg-white rounded shadow-sm" id="grid-container">
+                        <!-- Grid generated by JS -->
+                    </div>
+
+                    <!-- Chart Overlay Container (Hidden by default) -->
+                    <div id="chart-overlay"
+                        class="absolute inset-0 bg-white/95 z-20 hidden flex-col items-center justify-center p-8 transition-opacity duration-500">
+                        <h3 class="text-lg font-bold text-gray-700 mb-4">Performance Report</h3>
+                        <div class="chart-container w-full max-w-lg h-64">
+                            <canvas id="myChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sheet Tabs -->
+                <div class="h-8 bg-gray-100 border-t border-gray-300 flex items-end px-2">
+                    <div
+                        class="bg-white px-4 py-1 text-xs font-bold text-emerald-600 rounded-t border-t border-l border-r border-gray-300 shadow-sm relative -bottom-px">
+                        Sheet1</div>
+                    <div class="px-4 py-1 text-xs text-gray-500 hover:bg-gray-200 rounded-t ml-1 cursor-pointer">+</div>
+                </div>
+            </div>
+
+            <!-- Live Action Overlay (Notifications) -->
+            <div id="action-toast"
+                class="absolute bottom-8 right-8 bg-gray-800 text-white px-4 py-2 rounded shadow-lg text-sm font-mono opacity-0 transition-opacity duration-300 pointer-events-none">
+                Action: Typing...
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- DATA ENGINE: 60+ STEPS ---
+        // This is the brain of the simulator.
+        const slides = [
+            // MODULE 1: INTRO
+            { mod: "Module 1", title: "Training Shuru", text: "Namaste Teachers! Aaj hum Excel ko bilkul basic se seekhenge.", action: "Start button dabayein.", grid: {} },
+            { mod: "Module 1", title: "Grid System", text: "Excel 'Rows' (1,2,3) aur 'Columns' (A,B,C) se bana hai. Inke milne se banta hai 'Cell'.", action: "Mouse se Cells ko highlight karke dikhayein.", grid: {}, highlight: ["A1", "B2", "C3"] },
+            { mod: "Module 1", title: "Active Cell", text: "Jis box par green border hota hai, use 'Active Cell' kehte hain. Abhi hum A1 par hain.", action: "A1 cell par focus karein.", focus: "A1" },
+
+            // MODULE 2: DATA ENTRY
+            { mod: "Module 2", title: "Headers Banana", text: "Sabse pehle hum apni Marksheet ke liye 'Headers' banayenge.", action: "Row 1 mein headers type karein.", focus: "A1" },
+            { mod: "Module 2", title: "Typing: Roll No", text: "Cell A1 mein 'Roll No' type karein.", action: "Type 'Roll No'", focus: "A1", type: "Roll No" },
+            { mod: "Module 2", title: "Typing: Name", text: "Agla column. Tab dabayein aur 'Name' likhein.", action: "B1 mein 'Name' type karein.", focus: "B1", type: "Name" },
+            { mod: "Module 2", title: "Typing: Subjects", text: "Subjects ke naam likhte hain: Hindi, Eng, Math, Sci.", action: "Baaki headers fill karein.", focus: "C1", fillRow: { C1: "Hindi", D1: "Eng", E1: "Math", F1: "Sci" } },
+            { mod: "Module 2", title: "Total Column", text: "Aakhri mein 'Total' ka column banayenge.", action: "G1 mein 'Total' likhein.", focus: "G1", type: "Total" },
+            { mod: "Module 2", title: "Formatting Headers", text: "Headers alag dikhne chahiye. Inhe Bold karein aur Color karein.", action: "Row 1 ko Bold aur Yellow karein.", style: { range: "A1:G1", bold: true, bg: "#fef08a" } },
+
+            // MODULE 3: SERIAL NUMBERS
+            { mod: "Module 3", title: "Magic Fill (1/3)", text: "Ab Roll Numbers likhte hain. Pehle 101 aur 102 likhein.", action: "A2 aur A3 mein data bharein.", grid: { "A2": 101, "A3": 102 }, focus: "A3" },
+            { mod: "Module 3", title: "Magic Fill (2/3)", text: "Excel patterns samajhta hai. Dono ko select karein.", action: "A2 aur A3 ko select karein.", highlight: ["A2", "A3"] },
+            { mod: "Module 3", title: "Magic Fill (3/3)", text: "Ab corner pakad kar drag karein. Excel khud counting poori kar dega!", action: "Drag animation dikhayein.", fillCol: { A4: 103, A5: 104, A6: 105 } },
+
+            // MODULE 4: NAMES & MARKS
+            {
+                mod: "Module 4", title: "Data Bharna", text: "Ab students ke naam aur marks enter karte hain.", action: "Data entry demo.", fillData: [
+                    { cell: "B2", val: "Amit" }, { cell: "C2", val: 85 }, { cell: "D2", val: 74 }, { cell: "E2", val: 90 }, { cell: "F2", val: 88 },
+                    { cell: "B3", val: "Priya" }, { cell: "C3", val: 92 }, { cell: "D3", val: 95 }, { cell: "E3", val: 89 }, { cell: "F3", val: 94 },
+                    { cell: "B4", val: "Rahul" }, { cell: "C4", val: 35 }, { cell: "D4", val: 40 }, { cell: "E4", val: 32 }, { cell: "F4", val: 38 },
+                    { cell: "B5", val: "Neha" }, { cell: "C5", val: 78 }, { cell: "D5", val: 82 }, { cell: "E5", val: 75 }, { cell: "F5", val: 80 },
+                    { cell: "B6", val: "Dev" }, { cell: "C6", val: 45 }, { cell: "D6", val: 55 }, { cell: "E6", val: 48 }, { cell: "F6", val: 50 },
+                ]
+            },
+            { mod: "Module 4", title: "Formatting Data", text: "Text left mein aur Numbers center mein achhe lagte hain.", action: "Alignment change karein.", style: { range: "C2:F6", align: "center" } },
+
+            // MODULE 5: BASIC FORMULAS (SUM)
+            { mod: "Module 5", title: "Formula Shuru", text: "Excel ka asli jaadu. Total nikalne ke liye hum 'SUM' function use karenge.", action: "G2 cell par click karein.", focus: "G2" },
+            { mod: "Module 5", title: "Rule No. 1", text: "Har formula '=' (Equal to) se shuru hota hai.", action: "Formula bar mein '=' type karein.", focus: "G2", type: "=" },
+            { mod: "Module 5", title: "Typing Formula", text: "Humein jodna hai, to hum likhenge 'SUM('", action: "SUM( type karein.", focus: "G2", type: "=SUM(", keepContent: true },
+            { mod: "Module 5", title: "Range Selection", text: "Ab kin numbers ko jodna hai? Hindi se Science tak select karein.", action: "C2 se F2 highlight karein.", highlight: ["C2", "D2", "E2", "F2"], formulaAdd: "C2:F2" },
+            { mod: "Module 5", title: "Bracket Close", text: "Formula band karein ')' se.", action: "Bracket close karein.", focus: "G2", type: "=SUM(C2:F2)", keepContent: false },
+            { mod: "Module 5", title: "Enter Press Karein", text: "Jaise hi Enter dabayenge, total aa jayega!", action: "Result show karein.", grid: { "G2": 337 }, focus: "G3" },
+
+            // MODULE 6: DRAG FORMULA
+            { mod: "Module 6", title: "Ek baar mehnat", text: "Baaki bacchon ka total manually nahi nikalna. Bas corner par double click karein.", action: "Drag handle dikhayein.", focus: "G2" },
+            { mod: "Module 6", title: "Auto Calculation", text: "Dekhiye, sabka total apne aap aa gaya!", action: "Baaki cells fill karein.", fillCol: { G3: 370, G4: 145, G5: 315, G6: 198 } },
+
+            // MODULE 7: AVERAGE (PERCENTAGE)
+            { mod: "Module 7", title: "New Column", text: "Ab Percentage nikalte hain. Agla header banayein '%'.", action: "H1 mein % likhein.", grid: { "H1": "%" }, style: { range: "H1", bold: true, bg: "#fef08a" } },
+            { mod: "Module 7", title: "Average Formula", text: "Percentage ke liye 'AVERAGE' use karein.", action: "H2 mein type karein.", focus: "H2" },
+            { mod: "Module 7", title: "Typing Average", text: "=AVERAGE( likhein aur range select karein.", action: "Formula type karein.", focus: "H2", type: "=AVERAGE(C2:F2)" },
+            { mod: "Module 7", title: "Result", text: "Enter press karein.", action: "Result dikhayein.", grid: { "H2": 84.25 } },
+            { mod: "Module 7", title: "Sabka Nikalein", text: "Drag karein sabke liye.", action: "Auto fill.", fillCol: { H3: 92.5, H4: 36.25, H5: 78.75, H6: 49.5 } },
+
+            // MODULE 8: LOGIC (PASS/FAIL)
+            { mod: "Module 8", title: "Result Column", text: "Kaun Pass hai kaun Fail? Computer batayega. Naya column 'Result'.", action: "I1 mein header banayein.", grid: { "I1": "Result" }, style: { range: "I1", bold: true, bg: "#fef08a" } },
+            { mod: "Module 8", title: "IF Condition", text: "Agar (IF) marks 40 se kam hain, to Fail, nahi to Pass.", action: "I2 par focus karein.", focus: "I2" },
+            { mod: "Module 8", title: "Typing Logic 1", text: "Formula: =IF(H2>=40, ...", action: "Condition type karein.", focus: "I2", type: "=IF(H2>=40,", keepContent: true },
+            { mod: "Module 8", title: "Typing Logic 2", text: "... \"Pass\", \"Fail\")", action: "Result parts type karein.", focus: "I2", type: "=IF(H2>=40, \"Pass\", \"Fail\")" },
+            { mod: "Module 8", title: "Result Dekhein", text: "Amit ke 84% hain, to wo Pass hai.", action: "Result show karein.", grid: { "I2": "Pass" } },
+            { mod: "Module 8", title: "Auto Check", text: "Drag karke dekhte hain Rahul ka kya hua.", action: "Fill rest.", fillCol: { I3: "Pass", I4: "Fail", I5: "Pass", I6: "Pass" } },
+
+            // MODULE 9: CONDITIONAL FORMATTING
+            { mod: "Module 9", title: "Fail ko Red Karein", text: "List mein Fail dhoondna mushkil hai. Ise Red color karte hain.", action: "Result column select karein.", highlight: ["I2", "I3", "I4", "I5", "I6"] },
+            { mod: "Module 9", title: "Highlight Rules", text: "Conditional Formatting > Highlight Cells > Text containing 'Fail'", action: "Menu simulation.", toast: "Applying Formatting Rule..." },
+            { mod: "Module 9", title: "Magic Color", text: "Jahan bhi 'Fail' likha hoga, wo apne aap Lal ho jayega.", action: "Apply red style.", style: { cell: "I4", bg: "#fecaca", color: "#b91c1c", bold: true } },
+
+            // MODULE 10: MIN & MAX
+            { mod: "Module 10", title: "Topper Kaun?", text: "Neeche pata karte hain Highest marks kiske hain.", action: "Neeche scroll karein.", focus: "D8" },
+            { mod: "Module 10", title: "Max Formula", text: "=MAX(Range) sabse bada number dhoondta hai.", action: "Formula type.", focus: "D8", type: "=MAX(G2:G6)" },
+            { mod: "Module 10", title: "Highest Total", text: "Enter! Sabse zyada marks 370 hain.", action: "Show result.", grid: { "C8": "Max Marks:", "D8": 370 } },
+
+            // MODULE 11: CHARTS
+            { mod: "Module 11", title: "Visual Report", text: "Ab is data ka Chart banate hain taaki Parents Meeting mein dikha sakein.", action: "Names aur Marks select karein.", highlight: ["B2:B6", "G2:G6"] },
+            { mod: "Module 11", title: "Insert Chart", text: "Insert Tab > Column Chart par click karein.", action: "Chart popup.", showChart: true },
+            { mod: "Module 11", title: "Chart Ready", text: "Ye dekhiye! Marks ka graph taiyar hai.", action: "Explain chart.", showChart: true },
+            { mod: "Module 11", title: "Back to Grid", text: "Chart ko side mein rakhte hain.", action: "Hide chart.", showChart: false },
+
+            // MODULE 12: PRINTING
+            { mod: "Module 12", title: "Print Preview", text: "Print karne se pehle 'Ctrl+P' dabayein.", action: "Print mode.", toast: "Opening Print Preview..." },
+            { mod: "Module 12", title: "Gridlines", text: "Dhyan rakhein, 'All Borders' nahi lagaya to print mein lines nahi aayengi.", action: "Border lagayein.", style: { range: "A1:I6", border: true } },
+
+            // CLOSING
+            { mod: "Conclusion", title: "Training Complete!", text: "Badhai ho Teachers! Aapne Marksheet banana seekh liya hai. Ab practice karein.", action: "Clap!", toast: "Training Session Finished!" }
+        ];
+
+        // --- STATE & VARS ---
+        let currentSlide = 0;
+        let isAutoPlaying = false;
+        let autoPlayTimer = null;
+        let gridData = {}; // Stores current value of cells
+        let cellStyles = {}; // Stores current styles
+
+        const gridEl = document.getElementById('grid-container');
+        const formulaBar = document.getElementById('formula-bar');
+        const nameBox = document.getElementById('name-box');
+        const actionToast = document.getElementById('action-toast');
+
+        // --- INIT ---
+        window.onload = () => {
+            initGrid();
+            loadSlide(0);
+        };
+
+        // --- CORE FUNCTIONS ---
+
+        function initGrid() {
+            // Build 10 rows, 10 columns grid
+            let html = '';
+
+            // Corner
+            html += '<div class="header-col"></div>';
+
+            // Header Columns A-J (Using ASCII)
+            for (let i = 0; i < 9; i++) {
+                html += `<div class="header-col">${String.fromCharCode(65 + i)}</div>`;
+            }
+
+            // Rows
+            for (let r = 1; r <= 15; r++) {
+                // Row Header
+                html += `<div class="header-row">${r}</div>`;
+                // Cells
+                for (let c = 0; c < 9; c++) {
+                    let colId = String.fromCharCode(65 + c);
+                    let cellId = `${colId}${r}`;
+                    html += `<div class="cell" id="cell-${cellId}" data-id="${cellId}"></div>`;
+                }
+            }
+            gridEl.innerHTML = html;
+        }
+
+        function loadSlide(index) {
+            if (index < 0 || index >= slides.length) return;
+            currentSlide = index;
+            const s = slides[index];
+
+            // 1. Update UI Text
+            document.getElementById('module-badge').innerText = s.mod;
+            document.getElementById('slide-title').innerText = s.title;
+            document.getElementById('slide-content').innerHTML = `<p class="text-lg">${s.text}</p>`;
+            document.getElementById('slide-action').innerText = s.action;
+            document.getElementById('progress-indicator').innerText = `Step ${index + 1} / ${slides.length}`;
+
+            // 2. Disable/Enable Buttons
+            document.getElementById('btn-prev').disabled = index === 0;
+            document.getElementById('btn-next').innerText = index === slides.length - 1 ? "Finish" : "Next Step →";
+
+            // 3. Process Grid Actions
+            resetHighlights();
+
+            // Apply persistent data from previous steps? 
+            // Simplified: We apply data defined in THIS step or accumulate?
+            // Strategy: Accumulate data in 'gridData' state.
+            if (s.grid) {
+                Object.keys(s.grid).forEach(key => {
+                    updateCell(key, s.grid[key]);
+                });
+            }
+            if (s.fillRow) {
+                Object.keys(s.fillRow).forEach(key => updateCell(key, s.fillRow[key]));
+            }
+            if (s.fillCol) {
+                Object.keys(s.fillCol).forEach(key => updateCell(key, s.fillCol[key]));
+            }
+            if (s.fillData) {
+                s.fillData.forEach(item => updateCell(item.cell, item.val));
+            }
+
+            // Styles
+            if (s.style) {
+                applyStyle(s.style);
+            }
+
+            // Focus & Typing Animation
+            if (s.focus) {
+                setFocus(s.focus);
+                if (s.type) {
+                    typeInCell(s.focus, s.type, s.keepContent);
+                } else {
+                    // Update formula bar to show current content if no typing
+                    formulaBar.innerText = gridData[s.focus] || '';
+                }
+            } else {
+                setFocus(null);
+            }
+
+            // Highlighting Ranges
+            if (s.highlight) {
+                s.highlight.forEach(h => highlightCell(h));
+            }
+
+            // Formula Addition (Visual trick for =SUM(..range..))
+            if (s.formulaAdd) {
+                const current = formulaBar.innerText;
+                if (!current.endsWith(s.formulaAdd)) {
+                    formulaBar.innerText = current + s.formulaAdd;
+                    // Also update cell visually
+                    const activeId = document.querySelector('.active-cell')?.dataset.id;
+                    if (activeId) document.getElementById(`cell-${activeId}`).innerText = formulaBar.innerText;
+                }
+            }
+
+            // Chart Toggle
+            const chartOverlay = document.getElementById('chart-overlay');
+            if (s.showChart) {
+                chartOverlay.classList.remove('hidden');
+                chartOverlay.classList.add('flex');
+                renderChart();
+            } else {
+                chartOverlay.classList.add('hidden');
+                chartOverlay.classList.remove('flex');
+            }
+
+            // Toasts
+            if (s.toast) showToast(s.toast);
+
+            // Auto Play Logic
+            if (isAutoPlaying) {
+                clearTimeout(autoPlayTimer);
+                // Wait time depends on text length (typing) or default
+                const delay = s.type ? (s.type.length * 50) + 1500 : 2500;
+                autoPlayTimer = setTimeout(() => nextSlide(), delay);
+            }
+        }
+
+        function updateCell(id, val) {
+            gridData[id] = val;
+            const el = document.getElementById(`cell-${id}`);
+            if (el) el.innerText = val;
+        }
+
+        function applyStyle(styleObj) {
+            // Helper to parse range like "A1:G1" or single "A1"
+            let cells = [];
+            if (styleObj.range) {
+                if (styleObj.range.includes(':')) {
+                    // Very basic parser for single row/col ranges (A1:G1 or A1:A5)
+                    let [start, end] = styleObj.range.split(':');
+                    // Logic to find cells between start and end (simplified for this demo)
+                    // Assuming row range for headers (A1:G1)
+                    if (start[1] === end[1]) { // Same row
+                        let r = start.slice(1);
+                        let sC = start.charCodeAt(0);
+                        let eC = end.charCodeAt(0);
+                        for (let i = sC; i <= eC; i++) cells.push(String.fromCharCode(i) + r);
+                    }
+                    // Assuming col range (C2:F6) - Rectangular
+                    else {
+                        let sC = start.charCodeAt(0), eC = end.charCodeAt(0);
+                        let sR = parseInt(start.slice(1)), eR = parseInt(end.slice(1));
+                        for (let c = sC; c <= eC; c++) {
+                            for (let r = sR; r <= eR; r++) {
+                                cells.push(String.fromCharCode(c) + r);
+                            }
+                        }
+                    }
+                } else {
+                    cells.push(styleObj.range);
+                }
+            }
+            if (styleObj.cell) cells.push(styleObj.cell);
+
+            cells.forEach(id => {
+                const el = document.getElementById(`cell-${id}`);
+                if (!el) return;
+
+                if (styleObj.bold) el.style.fontWeight = 'bold';
+                if (styleObj.bg) el.style.backgroundColor = styleObj.bg;
+                if (styleObj.color) el.style.color = styleObj.color;
+                if (styleObj.align) el.style.justifyContent = styleObj.align === 'center' ? 'center' : 'flex-start';
+                if (styleObj.border) el.style.border = '1px solid #000';
+            });
+        }
+
+        function setFocus(id) {
+            // Remove old
+            document.querySelectorAll('.active-cell').forEach(el => el.classList.remove('active-cell'));
+            if (!id) {
+                nameBox.innerText = '';
+                formulaBar.innerText = '';
+                return;
+            }
+
+            const el = document.getElementById(`cell-${id}`);
+            if (el) {
+                el.classList.add('active-cell');
+                nameBox.innerText = id;
+                // If cell has value, put in formula bar
+                formulaBar.innerText = gridData[id] || '';
+            }
+        }
+
+        function highlightCell(idOrRange) {
+            // Handle ranges like C2:F2 later if needed, for now individual IDs
+            if (idOrRange.includes(':')) {
+                // Simplified parser again
+                let [start, end] = idOrRange.split(':');
+                let sC = start.charCodeAt(0), eC = end.charCodeAt(0);
+                let sR = parseInt(start.slice(1)), eR = parseInt(end.slice(1));
+                for (let c = sC; c <= eC; c++) {
+                    for (let r = sR; r <= eR; r++) {
+                        let cellId = String.fromCharCode(c) + r;
+                        const el = document.getElementById(`cell-${cellId}`);
+                        if (el) el.classList.add('highlight-range');
+                    }
+                }
+            } else {
+                const el = document.getElementById(`cell-${idOrRange}`);
+                if (el) el.classList.add('highlight-range');
+            }
+        }
+
+        function resetHighlights() {
+            document.querySelectorAll('.highlight-range').forEach(el => el.classList.remove('highlight-range'));
+        }
+
+        // Typing Simulation
+        let typingInterval;
+        function typeInCell(id, text, keepExisting) {
+            const el = document.getElementById(`cell-${id}`);
+            if (!el) return;
+
+            // Clear animations
+            clearInterval(typingInterval);
+            el.classList.add('typing-cursor');
+
+            let currentText = keepExisting ? (gridData[id] || '') : '';
+            let charIndex = keepExisting ? currentText.length : 0;
+            // Only type the NEW part
+            let textToType = keepExisting ? text.replace(currentText, '') : text;
+            // Wait if we are appending formula parts manually
+            if (text.startsWith(currentText) && keepExisting) {
+                textToType = text.substring(currentText.length);
+            } else {
+                currentText = '';
+                charIndex = 0;
+                textToType = text;
+            }
+
+            let i = 0;
+            formulaBar.innerText = currentText;
+            el.innerText = currentText;
+
+            typingInterval = setInterval(() => {
+                if (i < textToType.length) {
+                    currentText += textToType.charAt(i);
+                    el.innerText = currentText;
+                    formulaBar.innerText = currentText;
+                    i++;
+                } else {
+                    clearInterval(typingInterval);
+                    el.classList.remove('typing-cursor');
+                    gridData[id] = text; // Commit to memory
+                }
+            }, 50); // Speed of typing
+        }
+
+        function showToast(msg) {
+            actionToast.innerText = msg;
+            actionToast.style.opacity = '1';
+            setTimeout(() => { actionToast.style.opacity = '0'; }, 2000);
+        }
+
+        function nextSlide() {
+            if (currentSlide < slides.length - 1) {
+                loadSlide(currentSlide + 1);
+            } else {
+                isAutoPlaying = false;
+                document.getElementById('btn-autoplay').classList.remove('bg-purple-300');
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                loadSlide(currentSlide - 1);
+            }
+        }
+
+        function toggleAutoPlay() {
+            isAutoPlaying = !isAutoPlaying;
+            const btn = document.getElementById('btn-autoplay');
+            if (isAutoPlaying) {
+                btn.classList.add('bg-purple-300');
+                btn.innerText = "⏸ Pause";
+                nextSlide();
+            } else {
+                btn.classList.remove('bg-purple-300');
+                btn.innerText = "▶ Auto";
+                clearTimeout(autoPlayTimer);
+            }
+        }
+
+        // --- CHART JS RENDERER ---
+        let myChartInstance = null;
+        function renderChart() {
+            const ctx = document.getElementById('myChart').getContext('2d');
+            if (myChartInstance) myChartInstance.destroy();
+
+            myChartInstance = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Amit', 'Priya', 'Rahul', 'Neha', 'Dev'],
+                    datasets: [{
+                        label: 'Total Marks',
+                        data: [337, 370, 145, 315, 198],
+                        backgroundColor: ['#34d399', '#10b981', '#ef4444', '#34d399', '#f87171']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        title: { display: true, text: 'Student Performance Class X' }
+                    },
+                    scales: {
+                        y: { beginAtZero: true, max: 400 }
+                    }
+                }
+            });
+        }
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-74VNSC0NMX"></script> 
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-74VNSC0MNX');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit 1: Computer Systems | Class 11 CS</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <script src="../assets/js/navigation.js" defer></script>
+    <style>
+        .page-header {
+            padding-top: 8rem;
+            padding-bottom: 2rem;
+            text-align: center;
+        }
+
+        .chapter-section {
+            padding: 4rem 1.5rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .chapter-card {
+            background: var(--bg-card);
+            border-radius: 1.5rem;
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .chapter-title {
+            color: var(--primary-color);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 0.5rem;
+        }
+
+        .story-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #cbd5e1;
+            margin-bottom: 1.5rem;
+        }
+
+        .highlight-box {
+            background: rgba(56, 189, 248, 0.1);
+            border-left: 4px solid #38bdf8;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 1.5rem 0;
+            color: white;
+        }
+
+        /* Logic Gates Table */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .data-table th,
+        .data-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .data-table th {
+            background: #1e293b;
+            color: var(--primary-color);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="navbar-placeholder"></div>
+
+    <section class="page-header" data-aos="fade-down">
+        <h1>Unit 1: Computer Systems & Organisation</h1>
+        <p style="font-size: 1.2rem; color: #94a3b8;">Class 11 CS (Code 083)</p>
+    </section>
+
+    <div class="chapter-section" data-aos="fade-up">
+
+        <!-- Section 1: Basic Organization -->
+        <div class="chapter-card">
+            <h2 class="chapter-title">1. Basic Computer Organization</h2>
+            <div class="highlight-box">
+                <i class='bx bx-chip'></i>
+                <strong>Computer System:</strong> Ek aisa electronic device jo data (Input) leta hai, usse process karta
+                hai (CPU), aur information (Output) deta hai.
+            </div>
+
+            <p class="story-text">
+                Computer ke 4 main components hote hain (Von Neumann Architecture):
+            </p>
+            <ul class="story-text" style="list-style: disc; padding-left: 1.5rem;">
+                <li><strong>Input Unit:</strong> Data enter karne ke liye (Keyboard, Mouse).</li>
+                <li><strong>CPU (Central Processing Unit):</strong> "Brain of Computer". Iske parts hain:
+                    <br> - <strong>ALU (Arithmetic Logic Unit):</strong> Math aur Logic calculations.
+                    <br> - <strong>CU (Control Unit):</strong> Data flow control karta hai.
+                    <br> - <strong>Registers:</strong> High-speed memory inside CPU.
+                </li>
+                <li><strong>Memory Unit:</strong> Data store karne ke liye (RAM, ROM, HDD).</li>
+                <li><strong>Output Unit:</strong> Result dikhane ke liye (Monitor, Printer).</li>
+            </ul>
+        </div>
+
+        <!-- Section 2: Boolean Logic -->
+        <div class="chapter-card">
+            <h2 class="chapter-title">2. Boolean Logic (Logic Gates)</h2>
+            <p class="story-text">
+                Computers sirf 0 aur 1 (Binary) samajhte hain. Logic Gates wo circuits hain jo in signals par decisions
+                lete hain.
+            </p>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Gate Name</th>
+                        <th>Symbol</th>
+                        <th>Action</th>
+                        <th>Truth Table Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>AND</strong></td>
+                        <td>. (Dot)</td>
+                        <td>Dono Input 1 hone chahiye Output 1 ke liye.</td>
+                        <td>1 AND 1 = 1</td>
+                    </tr>
+                    <tr>
+                        <td><strong>OR</strong></td>
+                        <td>+ (Plus)</td>
+                        <td>Koi ek Input 1 ho toh Output 1 hoga.</td>
+                        <td>1 OR 0 = 1</td>
+                    </tr>
+                    <tr>
+                        <td><strong>NOT</strong></td>
+                        <td>' (Bar)</td>
+                        <td>Input ko ulat deta hai (Inverter).</td>
+                        <td>NOT 1 = 0</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Section 3: Number Systems -->
+        <div class="chapter-card">
+            <h2 class="chapter-title">3. Number Systems</h2>
+            <ul class="story-text" style="list-style: none;">
+                <li style="margin-bottom: 0.5rem;"><span style="color: #38bdf8;">• Binary:</span> Base 2 (0, 1) -
+                    Machine Language</li>
+                <li style="margin-bottom: 0.5rem;"><span style="color: #f472b6;">• Octal:</span> Base 8 (0-7)</li>
+                <li style="margin-bottom: 0.5rem;"><span style="color: #a855f7;">• Decimal:</span> Base 10 (0-9) - Human
+                    readable</li>
+                <li style="margin-bottom: 0.5rem;"><span style="color: #facc15;">• Hexadecimal:</span> Base 16 (0-9,
+                    A-F) - Memory Addressing</li>
+            </ul>
+
+            <!-- AdSense Placeholder -->
+            <div class="ad-slot">Google Ad Here</div>
+        </div>
+
+        <!-- Quiz Section -->
+        <div class="mcq-box">
+            <h2 style="color: #10b981; margin-bottom: 1.5rem;">Quiz Time!</h2>
+            <p class="mcq-question">Q1. Which unit is called the Brain of the Computer?</p>
+            <div class="mcq-options">
+                <span>(a) ALU</span>
+                <span>(b) Memory</span>
+                <span>(c) CPU</span>
+                <span>(d) Input</span>
+            </div>
+            <button class="btn btn-reveal" onclick="toggleAnswer('ans1')">Check Answer</button>
+            <div id="ans1" class="mcq-answer" style="display: none;">
+                <strong>Answer: (c) CPU</strong>
+            </div>
+        </div>
+
+        <div class="mcq-box">
+            <p class="mcq-question">Q2. What is the output of 1 OR 0?</p>
+            <div class="mcq-options">
+                <span>(a) 0</span>
+                <span>(b) 1</span>
+                <span>(c) 10</span>
+                <span>(d) Null</span>
+            </div>
+            <button class="btn btn-reveal" onclick="toggleAnswer('ans2')">Check Answer</button>
+            <div id="ans2" class="mcq-answer" style="display: none;">
+                <strong>Answer: (b) 1</strong>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="footer-placeholder"></div>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script src="../assets/js/script.js"></script>
+</body>
+
+</html>

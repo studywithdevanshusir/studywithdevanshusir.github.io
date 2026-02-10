@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-74VNSC0NMX"></script> 
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-74VNSC0MNX');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit 1: Programming - II | Class 12 CS</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <script src="../assets/js/navigation.js" defer></script>
+    <style>
+        .page-header {
+            padding-top: 8rem;
+            padding-bottom: 2rem;
+            text-align: center;
+        }
+
+        .chapter-section {
+            padding: 4rem 1.5rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .chapter-card {
+            background: var(--bg-card);
+            border-radius: 1.5rem;
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .chapter-title {
+            color: var(--primary-color);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 0.5rem;
+        }
+
+        .story-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #cbd5e1;
+            margin-bottom: 1.5rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="navbar-placeholder"></div>
+
+    <section class="page-header" data-aos="fade-down">
+        <h1>Unit 1: Computational Thinking & Programming - II</h1>
+        <p style="font-size: 1.2rem; color: #94a3b8;">Class 12 CS (Code 083) - Advanced Python</p>
+    </section>
+
+    <div class="chapter-section" data-aos="fade-up">
+
+        <!-- Section 1: Functions -->
+        <div class="chapter-card">
+            <h2 class="chapter-title">1. Functions</h2>
+            <p class="story-text">
+                Function ek code ka block hota hai jo specific kaam karta hai. Isse code reusable banta hai.
+                <br>Key concepts: <strong>def keyword</strong>, <strong>arguments</strong>, <strong>return
+                    statement</strong>.
+            </p>
+
+            <div class="code-block">
+                <pre><code class="language-python"><span class="comment"># Function definition</span>
+<span class="keyword">def</span> greet(name):
+    <span class="keyword">return</span> <span class="string">"Hello "</span> + name
+
+<span class="comment"># Function calling</span>
+msg = greet(<span class="string">"Rahul"</span>)
+print(msg)  <span class="comment"># Output: Hello Rahul</span></code></pre>
+            </div>
+        </div>
+
+        <!-- Section 2: File Handling -->
+        <div class="chapter-card">
+            <h2 class="chapter-title">2. File Handling</h2>
+            <p class="story-text">
+                Python se hum text files (.txt), binary files (.dat) aur CSV files ko read/write kar sakte hain.
+                Useful for storing data permanently.
+                <br>Modes: 'r' (read), 'w' (write), 'a' (append).
+            </p>
+
+            <div class="code-block">
+                <pre><code class="language-python"><span class="comment"># Writing to a text file</span>
+f = open(<span class="string">"data.txt"</span>, <span class="string">"w"</span>)
+f.write(<span class="string">"Confidential Data"</span>)
+f.close()
+
+<span class="comment"># Reading a text file</span>
+f = open(<span class="string">"data.txt"</span>, <span class="string">"r"</span>)
+print(f.read())
+f.close()</code></pre>
+            </div>
+        </div>
+
+        <!-- Section 3: Data Structures (Stack) -->
+        <div class="chapter-card">
+            <h2 class="chapter-title">3. Stack (Data Structure)</h2>
+            <p class="story-text">
+                Stack follows <strong>LIFO (Last In First Out)</strong> principle. Jaise plates ka stack - jo last mein
+                rakhi wo pehle uthegi.
+                <br>Operations: <strong>Push</strong> (Add), <strong>Pop</strong> (Remove).
+            </p>
+
+            <div class="code-block">
+                <pre><code class="language-python">stack = []
+stack.append(<span class="number">10</span>) <span class="comment"># PUSH</span>
+stack.append(<span class="number">20</span>)
+print(stack.pop()) <span class="comment"># POP -> Output: 20</span></code></pre>
+            </div>
+            <!-- AdSense Placeholder -->
+            <div class="ad-slot">Google Ad Here</div>
+        </div>
+
+        <!-- Quiz Section -->
+        <div class="mcq-box">
+            <h2 style="color: #10b981; margin-bottom: 1.5rem;">Quiz Time!</h2>
+            <p class="mcq-question">Q1. Which keyword is used to define a function?</p>
+            <div class="mcq-options">
+                <span>(a) func</span>
+                <span>(b) define</span>
+                <span>(c) def</span>
+                <span>(d) function</span>
+            </div>
+            <button class="btn btn-reveal" onclick="toggleAnswer('ans1')">Check Answer</button>
+            <div id="ans1" class="mcq-answer" style="display: none;">
+                <strong>Answer: (c) def</strong>
+            </div>
+        </div>
+
+        <div class="mcq-box">
+            <p class="mcq-question">Q2. Which mode is used to append data to a file?</p>
+            <div class="mcq-options">
+                <span>(a) r</span>
+                <span>(b) w</span>
+                <span>(c) a</span>
+                <span>(d) x</span>
+            </div>
+            <button class="btn btn-reveal" onclick="toggleAnswer('ans2')">Check Answer</button>
+            <div id="ans2" class="mcq-answer" style="display: none;">
+                <strong>Answer: (c) a</strong>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="footer-placeholder"></div>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script src="../assets/js/script.js"></script>
+</body>
+
+</html>

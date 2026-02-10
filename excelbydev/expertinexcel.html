@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-74VNSC0NMX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-74VNSC0NMX');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Excel Mastery for Teachers: Zero to Hero</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Chart Container Strategy */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            height: 300px;
+            margin: 0 auto;
+        }
+
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+
+        /* Custom Excel-like Grid for Demos */
+        .excel-grid {
+            display: grid;
+            grid-template-columns: 40px repeat(5, 1fr);
+            border-top: 1px solid #e5e7eb;
+            border-left: 1px solid #e5e7eb;
+            font-size: 0.875rem;
+        }
+
+        .excel-cell {
+            border-right: 1px solid #e5e7eb;
+            border-bottom: 1px solid #e5e7eb;
+            padding: 4px 8px;
+            background-color: white;
+            min-height: 28px;
+            display: flex;
+            align-items: center;
+        }
+
+        .excel-header {
+            background-color: #f3f4f6;
+            font-weight: 600;
+            justify-content: center;
+            color: #4b5563;
+        }
+
+        .excel-row-header {
+            background-color: #f3f4f6;
+            font-weight: 600;
+            justify-content: center;
+            color: #4b5563;
+        }
+
+        .active-cell {
+            border: 2px solid #10b981;
+            position: relative;
+            z-index: 10;
+        }
+
+        .conditional-pass {
+            background-color: #d1fae5;
+            color: #065f46;
+        }
+
+        .conditional-fail {
+            background-color: #fee2e2;
+            color: #991b1b;
+        }
+
+        /* Animation classes */
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+    <!-- Chosen Palette: Warm Neutrals & Excel Green -->
+    <!-- Application Structure Plan: The app uses a dashboard layout. A persistent sidebar (desktop) or top menu (mobile) allows navigation through the 7 training modules. The main content area dynamically updates based on the selected module. This structure was chosen to allow teachers to jump between topics non-linearly during a review, or follow step-by-step during the session. Each module contains a 'Learn' section (Theory) and a 'Simulate' section (Interactive Demo) to reinforce the 'Action' points from the source report. -->
+    <!-- Visualization & Content Choices: 
+         - Mod 1 (Interface): Mock CSS Grid UI to explain layout without screenshots.
+         - Mod 2 (Data Entry): Interactive form to demonstrate 'Enter' vs 'Tab' behavior.
+         - Mod 3 (Formulas): Live calculation fields demonstrating SUM/AVG/MIN/MAX updates in real-time.
+         - Mod 4 (Logic): Inputs triggering visual conditional formatting (Red/Green) and Pass/Fail logic.
+         - Mod 6 (Advanced): Chart.js used to demonstrate 'Recommended Charts' (Column & Pie) and Pivot data visualization.
+         - Interaction: Clicking buttons to 'Apply Formula' or 'Filter Data' simulates the Excel actions described in the slides.
+         - Justification: Hands-on simulation reinforces the 'Action' items (e.g., 'Sabhi teachers se Excel open karwayein') directly in the browser.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+</head>
+
+<body class="bg-stone-50 text-stone-800 h-screen flex flex-col md:flex-row overflow-hidden">
+
+    <!-- Mobile Nav Header -->
+    <header class="md:hidden bg-white border-b border-stone-200 p-4 flex justify-between items-center z-20">
+        <h1 class="text-lg font-bold text-emerald-700">Excel Shiksha</h1>
+        <button id="mobile-menu-btn" class="text-stone-600 focus:outline-none text-2xl">☰</button>
+    </header>
+
+    <!-- Sidebar Navigation -->
+    <nav id="sidebar"
+        class="fixed inset-y-0 left-0 transform -translate-x-full md:relative md:translate-x-0 w-64 bg-white border-r border-stone-200 flex flex-col transition-transform duration-300 ease-in-out z-10 shadow-lg md:shadow-none">
+        <div class="p-6 border-b border-stone-100 hidden md:block">
+            <h1 class="text-2xl font-bold text-emerald-700">Excel Shiksha</h1>
+            <p class="text-xs text-stone-500 mt-1">Teacher Training Portal</p>
+        </div>
+        <div class="flex-1 overflow-y-auto py-4">
+            <ul class="space-y-1 px-3" id="nav-list">
+                <!-- Nav items injected via JS -->
+            </ul>
+        </div>
+        <div class="p-4 border-t border-stone-100 bg-stone-50">
+            <div class="flex items-center space-x-2">
+                <span class="h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span class="text-xs font-medium text-stone-500">Live Session Mode</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 overflow-y-auto p-4 md:p-8 relative" id="main-content">
+        <!-- Content injected via JS -->
+    </main>
+
+    <!-- Trainer Tips Modal Overlay -->
+    <div id="trainer-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50 p-4">
+        <div class="bg-white rounded-lg shadow-xl max-w-lg w-full p-6 transform transition-all scale-100">
+            <h3 class="text-lg font-bold text-emerald-800 mb-2">Trainer's Secret Notes 🤫</h3>
+            <div id="trainer-tips-content" class="text-sm text-stone-600 space-y-2 mb-4"></div>
+            <button onclick="closeModal()"
+                class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-medium py-2 px-4 rounded transition-colors">Got
+                it!</button>
+        </div>
+    </div>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // --- DATA STORE ---
+        const modules = [
+            {
+                id: 'welcome',
+                title: 'Welcome & Objectives',
+                subtitle: 'Simplificando marksheet, attendance aur reporting',
+                icon: '👋',
+                slides: '1-5',
+                content: {
+                    intro: 'Excel sirf ek software nahi, teacher ka sabse bada helper hai. Is module mein hum samjhenge ki Excel kyun zaroori hai aur iska interface kaisa dikhta hai.',
+                    sections: [
+                        {
+                            title: 'Why Excel?',
+                            points: ['Automatic Total & Percentage calculation', 'Error-free results (No manual mistakes)', 'Student performance analysis', 'Attendance tracking']
+                        },
+                        {
+                            title: 'The Anatomy (Interface)',
+                            type: 'interactive-map',
+                            description: 'Neeche diye gaye buttons par click karke Excel ke parts ko samjhein.'
+                        }
+                    ],
+                    action: 'Sabhi teachers se Excel open karwayein.',
+                    tips: ['Projector zoom level 150% rakhein.', 'Examples hamesha Marks ya Attendance ke lein.']
+                }
+            },
+            {
+                id: 'data-entry',
+                title: 'Data Entry Basics',
+                subtitle: 'Headers, Rows, Columns & Formatting',
+                icon: '⌨️',
+                slides: '6-12',
+                content: {
+                    intro: 'Sahi tarike se data enter karna aadha kaam aasaan kar deta hai. Yahan hum seekhenge data entry ke smart tarike aur formatting.',
+                    sections: [
+                        {
+                            title: 'Key Concepts',
+                            points: ['**Enter:** Neeche jane ke liye', '**Tab:** Right jane ke liye', '**Wrap Text:** Lamba text cell mein fit karne ke liye', '**Flash Fill:** Serial numbers drag karne ka magic']
+                        },
+                        {
+                            title: 'Register Simulator',
+                            type: 'simulator-entry',
+                            description: 'Neeche diye gaye form mein data daalein aur dekhein wo "Register" mein kaise lagta hai.'
+                        }
+                    ],
+                    action: '5 students ka dummy data enter karein aur border lagayein.',
+                    tips: ['Teachers se galti karwayein fir Undo (Ctrl+Z) sikhayein.', 'Header row ko Yellow background dene ko kahein.']
+                }
+            },
+            {
+                id: 'formulas',
+                title: 'Essential Formulas',
+                subtitle: 'SUM, AVERAGE, MIN, MAX',
+                icon: '∑',
+                slides: '13-22',
+                content: {
+                    intro: 'Calculator chodho, Excel pakdo. Ye basic formulas aapke ghanton ka hisaab seconds mein kar denge.',
+                    sections: [
+                        {
+                            title: 'Formula Rules',
+                            points: ['Har formula **=** se shuru hota hai', 'SUM: Total Marks', 'AVERAGE: Class Performance', 'MIN/MAX: Weakest/Strongest Student']
+                        },
+                        {
+                            title: 'Formula Playground',
+                            type: 'simulator-formula',
+                            description: 'Student ke marks change karein aur dekhein formulas kaise update hote hain.'
+                        }
+                    ],
+                    action: 'Calculate Total, Average, Max, Min for dummy data.',
+                    tips: ['"Alt + =" (AutoSum) shortcut zaroor dikhayein.', 'Drag handle (double click) magic dikhayein.']
+                }
+            },
+            {
+                id: 'logic',
+                title: 'Logical Functions',
+                subtitle: 'IF Condition & Grading',
+                icon: '🧠',
+                slides: '23-30',
+                content: {
+                    intro: 'Kya student Pass hai ya Fail? Grade A hai ya B? Excel khud decision le sakta hai "IF" function ke saath.',
+                    sections: [
+                        {
+                            title: 'Logic Explained',
+                            points: ['**IF(Condition, True, False)**', 'Pass/Fail Logic: Marks >= 33', 'Conditional Formatting: Fail students in Red', 'Data Bars: Visual comparison']
+                        },
+                        {
+                            title: 'Pass/Fail Checker',
+                            type: 'simulator-logic',
+                            description: 'Marks enter karein. Agar 33 se kam hai, to result Red aur "Fail" ho jayega.'
+                        }
+                    ],
+                    action: 'Pass/Fail formula lagayein aur Fail students ko Red highlight karein.',
+                    tips: ['Jaan boojh kar galat formula lagayein taaki teachers galti pakad sakein.', 'Nested IF (Grades) ko step-by-step samjhayein.']
+                }
+            },
+            {
+                id: 'management',
+                title: 'Data Management',
+                subtitle: 'Sort, Filter, Freeze Panes',
+                icon: '🔍',
+                slides: '31-38',
+                content: {
+                    intro: 'Jab data bada ho jata hai, usse sambhalna mushkil hota hai. Sort, Filter aur Freeze Panes aapki life aasaan bana denge.',
+                    sections: [
+                        {
+                            title: 'Tools Checklist',
+                            points: ['**Sort:** A to Z ya Rank wise', '**Filter:** Sirf Fail students dekhna', '**Freeze Panes:** Header hamesha dikhe', '**Data Validation:** Sirf P/A type ho']
+                        },
+                        {
+                            title: 'Filter Simulation',
+                            type: 'simulator-filter',
+                            description: 'Buttons use karke data ko filter karein.'
+                        }
+                    ],
+                    action: 'Filter lagakar sirf Fail students ki list nikalein.',
+                    tips: ['Freeze Panes zaroor dikhayein, teachers ke liye bahut useful hai.', 'Paste Special (Values) ka trick batayein.']
+                }
+            },
+            {
+                id: 'advanced',
+                title: 'Advanced Tools',
+                subtitle: 'VLOOKUP, Pivots & Charts',
+                icon: '📊',
+                slides: '39-45',
+                content: {
+                    intro: 'Ab bante hain Pro! Bade data se specific jankari nikalna aur beautiful reports banana.',
+                    sections: [
+                        {
+                            title: 'Pro Tools',
+                            points: ['**VLOOKUP:** Roll No se Naam dhoondna', '**Pivot Table:** Ek click mein summary report', '**Charts:** Visual representation']
+                        },
+                        {
+                            title: 'Chart & Pivot Visualizer',
+                            type: 'simulator-chart',
+                            description: 'Dekhein kaise data Charts (Column/Pie) mein badalta hai.'
+                        }
+                    ],
+                    action: 'Ek chota Pivot table aur Chart banayein.',
+                    tips: ['VLOOKUP ko "Phonebook search" se compare karein.', 'Charts ke liye Alt+F1 shortcut batayein.']
+                }
+            },
+            {
+                id: 'printing',
+                title: 'Printing & Tips',
+                subtitle: 'Page Layout & Shortcuts',
+                icon: '🖨️',
+                slides: '46-53',
+                content: {
+                    intro: 'Sab mehnat bekar agar print sahi na nikle. Printing settings aur protection seekhna zaroori hai.',
+                    sections: [
+                        {
+                            title: 'Print Perfect',
+                            points: ['**Scale to Fit:** Ek page par sab columns', '**Print Titles:** Header har page par', '**Protect Sheet:** Password lagana', '**Ctrl + S:** Save karna na bhulein!']
+                        },
+                        {
+                            title: 'Shortcut Master',
+                            type: 'static-shortcuts',
+                            description: 'Yaad rakhne wale zaroori shortcuts.'
+                        }
+                    ],
+                    action: 'Page Break Preview check karein.',
+                    tips: ['Ctrl + ; (Current Date) ka demo dein.', 'Feedback form zaroor share karein.']
+                }
+            }
+        ];
+
+        // --- STATE MANAGEMENT ---
+        let currentModuleIndex = 0;
+        let mockData = [
+            { id: 101, name: "Aarav", marks: 85, result: "Pass" },
+            { id: 102, name: "Vivaan", marks: 28, result: "Fail" },
+            { id: 103, name: "Aditya", marks: 92, result: "Pass" },
+            { id: 104, name: "Vihaan", marks: 45, result: "Pass" },
+            { id: 105, name: "Arjun", marks: 76, result: "Pass" }
+        ];
+
+        // --- INITIALIZATION ---
+        document.addEventListener('DOMContentLoaded', () => {
+            renderNav();
+            loadModule(0);
+
+            document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+                const sidebar = document.getElementById('sidebar');
+                if (sidebar.classList.contains('-translate-x-full')) {
+                    sidebar.classList.remove('-translate-x-full');
+                } else {
+                    sidebar.classList.add('-translate-x-full');
+                }
+            });
+        });
+
+        // --- CORE FUNCTIONS ---
+        function renderNav() {
+            const navList = document.getElementById('nav-list');
+            navList.innerHTML = modules.map((mod, index) => `
+                <li>
+                    <button onclick="loadModule(${index})" 
+                        class="w-full text-left px-3 py-3 rounded-lg flex items-center space-x-3 transition-colors ${currentModuleIndex === index ? 'bg-emerald-50 text-emerald-700 font-semibold' : 'text-stone-600 hover:bg-stone-50'}">
+                        <span class="text-xl">${mod.icon}</span>
+                        <div>
+                            <div class="text-sm">${mod.title}</div>
+                            <div class="text-[10px] text-stone-400">Slides ${mod.slides}</div>
+                        </div>
+                    </button>
+                </li>
+            `).join('');
+        }
+
+        function loadModule(index) {
+            currentModuleIndex = index;
+            renderNav();
+            const mod = modules[index];
+            const main = document.getElementById('main-content');
+
+            // Build Main Content
+            let html = `
+                <div class="max-w-5xl mx-auto fade-in pb-12">
+                    <div class="mb-8 border-b border-stone-200 pb-4 flex justify-between items-start">
+                        <div>
+                            <h2 class="text-3xl font-bold text-stone-800">${mod.title}</h2>
+                            <p class="text-stone-500 mt-2 text-lg">${mod.subtitle}</p>
+                        </div>
+                        <button onclick="showTrainerTips()" class="bg-stone-200 hover:bg-stone-300 text-stone-700 px-4 py-2 rounded-full text-sm font-semibold flex items-center transition-colors">
+                            <span>🎓 Trainer Info</span>
+                        </button>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                        <!-- Left Column: Theory & Action -->
+                        <div class="lg:col-span-1 space-y-6">
+                            <div class="bg-white p-6 rounded-xl shadow-sm border border-stone-100">
+                                <h3 class="font-bold text-emerald-700 mb-3 flex items-center">
+                                    <span class="mr-2">📖</span> Concept
+                                </h3>
+                                <p class="text-stone-600 mb-4 leading-relaxed">${mod.content.intro}</p>
+                                <div class="space-y-3">
+                                    ${mod.content.sections[0].points.map(p => {
+                const bolded = p.replace(/\*\*(.*?)\*\*/g, '<strong class="text-stone-800">$1</strong>');
+                return `<div class="flex items-start"><span class="text-emerald-500 mr-2">•</span><span class="text-sm text-stone-600">${bolded}</span></div>`;
+            }).join('')}
+                                </div>
+                            </div>
+
+                            <div class="bg-amber-50 p-6 rounded-xl border border-amber-100">
+                                <h3 class="font-bold text-amber-800 mb-2 flex items-center">
+                                    <span class="mr-2">⚡</span> Teacher's Action
+                                </h3>
+                                <p class="text-sm text-amber-900 italic">"${mod.content.action}"</p>
+                            </div>
+                        </div>
+
+                        <!-- Right Column: Interactive Simulator -->
+                        <div class="lg:col-span-2">
+                             <div class="bg-white rounded-xl shadow-lg border border-stone-200 overflow-hidden">
+                                <div class="bg-stone-50 px-6 py-3 border-b border-stone-200 flex justify-between items-center">
+                                    <h3 class="font-semibold text-stone-700">${mod.content.sections[1].title}</h3>
+                                    <span class="text-xs bg-emerald-100 text-emerald-800 px-2 py-1 rounded">Interactive Demo</span>
+                                </div>
+                                <div class="p-6">
+                                    <p class="text-sm text-stone-500 mb-6">${mod.content.sections[1].description}</p>
+                                    ${getSimulatorHTML(mod.id)}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            main.innerHTML = html;
+
+            // Initialize specific simulator logic after render
+            if (mod.id === 'welcome') initMapLogic();
+            if (mod.id === 'data-entry') initEntryLogic();
+            if (mod.id === 'formulas') initFormulaLogic();
+            if (mod.id === 'logic') initLogicSimulator();
+            if (mod.id === 'management') initFilterLogic();
+            if (mod.id === 'advanced') initChartLogic();
+
+            // Close mobile menu if open
+            if (window.innerWidth < 768) {
+                document.getElementById('sidebar').classList.add('-translate-x-full');
+            }
+        }
+
+        // --- SIMULATOR RENDERERS ---
+
+        function getSimulatorHTML(id) {
+            if (id === 'welcome') {
+                return `
+                    <div class="relative bg-white border border-stone-300 rounded shadow-inner h-64 flex flex-col">
+                        <div class="h-8 bg-emerald-700 flex items-center px-4 space-x-4">
+                            <div class="w-16 h-4 bg-white/20 rounded hover:bg-white/40 cursor-pointer transition" id="ribbon-target" title="Ribbon"></div>
+                            <div class="w-8 h-4 bg-white/20 rounded hover:bg-white/40 cursor-pointer transition"></div>
+                        </div>
+                        <div class="h-10 bg-stone-100 border-b border-stone-300 flex items-center px-2 space-x-2">
+                            <div class="w-12 h-6 bg-white border border-stone-300 flex items-center justify-center text-xs text-stone-400">A1</div>
+                            <div class="flex-1 h-6 bg-white border border-stone-300 flex items-center px-2 text-xs text-stone-400" id="formula-bar-target" title="Formula Bar">fx</div>
+                        </div>
+                        <div class="flex-1 excel-grid relative overflow-hidden">
+                             <!-- Grid Cells -->
+                             <div class="excel-header"></div><div class="excel-header">A</div><div class="excel-header">B</div><div class="excel-header">C</div><div class="excel-header">D</div><div class="excel-header">E</div>
+                             <div class="excel-row-header">1</div><div class="excel-cell"></div><div class="excel-cell"></div><div class="excel-cell"></div><div class="excel-cell"></div><div class="excel-cell"></div>
+                             <div class="excel-row-header">2</div><div class="excel-cell"></div><div class="excel-cell"></div><div class="excel-cell"></div><div class="excel-cell" id="active-cell-target"></div><div class="excel-cell"></div>
+                             <div class="excel-row-header">3</div><div class="excel-cell"></div><div class="excel-cell"></div><div class="excel-cell"></div><div class="excel-cell"></div><div class="excel-cell"></div>
+                             
+                             <!-- Tooltip Overlay -->
+                             <div id="interface-tooltip" class="absolute bottom-4 right-4 bg-stone-800 text-white text-xs px-3 py-2 rounded opacity-0 transition-opacity">Hover over UI parts</div>
+                        </div>
+                        <div class="h-6 bg-stone-200 border-t border-stone-300 flex items-center px-2">
+                            <div class="bg-white px-3 py-0.5 text-xs border-t-2 border-emerald-600 font-semibold" id="sheet-tab-target" title="Sheet Tab">Sheet1</div>
+                        </div>
+                    </div>
+                    <div class="flex justify-center space-x-2 mt-4">
+                        <button onmouseover="highlightUI('ribbon')" onmouseout="clearUI()" class="px-3 py-1 bg-stone-100 text-xs rounded hover:bg-stone-200">Show Ribbon</button>
+                        <button onmouseover="highlightUI('formula')" onmouseout="clearUI()" class="px-3 py-1 bg-stone-100 text-xs rounded hover:bg-stone-200">Show Formula Bar</button>
+                        <button onmouseover="highlightUI('cell')" onmouseout="clearUI()" class="px-3 py-1 bg-stone-100 text-xs rounded hover:bg-stone-200">Show Cell</button>
+                    </div>
+                `;
+            }
+            if (id === 'data-entry') {
+                return `
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="space-y-3 bg-stone-50 p-4 rounded border border-stone-200">
+                            <div>
+                                <label class="block text-xs font-semibold text-stone-500 uppercase">Roll No</label>
+                                <input type="number" id="entry-roll" class="w-full border border-stone-300 rounded p-1 text-sm focus:border-emerald-500 outline-none" placeholder="e.g. 101">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-stone-500 uppercase">Name</label>
+                                <input type="text" id="entry-name" class="w-full border border-stone-300 rounded p-1 text-sm focus:border-emerald-500 outline-none" placeholder="e.g. Rahul">
+                            </div>
+                            <button onclick="addEntry()" class="w-full bg-emerald-600 text-white py-1.5 rounded text-sm hover:bg-emerald-700 transition">Add to Register (Enter)</button>
+                        </div>
+                        <div class="border border-stone-300 rounded bg-white overflow-hidden">
+                            <div class="grid grid-cols-2 bg-yellow-100 border-b border-stone-300 text-center font-bold text-sm py-2">
+                                <div>Roll No</div>
+                                <div>Name</div>
+                            </div>
+                            <div id="entry-list" class="text-sm max-h-40 overflow-y-auto divide-y divide-stone-100">
+                                <!-- Entries go here -->
+                                <div class="grid grid-cols-2 text-center py-1 text-stone-500">
+                                    <div>101</div><div>Amit</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+            if (id === 'formulas') {
+                return `
+                    <div class="bg-white border border-stone-300 rounded p-4 max-w-md mx-auto">
+                        <h4 class="text-center font-bold text-stone-700 mb-4 border-b pb-2">Student Marksheet</h4>
+                        <div class="space-y-2 mb-4">
+                            <div class="flex justify-between items-center">
+                                <label class="text-sm text-stone-600 w-24">English</label>
+                                <input type="number" id="mark-eng" value="65" oninput="calcFormulas()" class="w-20 border border-stone-300 rounded p-1 text-right">
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <label class="text-sm text-stone-600 w-24">Math</label>
+                                <input type="number" id="mark-math" value="82" oninput="calcFormulas()" class="w-20 border border-stone-300 rounded p-1 text-right">
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <label class="text-sm text-stone-600 w-24">Science</label>
+                                <input type="number" id="mark-sci" value="70" oninput="calcFormulas()" class="w-20 border border-stone-300 rounded p-1 text-right">
+                            </div>
+                        </div>
+                        <div class="border-t-2 border-stone-800 pt-2 space-y-2 bg-stone-50 -mx-4 px-4 pb-2">
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm font-bold text-emerald-700">=SUM()</span>
+                                <span id="res-total" class="font-bold text-lg">0</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm font-bold text-emerald-700">=AVERAGE()</span>
+                                <span id="res-avg" class="font-bold text-stone-600">0</span>
+                            </div>
+                            <div class="flex justify-between items-center text-xs text-stone-500 mt-2">
+                                <span>MIN: <span id="res-min">0</span></span>
+                                <span>MAX: <span id="res-max">0</span></span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+            if (id === 'logic') {
+                return `
+                    <div class="flex flex-col items-center justify-center space-y-6">
+                        <div class="w-full max-w-xs">
+                            <label class="block text-sm font-semibold text-stone-600 mb-1">Enter Student Marks</label>
+                            <input type="range" id="logic-slider" min="0" max="100" value="45" class="w-full h-2 bg-stone-200 rounded-lg appearance-none cursor-pointer accent-emerald-600" oninput="updateLogic(this.value)">
+                            <div class="flex justify-between text-xs text-stone-400 mt-1">
+                                <span>0</span>
+                                <span id="slider-val" class="font-bold text-emerald-700 text-lg">45</span>
+                                <span>100</span>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4 w-full max-w-sm">
+                            <div class="bg-white border border-stone-200 p-4 rounded text-center shadow-sm">
+                                <div class="text-xs text-stone-500 mb-1">Result (IF >= 33)</div>
+                                <div id="logic-result" class="font-bold text-xl px-2 py-1 rounded transition-colors">Pass</div>
+                            </div>
+                            <div class="bg-white border border-stone-200 p-4 rounded text-center shadow-sm">
+                                <div class="text-xs text-stone-500 mb-1">Grade (Nested IF)</div>
+                                <div id="logic-grade" class="font-bold text-xl text-stone-700">C</div>
+                            </div>
+                        </div>
+                        
+                        <div class="w-full max-w-sm bg-stone-100 p-3 rounded text-xs font-mono text-stone-600 border border-stone-200">
+                            =IF(Marks>=33, "Pass", "Fail")
+                        </div>
+                    </div>
+                `;
+            }
+            if (id === 'management') {
+                return `
+                    <div class="bg-white border border-stone-300 rounded overflow-hidden">
+                        <div class="flex justify-between p-2 bg-stone-50 border-b border-stone-200">
+                            <div class="space-x-2">
+                                <button onclick="sortData()" class="text-xs bg-white border border-stone-300 px-2 py-1 rounded hover:bg-stone-100">Sort (Marks)</button>
+                                <button onclick="filterFail()" class="text-xs bg-white border border-stone-300 px-2 py-1 rounded hover:bg-stone-100">Filter (Fail)</button>
+                                <button onclick="resetData()" class="text-xs bg-white border border-stone-300 px-2 py-1 rounded hover:bg-stone-100">Reset</button>
+                            </div>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-sm text-left">
+                                <thead class="text-xs text-stone-500 uppercase bg-stone-50 border-b">
+                                    <tr>
+                                        <th class="px-4 py-2">Roll No</th>
+                                        <th class="px-4 py-2">Name</th>
+                                        <th class="px-4 py-2">Marks</th>
+                                        <th class="px-4 py-2">Result</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="mgmt-table-body">
+                                    <!-- Populated via JS -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                `;
+            }
+            if (id === 'advanced') {
+                return `
+                    <div class="space-y-4">
+                        <div class="flex justify-center space-x-4 mb-4">
+                            <button onclick="updateChart('bar')" class="px-4 py-2 bg-stone-100 hover:bg-stone-200 rounded text-sm font-medium">Comparison (Column)</button>
+                            <button onclick="updateChart('pie')" class="px-4 py-2 bg-stone-100 hover:bg-stone-200 rounded text-sm font-medium">Pass/Fail Ratio (Pie)</button>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="advChart"></canvas>
+                        </div>
+                        <p class="text-center text-xs text-stone-500 italic mt-2">Chart.js dynamic rendering</p>
+                    </div>
+                `;
+            }
+            if (id === 'printing') {
+                return `
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-stone-800 text-stone-100 p-4 rounded-lg font-mono text-sm space-y-3">
+                            <div class="flex justify-between">
+                                <span>Save</span>
+                                <span class="bg-stone-700 px-2 rounded">Ctrl + S</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Undo</span>
+                                <span class="bg-stone-700 px-2 rounded">Ctrl + Z</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Today's Date</span>
+                                <span class="bg-stone-700 px-2 rounded">Ctrl + ;</span>
+                            </div>
+                             <div class="flex justify-between">
+                                <span>Print</span>
+                                <span class="bg-stone-700 px-2 rounded">Ctrl + P</span>
+                            </div>
+                             <div class="flex justify-between">
+                                <span>Filter</span>
+                                <span class="bg-stone-700 px-2 rounded">Ctrl+Shift+L</span>
+                            </div>
+                        </div>
+                        <div class="bg-white border-2 border-stone-200 p-4 rounded-lg flex flex-col items-center justify-center text-center">
+                            <div class="text-4xl mb-2">📄</div>
+                            <h4 class="font-bold text-stone-700">Page Break Preview</h4>
+                            <p class="text-xs text-stone-500 mt-2">Check this before printing to ensure columns don't spill to page 2.</p>
+                        </div>
+                    </div>
+                `;
+            }
+            return '';
+        }
+
+        // --- SPECIFIC MODULE LOGIC ---
+
+        function showTrainerTips() {
+            const mod = modules[currentModuleIndex];
+            const content = document.getElementById('trainer-tips-content');
+            content.innerHTML = `<ul class="list-disc pl-4 space-y-1">${mod.content.tips.map(t => `<li>${t}</li>`).join('')}</ul>`;
+            document.getElementById('trainer-modal').classList.remove('hidden');
+            document.getElementById('trainer-modal').classList.add('flex');
+        }
+
+        function closeModal() {
+            document.getElementById('trainer-modal').classList.add('hidden');
+            document.getElementById('trainer-modal').classList.remove('flex');
+        }
+
+        // Mod 1: Interface Highlights
+        function highlightUI(part) {
+            const ribbon = document.getElementById('ribbon-target');
+            const formula = document.getElementById('formula-bar-target');
+            const cell = document.getElementById('active-cell-target');
+            const tooltip = document.getElementById('interface-tooltip');
+
+            tooltip.style.opacity = '1';
+
+            if (part === 'ribbon') {
+                ribbon.parentElement.classList.add('ring-2', 'ring-yellow-400');
+                tooltip.textContent = "Ribbon: Main Menu (Home, Insert...)";
+            }
+            if (part === 'formula') {
+                formula.classList.add('ring-2', 'ring-yellow-400');
+                tooltip.textContent = "Formula Bar: Write logic here";
+            }
+            if (part === 'cell') {
+                cell.classList.add('bg-yellow-100');
+                tooltip.textContent = "Active Cell: Where you type";
+            }
+        }
+        function clearUI() {
+            const ribbon = document.getElementById('ribbon-target');
+            const formula = document.getElementById('formula-bar-target');
+            const cell = document.getElementById('active-cell-target');
+            const tooltip = document.getElementById('interface-tooltip');
+
+            ribbon.parentElement.classList.remove('ring-2', 'ring-yellow-400');
+            formula.classList.remove('ring-2', 'ring-yellow-400');
+            cell.classList.remove('bg-yellow-100');
+            tooltip.style.opacity = '0';
+        }
+        function initMapLogic() { /* No init needed beyond DOM events */ }
+
+        // Mod 2: Entry
+        function initEntryLogic() { /* No init needed */ }
+        function addEntry() {
+            const roll = document.getElementById('entry-roll').value;
+            const name = document.getElementById('entry-name').value;
+            if (!roll || !name) return;
+            const list = document.getElementById('entry-list');
+            const div = document.createElement('div');
+            div.className = "grid grid-cols-2 text-center py-1 border-t border-stone-50 animate-pulse";
+            div.innerHTML = `<div>${roll}</div><div>${name}</div>`;
+            list.insertBefore(div, list.firstChild);
+            document.getElementById('entry-roll').value = '';
+            document.getElementById('entry-name').value = '';
+        }
+
+        // Mod 3: Formulas
+        function initFormulaLogic() { calcFormulas(); }
+        function calcFormulas() {
+            const e = parseFloat(document.getElementById('mark-eng').value) || 0;
+            const m = parseFloat(document.getElementById('mark-math').value) || 0;
+            const s = parseFloat(document.getElementById('mark-sci').value) || 0;
+
+            const total = e + m + s;
+            const avg = (total / 3).toFixed(1);
+            const min = Math.min(e, m, s);
+            const max = Math.max(e, m, s);
+
+            document.getElementById('res-total').innerText = total;
+            document.getElementById('res-avg').innerText = avg;
+            document.getElementById('res-min').innerText = min;
+            document.getElementById('res-max').innerText = max;
+        }
+
+        // Mod 4: Logic
+        function initLogicSimulator() { updateLogic(45); }
+        function updateLogic(val) {
+            document.getElementById('slider-val').innerText = val;
+            const resBox = document.getElementById('logic-result');
+            const gradeBox = document.getElementById('logic-grade');
+
+            if (val >= 33) {
+                resBox.innerText = "Pass";
+                resBox.className = "font-bold text-xl px-2 py-1 rounded transition-colors conditional-pass";
+            } else {
+                resBox.innerText = "Fail";
+                resBox.className = "font-bold text-xl px-2 py-1 rounded transition-colors conditional-fail";
+            }
+
+            let grade = 'C';
+            if (val >= 90) grade = 'A';
+            else if (val >= 75) grade = 'B';
+            gradeBox.innerText = grade;
+        }
+
+        // Mod 5: Management
+        function initFilterLogic() { renderMgmtTable(mockData); }
+        function renderMgmtTable(data) {
+            const tbody = document.getElementById('mgmt-table-body');
+            tbody.innerHTML = data.map(row => `
+                <tr class="bg-white border-b hover:bg-stone-50">
+                    <td class="px-4 py-2">${row.id}</td>
+                    <td class="px-4 py-2 font-medium">${row.name}</td>
+                    <td class="px-4 py-2">${row.marks}</td>
+                    <td class="px-4 py-2 ${row.result === 'Fail' ? 'text-red-600 font-bold' : 'text-emerald-600'}">${row.result}</td>
+                </tr>
+            `).join('');
+        }
+        function sortData() {
+            const sorted = [...mockData].sort((a, b) => b.marks - a.marks);
+            renderMgmtTable(sorted);
+        }
+        function filterFail() {
+            const filtered = mockData.filter(d => d.result === 'Fail');
+            renderMgmtTable(filtered);
+        }
+        function resetData() {
+            renderMgmtTable(mockData);
+        }
+
+        // Mod 6: Charts
+        let myChart = null;
+        function initChartLogic() {
+            updateChart('bar');
+        }
+        function updateChart(type) {
+            const ctx = document.getElementById('advChart');
+            if (!ctx) return;
+
+            if (myChart) myChart.destroy();
+
+            const config = type === 'bar' ? {
+                type: 'bar',
+                data: {
+                    labels: mockData.map(d => d.name),
+                    datasets: [{
+                        label: 'Student Marks',
+                        data: mockData.map(d => d.marks),
+                        backgroundColor: '#10b981',
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    responsive: true,
+                    scales: { y: { beginAtZero: true, max: 100 } }
+                }
+            } : {
+                type: 'pie',
+                data: {
+                    labels: ['Pass', 'Fail'],
+                    datasets: [{
+                        data: [4, 1], // Based on mockData
+                        backgroundColor: ['#10b981', '#ef4444']
+                    }]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    responsive: true
+                }
+            };
+
+            myChart = new Chart(ctx, config);
+        }
+
+    </script>
+</body>
+
+</html>

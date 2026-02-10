@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Excel | Excel Mastery</title>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
+
+    <style>
+        /* Shared Excel Theme (Duplicated for consistency) */
+        body {
+            background-color: var(--bg-dark);
+        }
+
+        .excel-navbar {
+            background: #1e3a8a;
+            /* Dark Blue for Advanced */
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .lesson-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 280px;
+            background: rgba(30, 41, 59, 0.5);
+            border-right: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 3rem 4rem;
+            max-width: 900px;
+        }
+
+        .topic-link {
+            display: block;
+            padding: 0.8rem 1rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-bottom: 0.5rem;
+            transition: all 0.2s;
+        }
+
+        .topic-link:hover,
+        .topic-link.active {
+            background: rgba(96, 165, 250, 0.1);
+            color: #60a5fa;
+            padding-left: 1.2rem;
+        }
+
+        .content-card {
+            background: rgba(30, 41, 59, 0.6);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .formula-box {
+            background: #0f172a;
+            padding: 1rem;
+            border-left: 4px solid #60a5fa;
+            font-family: monospace;
+            color: #e2e8f0;
+            margin: 1rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .lesson-container {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+            }
+
+            .main-content {
+                padding: 2rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="excel-navbar">
+        <a href="index.html" style="color:white; text-decoration:none; display:flex; gap:0.5rem; align-items:center;">
+            <i class="fas fa-arrow-left"></i> Back to Hub
+        </a>
+        <h2 style="color:white; font-size:1.2rem; margin:0;">Module 2: Advanced Logic</h2>
+        <div></div>
+    </nav>
+
+    <div class="lesson-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <h3 style="color:white; margin-bottom:1.5rem;">Topics</h3>
+            <a href="#if" class="topic-link active">1. The IF Function</a>
+            <a href="#nested" class="topic-link">2. Nested IFs</a>
+            <a href="#vlookup" class="topic-link">3. VLOOKUP Mastery</a>
+            <a href="#pivot" class="topic-link">4. Introduction to Pivot Tables</a>
+            <a href="#project" class="topic-link" style="margin-top:2rem; color:#facc15;"><i class="fas fa-star"></i>
+                Real World Project</a>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+
+            <section id="if" class="content-card" data-aos="fade-up">
+                <h1 style="font-size: 2.5rem; color: #60a5fa; margin-bottom: 1rem;">1. The IF Function</h1>
+                <p style="color: #cbd5e1; font-size: 1.1rem; line-height: 1.7;">
+                    Computers make decisions using logic. The <b>IF</b> function lets Excel choose between two outcomes.
+                </p>
+                <div class="formula-box">
+                    =IF(logic_test, value_if_true, value_if_false)
+                </div>
+                <div class="formula-box">
+                    =IF(A1 > 33, "Pass", "Fail")
+                </div>
+            </section>
+
+            <section id="nested" class="content-card" data-aos="fade-up">
+                <h2 style="font-size: 1.8rem; color: white; margin-bottom: 1rem;">2. Nested IFs (Grading System)</h2>
+                <p style="color: #cbd5e1; margin-bottom: 1rem;">
+                    What if you have more than two Grade options? Use an IF inside an IF.
+                </p>
+                <div class="formula-box">
+                    =IF(A1>90, "A", IF(A1>80, "B", "C"))
+                </div>
+            </section>
+
+            <section id="vlookup" class="content-card" data-aos="fade-up">
+                <h2 style="font-size: 1.8rem; color: white; margin-bottom: 1rem;">3. VLOOKUP Mastery</h2>
+                <p style="color: #cbd5e1; margin-bottom: 1rem;">
+                    Vertical Lookup. It searches for a value in the first column of a table and returns a value in the
+                    same row from a specified column.
+                </p>
+                <img src="https://via.placeholder.com/600x300/1e293b/ffffff?text=VLOOKUP+Diagram"
+                    alt="VLOOKUP Syntax Visualization"
+                    style="width:100%; border-radius:0.5rem; margin-bottom:1rem; opacity:0.8;">
+                <div class="formula-box">
+                    =VLOOKUP(lookup_value, table_array, col_index_num, [range_lookup])
+                </div>
+            </section>
+
+            <section id="project" class="content-card" style="border-color: #facc15;" data-aos="fade-up">
+                <h2 style="font-size: 1.8rem; color: #facc15; margin-bottom: 1rem;"><i class="fas fa-briefcase"></i>
+                    Real World Project</h2>
+                <p style="color: #cbd5e1; margin-bottom: 1rem;">
+                    <b>Sales Report:</b> You have a list of Sales IDs. Use VLOOKUP to pull Product Names and Prices from
+                    a Master Sheet, then use IF to assign a "Bonus" if sales > 5000.
+                </p>
+                <button class="btn btn-primary" style="background:var(--primary-color);">Download Data Set</button>
+            </section>
+
+        </main>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 800, once: true });
+
+        // Sidebar Active Switcher
+        const sections = document.querySelectorAll('.content-card');
+        const navLinks = document.querySelectorAll('.topic-link');
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (scrollY >= sectionTop - 150) current = section.getAttribute('id');
+            });
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').includes(current)) link.classList.add('active');
+            });
+        });
+    </script>
+</body>
+
+</html>

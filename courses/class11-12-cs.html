@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-74VNSC0NMX"></script> 
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-74VNSC0MNX');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Class | Computer Science (083) | Devanshu Sir</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <script src="../assets/js/navigation.js" defer></script>
+    <style>
+        .page-header {
+            padding-top: 10rem;
+            padding-bottom: 2rem;
+            text-align: center;
+        }
+
+        .class-card {
+            background: rgba(30, 41, 59, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 3rem;
+            border-radius: 2rem;
+            transition: all 0.4s ease;
+            text-align: center;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+        }
+
+        .class-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: var(--primary-color);
+            box-shadow: 0 20px 40px rgba(37, 99, 235, 0.2);
+        }
+
+        .class-card h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .class-card p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .class-icon {
+            font-size: 5rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="navbar-placeholder"></div>
+
+    <section class="page-header home" data-aos="fade-down">
+        <div class="home-content">
+            <h1>Computer Science <span class="text-gradient">(Code 083)</span></h1>
+            <p style="font-size: 1.5rem; margin-top: 1rem; color: #94a3b8;">Select your Class for Complete Syllabus
+                2026-27</p>
+        </div>
+    </section>
+
+    <section class="page-section" data-aos="fade-up">
+        <div class="card-grid" style="max-width: 900px; margin: 0 auto; gap: 3rem;">
+
+            <!-- Class 12 Card -->
+            <a href="class12-cs.html" class="class-card">
+                <i class='bx bx-code-alt class-icon' style="color: #a855f7;"></i>
+                <h2 style="color: white;">Class <span style="color: #a855f7;">12 CS</span></h2>
+                <p>Python, SQL, Networks & Project Work <br> (Board Exam Special)</p>
+                <span class="btn btn-primary"
+                    style="background: linear-gradient(135deg, #a855f7, #d946ef); color: white;">Enter Class 12</span>
+            </a>
+
+            <!-- Class 11 Card -->
+            <a href="class11-cs.html" class="class-card">
+                <i class='bx bx-laptop class-icon' style="color: #38bdf8;"></i>
+                <h2 style="color: white;">Class <span style="color: #38bdf8;">11 CS</span></h2>
+                <p>Computer Systems, Python Basics, Logic & Ethics <br> (Foundation Course)</p>
+                <span class="btn btn-primary"
+                    style="background: linear-gradient(135deg, #38bdf8, #0ea5e9); color: #0f172a;">Enter Class 11</span>
+            </a>
+
+        </div>
+    </section>
+
+    <div id="footer-placeholder"></div>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script src="../assets/js/script.js"></script>
+</body>
+
+</html>

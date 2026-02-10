@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-74VNSC0NMX"></script> 
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-74VNSC0MNX');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Excel Training: Zero to Hero (Trainer Mode)</title>
+    <style>
+        /* --- GLOBAL VARIABLES & RESET --- */
+        :root {
+            --bg-color: #fdfdfd;
+            /* Very light grey */
+            --header-blue: #1F4BD8;
+            --excel-green: #107C41;
+            --formula-text: #006400;
+            /* Dark Green */
+            --warning-red: #D13438;
+            --practice-bg: #fffbe6;
+            /* Light Yellow */
+            --text-main: #333333;
+            --font-title: 'Segoe UI', Calibri, sans-serif;
+            --font-body: 'Calibri', 'Segoe UI', sans-serif;
+            --font-code: 'Consolas', monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: #222;
+            font-family: var(--font-body);
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: var(--text-main);
+        }
+
+        /* --- SLIDE CONTAINER (16:9 Aspect Ratio) --- */
+        #slide-stage {
+            width: 1280px;
+            height: 720px;
+            background: var(--bg-color);
+            position: relative;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* --- HEADER BAR --- */
+        .header-bar {
+            background-color: var(--header-blue);
+            height: 15px;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 10;
+        }
+
+        .slide-content {
+            padding: 60px 80px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        /* --- TYPOGRAPHY --- */
+        h1 {
+            font-family: var(--font-title);
+            font-size: 44px;
+            color: var(--header-blue);
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        p,
+        li {
+            font-size: 28px;
+            line-height: 1.5;
+            margin-bottom: 15px;
+            list-style-position: inside;
+        }
+
+        .formula {
+            font-family: var(--font-code);
+            font-size: 32px;
+            font-weight: bold;
+            color: var(--formula-text);
+            background: #f0f0f0;
+            padding: 10px 20px;
+            border-radius: 5px;
+            display: inline-block;
+            margin: 10px 0;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .warning {
+            color: var(--warning-red);
+            font-weight: bold;
+        }
+
+        .highlight {
+            color: var(--header-blue);
+            font-weight: bold;
+        }
+
+        /* --- ANIMATION CLASSES --- */
+        .anim-element {
+            opacity: 0;
+            transition: all 0.5s ease;
+        }
+
+        .visible {
+            opacity: 1;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s forwards;
+        }
+
+        .wipe-left {
+            animation: wipeLeft 0.6s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+        }
+
+        .zoom-in {
+            animation: zoomIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        .slide-up {
+            animation: slideUp 0.5s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes wipeLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes zoomIn {
+            from {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* --- EXCEL SIMULATION GRID --- */
+        .excel-ui {
+            border: 1px solid #ccc;
+            font-family: 'Segoe UI', sans-serif;
+            background: #fff;
+            width: 100%;
+            margin-top: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .excel-ribbon {
+            background: #f3f2f1;
+            height: 40px;
+            border-bottom: 1px solid #e1dfdd;
+            display: flex;
+            align-items: center;
+            padding: 0 10px;
+            color: #333;
+            font-size: 14px;
+        }
+
+        .excel-formula-bar {
+            background: #fff;
+            height: 30px;
+            border-bottom: 1px solid #e1dfdd;
+            display: flex;
+            align-items: center;
+            padding: 0 10px;
+            font-family: 'Consolas', monospace;
+        }
+
+        table.excel-grid {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .excel-grid th {
+            background: #e6f3eb;
+            border: 1px solid #d4d4d4;
+            padding: 10px;
+            text-align: center;
+            color: var(--excel-green);
+            font-weight: 600;
+            width: 60px;
+        }
+
+        .excel-grid td {
+            border: 1px solid #d4d4d4;
+            padding: 15px;
+            text-align: center;
+            position: relative;
+            font-size: 24px;
+            height: 60px;
+        }
+
+        .cell-active {
+            border: 3px solid var(--excel-green) !important;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 0 10px rgba(16, 124, 65, 0.3);
+        }
+
+        .cell-active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            right: -5px;
+            width: 8px;
+            height: 8px;
+            background: var(--excel-green);
+        }
+
+        /* Handle */
+
+        /* --- PRACTICE SLIDE STYLE --- */
+        .practice-slide {
+            background-color: var(--practice-bg) !important;
+        }
+
+        .practice-timer {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 24px;
+            color: #d46b08;
+            font-weight: bold;
+        }
+
+        /* --- TRAINER NOTES OVERLAY --- */
+        #trainer-notes {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            color: #fff;
+            padding: 20px;
+            font-size: 20px;
+            display: none;
+            z-index: 100;
+            border-top: 4px solid var(--header-blue);
+        }
+
+        /* --- CONTROLS --- */
+        .controls {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            color: #555;
+            font-size: 14px;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="slide-stage">
+        <div class="header-bar"></div>
+        <div id="slide-container" class="slide-content">
+            <!-- Dynamic Content Loaded Here -->
+        </div>
+        <div id="trainer-notes">
+            <strong>Trainer Note:</strong> <span id="note-text"></span>
+        </div>
+    </div>
+
+    <div class="controls">
+        Press ➡️ / Click to Next | ⬅️ to Back | 'T' for Notes
+    </div>
+
+    <script>
+        // ==========================================
+        // 60+ SLIDE DATA STRUCTURE
+        // ==========================================
+        const slides = [
+            // --- MODULE 1: INTRODUCTION ---
+            {
+                type: "intro",
+                title: "Excel Training for Teachers",
+                content: ["Zero to Hero (Basic to Advanced)", "Interactive & Hands-on", "Goal: Create Marksheets & Reports"],
+                notes: "Welcome everyone. Ask how many are scared of Excel? Tell them today we kill that fear.",
+                animType: "fade"
+            },
+            {
+                type: "list",
+                title: "Why Learn Excel?",
+                content: ["Save 100s of hours manually calculating.", "100% Accurate Results (No totaling mistakes).", "Beautiful Reports with one click."],
+                notes: "Give example: Adding 50 students' marks manually takes 1 hour. Excel takes 1 second.",
+                animType: "wipe"
+            },
+            {
+                type: "anatomy",
+                title: "The Excel Window",
+                content: ["Ribbon: The Toolbox at the top.", "Formula Bar: Where you talk to Excel.", "Sheet: Your infinite notebook."],
+                image: "mock-ui",
+                notes: "Point to the screen. Make them identify the Formula Bar.",
+                animType: "appear"
+            },
+            {
+                type: "anatomy",
+                title: "Rows, Columns & Cells",
+                content: ["Columns: Stand Tall (A, B, C...)", "Rows: Sleep Flat (1, 2, 3...)", "Cell: The Meeting Point (e.g., D5)"],
+                notes: "Use hand gestures. Vertical for Columns, Horizontal for Rows.",
+                animType: "wipe"
+            },
+            {
+                type: "practice",
+                title: "⏱ Practice Time",
+                content: ["Open Excel.", "Click on Cell D5.", "Check the Name Box."],
+                notes: "Walk around the room. Ensure everyone has found D5.",
+                animType: "appear"
+            },
+
+            // --- MODULE 2: DATA ENTRY ---
+            {
+                type: "demo",
+                title: "Creating a Marksheet",
+                content: ["Click Cell A1", "Type 'Roll No'", "Press TAB to go right"],
+                grid: { active: "A1", val: "Roll No" },
+                notes: "Explain that TAB moves right, ENTER moves down.",
+                animType: "zoom"
+            },
+            {
+                type: "demo",
+                title: "Entering Headers",
+                content: ["B1: Name", "C1: Math", "D1: English"],
+                grid: { headers: ["Roll No", "Name", "Math", "English"] },
+                notes: "Don't worry about formatting yet. Just data entry.",
+                animType: "wipe"
+            },
+            {
+                type: "demo",
+                title: "The Drag Trick (Fill Handle)",
+                content: ["Type '1' in A2", "Type '2' in A3", "Select BOTH", "Drag the green square down"],
+                grid: { colA: [1, 2, "...", 10] },
+                notes: "This is the 'Wow' moment. Show the thin cross cursor.",
+                animType: "slide"
+            },
+            {
+                type: "list",
+                title: "Formatting: Borders",
+                content: ["Gridlines don't print!", "Select Data -> Click 'All Borders' icon.", "Now it looks like a table."],
+                notes: "Show the difference between gridlines (grey) and borders (black).",
+                animType: "fade"
+            },
+            {
+                type: "list",
+                title: "Formatting: Headers",
+                content: ["Select Row 1", "Click BOLD (B)", "Change Fill Color (Bucket Icon)"],
+                notes: "Make headers distinct so they don't look like data.",
+                animType: "appear"
+            },
+            {
+                type: "practice",
+                title: "⏱ Practice Task",
+                content: ["Create headers: Name, Math, Sci, Eng", "Add 5 students", "Give it Borders and Color"],
+                notes: "Give them 5 minutes. Check for 'Merge and Center' usage.",
+                animType: "appear"
+            },
+
+            // --- MODULE 3: FORMULAS ---
+            {
+                type: "concept",
+                title: "The Golden Rule of Formulas",
+                content: ["Every formula starts with an Equals Sign", "=", "No '=' means it's just text!"],
+                notes: "Make them repeat: 'Equals Sign First!'",
+                animType: "zoom"
+            },
+            {
+                type: "formula_demo",
+                title: "Calculating Total (SUM)",
+                step: "Click Cell E2 (Total)",
+                formula: "=SUM(C2:D2)",
+                result: "150",
+                notes: "Explain: SUM is the machine, C2:D2 is the raw material.",
+                animType: "typewriter"
+            },
+            {
+                type: "list",
+                title: "The AutoSum Button Σ",
+                content: ["The lazy way to add.", "Select numbers + 1 empty cell.", "Click AutoSum (Top Right)."],
+                notes: "Show the Sigma symbol. It's faster than typing.",
+                animType: "wipe"
+            },
+            {
+                type: "demo",
+                title: "One Formula for Everyone",
+                content: ["Don't calculate for Student 2, 3, 4...", "Double click the Fill Handle on Student 1.", "Excel copies the logic!"],
+                notes: "This explains Relative Reference without using the scary term.",
+                animType: "zoom"
+            },
+            {
+                type: "formula_demo",
+                title: "Calculating Average",
+                step: "Type in Cell F2",
+                formula: "=AVERAGE(C2:E2)",
+                result: "75",
+                notes: "Remind them: Don't include the 'Total' column in Average!",
+                animType: "typewriter"
+            },
+            {
+                type: "formula_demo",
+                title: "Finding the Topper (MAX)",
+                step: "Who got the highest?",
+                formula: "=MAX(C2:C50)",
+                result: "98",
+                notes: "MAX = Maximum. MIN = Minimum. Simple English.",
+                animType: "typewriter"
+            },
+            {
+                type: "list",
+                title: "Count vs CountA",
+                content: ["COUNT: Counts only Numbers (Marks).", "COUNTA: Counts All (Names + Marks).", "Use COUNTA for Attendance."],
+                notes: "A common mistake is using COUNT on Names.",
+                animType: "fade"
+            },
+            {
+                type: "formula_demo",
+                title: "Percentage Formula",
+                step: "Marks Obtained / Total Marks",
+                formula: "=E2 / 500 %",
+                result: "85%",
+                notes: "Show the % button in the ribbon to format it.",
+                animType: "typewriter"
+            },
+            {
+                type: "practice",
+                title: "⏱ Practice Task",
+                content: ["Calculate Total for 5 students.", "Find Average.", "Find the Max score in Class."],
+                notes: "Ensure they are using formulas, not calculators.",
+                animType: "appear"
+            },
+
+            // --- MODULE 4: LOGIC (IF) ---
+            {
+                type: "logic_split",
+                title: "The 'IF' Logic",
+                left: ["Is it Raining?", "YES: Take Umbrella", "NO: Wear Sunglasses"],
+                right: ["=IF( Rain, Umbrella, Sun )"],
+                notes: "Connect real life decisions to Excel logic.",
+                animType: "slide"
+            },
+            {
+                type: "formula_demo",
+                title: "Pass or Fail?",
+                step: "If Marks < 33, then Fail.",
+                formula: "=IF(C2 < 33, \"Fail\", \"Pass\")",
+                result: "Pass",
+                notes: "Stress on the Double Quotes for Text!",
+                animType: "typewriter"
+            },
+            {
+                type: "list",
+                title: "Conditional Formatting",
+                content: ["Visual Magic.", "Highlight all 'Fail' students in RED automatically.", "Home -> Conditional Formatting -> Highlight Rules."],
+                notes: "Show them how the color changes if you change marks from 20 to 50.",
+                animType: "zoom"
+            },
+            {
+                type: "demo",
+                title: "Creating Data Bars",
+                content: ["Select Marks Column.", "Conditional Formatting -> Data Bars.", "Blue bars show performance visually."],
+                grid: { databars: true },
+                notes: "It looks like a mini-graph inside the cell.",
+                animType: "wipe"
+            },
+            {
+                type: "practice",
+                title: "⏱ Practice Task",
+                content: ["Apply IF formula for Pass/Fail.", "Make Fail cells Red.", "Add Data bars to Total."],
+                notes: "This visually transforms their sheet.",
+                animType: "appear"
+            },
+
+            // --- MODULE 5: DATA MANAGEMENT ---
+            {
+                type: "list",
+                title: "Sorting (A-Z)",
+                content: ["Select Name Column.", "Click Data -> Sort A to Z.", "Whole row moves together."],
+                notes: "Warn them: Always expand selection, or data gets mixed up!",
+                animType: "wipe"
+            },
+            {
+                type: "list",
+                title: "Filtering (The Funnel)",
+                content: ["Data -> Filter.", "Click the arrow on 'Result'.", "Uncheck 'Fail' to see only passed students."],
+                notes: "The Funnel icon explains itself.",
+                animType: "appear"
+            },
+            {
+                type: "demo",
+                title: "Attendance: Dropdown List",
+                content: ["Select Attendance Column.", "Data Validation -> List.", "Source: P, A, L"],
+                notes: "Prevents spelling mistakes like 'p', 'Present', 'prsnt'.",
+                animType: "zoom"
+            },
+            {
+                type: "list",
+                title: "Freeze Panes",
+                content: ["Problem: Headers disappear when scrolling down.", "Solution: View -> Freeze Panes -> Freeze Top Row.", "Now headers stick!"],
+                notes: "Crucial for long lists.",
+                animType: "fade"
+            },
+
+            // --- MODULE 6: ADVANCED ---
+            {
+                type: "concept",
+                title: "VLOOKUP = Phonebook",
+                content: ["You have a Name.", "You want their Number.", "You look VERTICALLY down the list."],
+                notes: "Demystify VLOOKUP. It's just a search tool.",
+                animType: "appear"
+            },
+            {
+                type: "formula_demo",
+                title: "VLOOKUP Formula",
+                step: "Find Marks for Roll No 105",
+                formula: "=VLOOKUP(105, A:C, 3, 0)",
+                result: "92",
+                notes: "Explain the 4 parts: Who? Where? Which Col? Exact Match.",
+                animType: "typewriter"
+            },
+            {
+                type: "list",
+                title: "Pivot Tables (Magic Reports)",
+                content: ["Select Data -> Insert Pivot Table.", "Drag 'Result' to Rows.", "Drag 'Name' to Values.", "Count of Pass/Fail appears instantly!"],
+                notes: "Do not explain technicalities. Just drag and drop.",
+                animType: "zoom"
+            },
+            {
+                type: "demo",
+                title: "Charts",
+                content: ["Select Name and Total.", "Press ALT + F1.", "Instant Graph created."],
+                grid: { chart: true },
+                notes: "The shortcut Alt+F1 is a lifesaver.",
+                animType: "zoom"
+            },
+
+            // --- MODULE 7: PRINTING ---
+            {
+                type: "list",
+                title: "Printing Problems",
+                content: ["Columns going to Page 2?", "Dotted lines show page breaks.", "Don't shrink columns manually!"],
+                notes: "This is the #1 pain point for teachers.",
+                animType: "appear"
+            },
+            {
+                type: "list",
+                title: "The Solution: Scale to Fit",
+                content: ["Page Layout Tab.", "Width: 1 Page.", "Excel shrinks everything to fit automatically."],
+                notes: "This is the magic button for printing.",
+                animType: "wipe"
+            },
+            {
+                type: "list",
+                title: "Protect Your Sheet",
+                content: ["Review -> Protect Sheet.", "Set a Password.", "Now students can't change their marks!"],
+                notes: "Essential for security.",
+                animType: "fade"
+            },
+
+            // --- CONCLUSION ---
+            {
+                type: "intro",
+                title: "Congratulations!",
+                content: ["You are now an Excel Hero.", "Practice makes perfect.", "Thank You!"],
+                notes: "End on a high note.",
+                animType: "zoom"
+            }
+        ];
+
+        // ==========================================
+        // ENGINE
+        // ==========================================
+        let currentSlide = 0;
+        let currentStep = 0; // For animations within slide
+
+        const container = document.getElementById('slide-container');
+        const noteText = document.getElementById('note-text');
+        const trainerNotes = document.getElementById('trainer-notes');
+
+        function renderSlide(index) {
+            const slide = slides[index];
+            container.innerHTML = ''; // Clear previous
+            noteText.textContent = slide.notes || "No notes.";
+            currentStep = 0;
+
+            // Slide Title
+            const h1 = document.createElement('h1');
+            h1.textContent = slide.title;
+            h1.className = 'anim-element fade-in';
+            container.appendChild(h1);
+
+            // Slide Background logic
+            if (slide.type === 'practice') {
+                container.parentElement.classList.add('practice-slide');
+            } else {
+                container.parentElement.classList.remove('practice-slide');
+            }
+
+            // Content Rendering Logic
+            const contentDiv = document.createElement('div');
+            contentDiv.style.flex = "1";
+            contentDiv.style.position = "relative";
+
+            if (slide.type === 'list' || slide.type === 'intro' || slide.type === 'practice') {
+                const ul = document.createElement('ul');
+                slide.content.forEach(text => {
+                    const li = document.createElement('li');
+                    li.innerHTML = text; // allow html
+                    li.className = 'anim-element';
+                    li.style.opacity = '0'; // Start hidden
+                    ul.appendChild(li);
+                });
+                contentDiv.appendChild(ul);
+            }
+            else if (slide.type === 'formula_demo') {
+                contentDiv.innerHTML = `
+                <p class="anim-element" style="opacity:0"><strong>Action:</strong> ${slide.step}</p>
+                <div class="excel-ui anim-element" style="opacity:0">
+                    <div class="excel-ribbon">Home | Insert | Page Layout | Formulas</div>
+                    <div class="excel-formula-bar"><span style="color:#666">fx</span> &nbsp; <span id="formula-target"></span></div>
+                    <table class="excel-grid">
+                        <tr><th></th><th>C</th><th>D</th><th>E</th></tr>
+                        <tr><th>2</th><td>80</td><td>70</td><td class="cell-active" id="result-cell"></td></tr>
+                    </table>
+                </div>
+                <div id="final-result" class="anim-element" style="opacity:0; margin-top:20px; font-size:40px; color:green; text-align:center;">
+                    Result: ${slide.result} 🎉
+                </div>
+            `;
+            }
+            else if (slide.type === 'demo' || slide.type === 'anatomy') {
+                // Mock Grid
+                let gridHtml = '';
+                if (slide.grid) {
+                    gridHtml = `
+                 <table class="excel-grid" style="margin-top:20px;">
+                    <tr><th></th><th>A</th><th>B</th><th>C</th><th>D</th></tr>
+                    <tr><th>1</th><td>${slide.grid.headers ? slide.grid.headers[0] : ''}</td><td>${slide.grid.headers ? slide.grid.headers[1] : ''}</td><td>${slide.grid.headers ? slide.grid.headers[2] : ''}</td><td>${slide.grid.headers ? slide.grid.headers[3] : ''}</td></tr>
+                    <tr><th>2</th><td>${slide.grid.active === 'A1' ? '<b>|</b>' : ''}</td><td></td><td></td><td></td></tr>
+                 </table>`;
+                }
+
+                const ul = document.createElement('ul');
+                slide.content.forEach(text => {
+                    const li = document.createElement('li');
+                    li.innerHTML = text;
+                    li.className = 'anim-element';
+                    li.style.opacity = '0';
+                    ul.appendChild(li);
+                });
+                contentDiv.appendChild(ul);
+                contentDiv.innerHTML += gridHtml;
+            }
+            else if (slide.type === 'logic_split') {
+                contentDiv.innerHTML = `
+                <div style="display:flex; height:100%; gap:50px;">
+                    <div style="flex:1; background:#e6f7ff; padding:20px; border-radius:10px;" class="anim-element" style="opacity:0">
+                        <h3 style="color:#0050b3">Real Life</h3>
+                        <ul>${slide.left.map(l => `<li>${l}</li>`).join('')}</ul>
+                    </div>
+                    <div style="flex:1; background:#f6ffed; padding:20px; border-radius:10px;" class="anim-element" style="opacity:0">
+                        <h3 style="color:#389e0d">Excel Formula</h3>
+                        <div class="formula">${slide.right[0]}</div>
+                    </div>
+                </div>
+            `;
+            }
+
+            container.appendChild(contentDiv);
+        }
+
+        // ==========================================
+        // ANIMATION CONTROLLER
+        // ==========================================
+        function nextStep() {
+            const slide = slides[currentSlide];
+            const elements = document.querySelectorAll('.anim-element');
+
+            if (currentStep < elements.length) {
+                const el = elements[currentStep];
+
+                // Apply specific animation class based on slide config
+                if (slide.type === 'formula_demo' && currentStep === 1) {
+                    // Special Formula Typing Animation
+                    el.classList.add('visible');
+                    typeWriter(slide.formula, document.getElementById('formula-target'));
+                }
+                else if (slide.type === 'formula_demo' && currentStep === 2) {
+                    // Result appear
+                    el.classList.add('zoom-in');
+                    el.style.opacity = 1;
+                    document.getElementById('result-cell').innerText = slide.result;
+                }
+                else {
+                    // Standard animations
+                    el.style.opacity = 1;
+                    if (slide.animType === 'wipe') el.classList.add('wipe-left');
+                    else if (slide.animType === 'zoom') el.classList.add('zoom-in');
+                    else if (slide.animType === 'slide') el.classList.add('slide-up');
+                    else el.classList.add('fade-in');
+                }
+
+                currentStep++;
+            } else {
+                // Next Slide
+                if (currentSlide < slides.length - 1) {
+                    currentSlide++;
+                    renderSlide(currentSlide);
+                }
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                currentSlide--;
+                renderSlide(currentSlide);
+            }
+        }
+
+        function typeWriter(text, element) {
+            let i = 0;
+            element.innerHTML = "";
+            function type() {
+                if (i < text.length) {
+                    element.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(type, 50);
+                }
+            }
+            type();
+        }
+
+        // ==========================================
+        // EVENTS
+        // ==========================================
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') nextStep();
+            if (e.key === 'ArrowLeft') prevSlide();
+            if (e.key === 't' || e.key === 'T') {
+                trainerNotes.style.display = trainerNotes.style.display === 'block' ? 'none' : 'block';
+            }
+        });
+
+        document.addEventListener('click', nextStep);
+
+        // Initial Render
+        renderSlide(0);
+
+    </script>
+</body>
+
+</html>

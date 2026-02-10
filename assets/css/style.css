@@ -1,0 +1,930 @@
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;600;700&display=swap');
+
+:root {
+    /* Color Palette */
+    --primary-color: #2563EB;
+    /* Bright Blue */
+    --primary-dark: #1E40AF;
+    --secondary-color: #7C3AED;
+    /* Purple */
+    --accent-color: #10B981;
+    /* Emerald Green */
+
+    --bg-dark: #0F172A;
+    /* Slate 900 */
+    --bg-card: #1E293B;
+    /* Slate 800 */
+    --bg-light: #F8FAFC;
+    /* Slate 50 */
+
+    --text-primary: #F1F5F9;
+    /* Slate 100 */
+    --text-secondary: #94A3B8;
+    /* Slate 400 */
+    --text-light: #334155;
+    /* Slate 700 - for light modes/sections if needed */
+
+    --gradient-main: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+
+    --radius-md: 0.5rem;
+    --radius-lg: 1rem;
+}
+
+/* Reset & Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--text-primary);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Poppins', sans-serif;
+    color: #fff;
+    margin-bottom: 1rem;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.3s ease;
+}
+
+ul {
+    list-style: none;
+}
+
+section {
+    padding: 4rem 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Utilities */
+.btn {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border: none;
+    text-align: center;
+}
+
+.btn-primary {
+    background: var(--gradient-main);
+    color: white;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 10px #06b6d4;
+}
+
+.btn-secondary {
+    background: transparent;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+}
+
+.btn-secondary:hover {
+    background: rgba(37, 99, 235, 0.1);
+}
+
+.text-gradient {
+    background: var(--gradient-main);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.cards-grid {
+    /* Legacy support */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+/* Navbar */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: rgba(15, 23, 42, 0.9);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1.5rem;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    font-family: 'Poppins', sans-serif;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-links a {
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: var(--primary-color);
+}
+
+.menu-toggle {
+    display: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: white;
+}
+
+/* Hero Section */
+.hero {
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding-top: 80px;
+    /* offset for fixed header */
+    background: radial-gradient(circle at top right, rgba(37, 99, 235, 0.2), transparent 40%),
+        radial-gradient(circle at bottom left, rgba(124, 58, 237, 0.1), transparent 40%);
+}
+
+.hero h1 {
+    font-size: 3rem;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+}
+
+.hero p {
+    font-size: 1.25rem;
+    color: var(--text-secondary);
+    max-width: 600px;
+    margin-bottom: 2rem;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 1rem;
+}
+
+/* Card Styles */
+.card {
+    background: var(--bg-card);
+    padding: 2rem;
+    border-radius: var(--radius-lg);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+    border-color: rgba(37, 99, 235, 0.3);
+}
+
+.card-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+}
+
+.card h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+}
+
+.card p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+/* Footer */
+footer {
+    background: var(--bg-card);
+    padding: 4rem 1.5rem 1rem;
+    margin-top: 4rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 3rem;
+    margin-bottom: 3rem;
+}
+
+.footer-section h4 {
+    color: white;
+    margin-bottom: 1.5rem;
+}
+
+.footer-links li {
+    margin-bottom: 0.75rem;
+}
+
+.footer-links a {
+    color: var(--text-secondary);
+}
+
+.footer-links a:hover {
+    color: var(--primary-color);
+}
+
+.copyright {
+    text-align: center;
+    color: var(--text-secondary);
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    font-size: 0.9rem;
+}
+
+/* --- Legacy UI Refinements --- */
+
+.section-title {
+    text-align: center;
+    font-size: 3.8rem;
+    margin-bottom: 3rem;
+    color: #fff;
+    text-shadow: 0 0 10px rgba(6, 182, 212, 0.4);
+}
+
+.page-section {
+    padding-top: 5rem;
+    padding-bottom: 6rem;
+}
+
+/* Glass Effect Container */
+.glass-effect {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+}
+
+.diagram-box {
+    border: 2px dashed #94a3b8;
+    background: rgba(255, 255, 255, 0.05);
+    color: #94a3b8;
+    padding: 2rem;
+    text-align: center;
+    border-radius: 1rem;
+    margin: 1.5rem 0;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.diagram-box:hover {
+    border-color: #38bdf8;
+    color: #38bdf8;
+    background: rgba(56, 189, 248, 0.05);
+
+}
+
+/* Enhanced Content Card Hover (Legacy) */
+.content-card {
+    position: relative;
+    background: var(--bg-card);
+    padding: 2rem;
+    border-radius: 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+        box-shadow 0.4s ease,
+        border-color 0.3s ease;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.content-card:hover {
+    transform: translateY(-12px) scale(1.03);
+    border-color: var(--accent-color);
+    box-shadow: 0 15px 40px rgba(6, 182, 212, 0.25);
+}
+
+.content-card i {
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.content-card h4 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.content-card p {
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+}
+
+/* Glowing Border Animation */
+.content-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 1.5rem;
+    pointer-events: none;
+    box-shadow: 0 0 20px rgba(6, 182, 212, 0.15);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.content-card:hover::after {
+    opacity: 1;
+}
+
+/* Hero Header Improvement */
+.page-header.home {
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: radial-gradient(circle at center, rgba(37, 99, 235, 0.15), transparent 60%);
+}
+
+.tech-font {
+    font-family: 'Courier New', Courier, monospace;
+}
+
+/* Mobile Responsiveness for LEGACY components */
+@media (max-width: 768px) {
+
+    .hero h1,
+    .section-title {
+        font-size: 2.2rem;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+        width: 100%;
+        padding: 0 2rem;
+    }
+
+    .btn {
+        width: 100%;
+        text-align: center;
+    }
+
+    .glass-effect {
+        padding: 1.5rem !important;
+    }
+}
+
+/* =========================================
+   EDTECH NAVBAR - STANDALONE STYLES (v2.1)
+   ========================================= */
+
+:root {
+    --nav-bg: #0f172a;
+    --nav-text: #e2e8f0;
+    --nav-accent: #6366f1;
+    --nav-hover-bg: rgba(255, 255, 255, 0.1);
+    --nav-border: rgba(99, 102, 241, 0.2);
+    --dropdown-bg: #1e293b;
+}
+
+/* Base Reset for Nav */
+.edtech-navbar * {
+    box-sizing: border-box;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+.edtech-navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    background-color: rgba(15, 23, 42, 0.95);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--nav-border);
+    z-index: 9999;
+    color: var(--nav-text);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.nav-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Brand */
+.nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-decoration: none;
+    color: white;
+    font-weight: 700;
+    font-size: 1.25rem;
+}
+
+.brand-icon {
+    width: 32px;
+    height: 32px;
+    background: linear-gradient(135deg, #6366f1, #a855f7);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 800;
+    font-size: 1.2rem;
+}
+
+/* Desktop Menu */
+.desktop-menu {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: var(--nav-text);
+    font-size: 0.95rem;
+    font-weight: 500;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.375rem;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.nav-link:hover {
+    background-color: var(--nav-hover-bg);
+    color: white;
+}
+
+.nav-link.btn-cta {
+    background: var(--nav-accent);
+    color: white;
+    padding: 0.5rem 1.25rem;
+    border-radius: 9999px;
+    box-shadow: 0 2px 10px rgba(99, 102, 241, 0.3);
+}
+
+.nav-link.btn-cta:hover {
+    background: #4f46e5;
+    transform: translateY(-1px);
+}
+
+/* Dropdowns */
+.nav-dropdown {
+    position: relative;
+}
+
+.dropdown-trigger {
+    cursor: pointer;
+}
+
+.dropdown-icon {
+    width: 14px;
+    height: 14px;
+    transition: transform 0.2s;
+    opacity: 0.7;
+}
+
+.nav-dropdown:hover .dropdown-icon {
+    transform: rotate(180deg);
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 240px;
+    background-color: var(--dropdown-bg);
+    border: 1px solid var(--nav-border);
+    border-radius: 0.75rem;
+    padding: 0.5rem;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    margin-top: 0.5rem;
+}
+
+.nav-dropdown:hover .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown-item {
+    display: block;
+    padding: 0.75rem 1rem;
+    text-decoration: none;
+    color: var(--nav-text);
+    font-size: 0.9rem;
+    border-radius: 0.5rem;
+    transition: background 0.2s;
+}
+
+.dropdown-item:hover {
+    background-color: var(--nav-hover-bg);
+    color: white;
+}
+
+.dropdown-divider {
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.1);
+    margin: 0.5rem 0;
+}
+
+/* Mobile Toggle */
+.mobile-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 0.5rem;
+}
+
+.toggle-icon {
+    width: 24px;
+    height: 24px;
+}
+
+/* Mobile Menu */
+.mobile-menu {
+    position: absolute;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    background-color: #020617;
+    border-bottom: 1px solid var(--nav-border);
+    padding: 1rem;
+    display: none;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.mobile-menu.active {
+    display: flex;
+    animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .desktop-menu {
+        display: none;
+    }
+
+    .mobile-toggle {
+        display: block;
+    }
+
+    .mobile-menu {
+        padding: 2rem 1rem;
+        gap: 1.5rem;
+    }
+
+    .dropdown-item {
+        font-size: 1.1rem;
+        /* Larger touch target */
+        padding: 1rem;
+        background: rgba(255, 255, 255, 0.03);
+    }
+}
+
+/* Close Button for Mobile */
+.close-menu-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0.5rem;
+}
+
+/* Glow Effect */
+.nav-link:hover {
+    background-color: var(--nav-hover-bg);
+    color: white;
+    text-shadow: 0 0 10px var(--nav-accent);
+    box-shadow: 0 0 15px rgba(99, 102, 241, 0.2);
+}
+
+.edtech-navbar {
+    z-index: 10001;
+    /* High Z-Index */
+}
+
+.mobile-menu {
+    z-index: 10000;
+}
+
+/* =========================================
+   NEW HERO SECTION ANIMATIONS (User Request)
+   ========================================= */
+
+/* Hero Container Override/Enhancement */
+.hero {
+    /* Merging existing hero structure with new background */
+    background-color: #0f172a;
+    background-image: radial-gradient(at 0% 0%, rgba(16, 185, 129, 0.1) 0px, transparent 50%),
+        radial-gradient(at 100% 0%, rgba(37, 99, 235, 0.1) 0px, transparent 50%);
+    /* Keep existing layout properties */
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding-top: 80px;
+}
+
+/* 1. Main Heading Animation */
+.main-heading {
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 10px;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out forwards;
+    color: white;
+}
+
+/* 2. Colorful Animated Text */
+.gradient-text-hero {
+    font-size: 3.5rem;
+    font-weight: 800;
+    background: linear-gradient(90deg, #00c6ff, #0072ff, #a445b2, #fa4299);
+    background-size: 300%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation:
+        gradientMove 5s infinite alternate,
+        fadeInUp 0.8s ease-out 0.3s forwards;
+    opacity: 0;
+    display: block;
+    margin-bottom: 20px;
+}
+
+/* 3. Sub-heading */
+.sub-text {
+    font-size: 1.2rem;
+    color: #cbd5e1;
+    margin-bottom: 40px;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out 0.6s forwards;
+}
+
+/* --- BUTTONS STYLING --- */
+.btn-group {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out 0.9s forwards;
+}
+
+/* New Button Variants */
+.btn-primary-hero {
+    background: linear-gradient(45deg, #2563eb, #3b82f6);
+    box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
+    color: white;
+}
+
+.btn-excel {
+    background: linear-gradient(45deg, #10b981, #059669);
+    /* Green for Excel */
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+    color: white;
+    border: none;
+}
+
+.btn-youtube {
+    background: linear-gradient(45deg, #ef4444, #dc2626);
+    /* Red for YouTube */
+    box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4);
+    color: white;
+    border: none;
+}
+
+/* Ensure icons interact nicely */
+.btn i {
+    margin-right: 8px;
+}
+
+/* Hover Effects Override */
+.btn:hover {
+    transform: translateY(-5px);
+    filter: brightness(1.1);
+}
+
+/* --- KEYFRAME ANIMATIONS --- */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes gradientMove {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    100% {
+        background-position: 100% 50%;
+    }
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .main-heading {
+        font-size: 2rem;
+    }
+
+    .gradient-text-hero {
+        font-size: 2.5rem;
+    }
+
+    .btn-group {
+        flex-direction: column;
+        width: 100%;
+    }
+}
+
+/* =========================================
+   PRINT STYLESHEET
+   ========================================= */
+@media print {
+
+    /* Hide Navigation, Footer, and Interactive Elements */
+    .edtech-navbar,
+    .navbar,
+    footer,
+    .btn,
+    .hero-buttons,
+    .mobile-toggle,
+    .mobile-menu,
+    .video-hero,
+    .page-header,
+    .filters-container,
+    .search-container,
+    .card-link,
+    .subscribe-btn,
+    .play-icon,
+    #trainer-notes,
+    .controls {
+        display: none !important;
+    }
+
+    /* Reset Backgrounds and Colors */
+    body {
+        background-color: white !important;
+        background-image: none !important;
+        color: black !important;
+        font-size: 12pt;
+    }
+
+    /* Ensure Containers are Full Width */
+    .container,
+    .hub-container,
+    section {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    /* Card Tweaks for Print */
+    .card,
+    .content-card,
+    .module-card,
+    .note-card {
+        border: 1px solid #ccc !important;
+        background: white !important;
+        box-shadow: none !important;
+        color: black !important;
+        break-inside: avoid;
+        /* Prevent splitting across pages */
+        margin-bottom: 2rem !important;
+    }
+
+    /* Typography Adjustments */
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        color: black !important;
+        text-shadow: none !important;
+    }
+
+    p,
+    li,
+    td,
+    th {
+        color: #333 !important;
+    }
+
+    /* Expand Links */
+    a {
+        text-decoration: underline;
+        color: black !important;
+    }
+
+    /* Ensure specific sections are visible */
+    .notes-grid,
+    .playlist-grid,
+    .card-grid {
+        display: block !important;
+    }
+
+    .notes-grid>*,
+    .playlist-grid>*,
+    .card-grid>* {
+        margin-bottom: 20px;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 20px;
+    }
+}

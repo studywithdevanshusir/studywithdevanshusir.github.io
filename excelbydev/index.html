@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-74VNSC0NMX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-74VNSC0NMX');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Excel Mastery Hub | Study with Devanshu Sir</title>
+    <!-- Adjust paths to point to the parent directory's assets -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <style>
+        /* Specific overrides for the Hub to ensure it looks distinct but consistent */
+        body {
+            background-color: var(--bg-dark);
+            background-image:
+                radial-gradient(at 0% 0%, rgba(16, 185, 129, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 0%, rgba(37, 99, 235, 0.15) 0px, transparent 50%);
+        }
+
+        .hub-container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .hub-title {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .hub-title h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #fff 0%, #a5f3fc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hub-title p {
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .module-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            width: 100%;
+            max-width: 1200px;
+            z-index: 10;
+        }
+
+        .module-card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 1.5rem;
+            padding: 2.5rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .module-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: var(--accent-color);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            background: rgba(30, 41, 59, 0.9);
+        }
+
+        /* Hover Glow Effect */
+        .module-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+            transition: 0.5s;
+        }
+
+        .module-card:hover::before {
+            left: 100%;
+        }
+
+        .icon-box {
+            width: 70px;
+            height: 70px;
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .module-card:hover .icon-box {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        /* Card Specific Colors */
+        .card-sim .icon-box {
+            color: #34d399;
+            background: rgba(52, 211, 153, 0.1);
+        }
+
+        .card-dash .icon-box {
+            color: #60a5fa;
+            background: rgba(96, 165, 250, 0.1);
+        }
+
+        .card-pres .icon-box {
+            color: #f472b6;
+            background: rgba(244, 114, 182, 0.1);
+        }
+
+        .module-card h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            color: #f1f5f9;
+        }
+
+        .module-card p {
+            color: #94a3b8;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            flex-grow: 1;
+        }
+
+        .card-link {
+            display: inline-flex;
+            align-items: center;
+            margin-top: 1.5rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--primary-color);
+            transition: gap 0.2s ease;
+        }
+
+        .module-card:hover .card-link {
+            gap: 0.5rem;
+            color: var(--accent-color);
+        }
+
+        /* Back Button */
+        .back-nav {
+            position: absolute;
+            top: 2rem;
+            left: 2rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: color 0.3s;
+        }
+
+        .back-nav:hover {
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="hub-container">
+        <a href="../index.html" class="back-nav">
+            <i class="fas fa-arrow-left"></i> Back to Home
+        </a>
+
+        <div class="hub-title" data-aos="fade-down">
+            <h1>Excel Mastery Suite</h1>
+            <p>Choose your learning mode. Whether you are a student, teacher, or presenter, we have the right tool for
+                you.</p>
+        </div>
+
+        <div class="module-grid">
+
+            <!-- Original Tool: Interactive Simulator (excelbydev.html) -->
+            <a href="excelbydev.html" class="module-card card-sim" data-aos="fade-up" data-aos-delay="100">
+                <div class="icon-box">
+                    <i class="fas fa-keyboard"></i>
+                </div>
+                <h2>Interactive Simulator</h2>
+                <p>The core Excel By Dev experience. Hands-on practice with live feedback.</p>
+                <div class="card-link">
+                    Launch Simulator <i class="fas fa-arrow-right ml-2" style="margin-left: 8px;"></i>
+                </div>
+            </a>
+
+            <!-- Original Tool: Expert Modules (expertinexcel.html) -->
+            <a href="expertinexcel.html" class="module-card card-dash" data-aos="fade-up" data-aos-delay="200">
+                <div class="icon-box">
+                    <i class="fas fa-user-graduate"></i>
+                </div>
+                <h2>Expert Mode</h2>
+                <p>Deep dive into advanced concepts. The Pro version of our curriculum.</p>
+                <div class="card-link">
+                    Go Pro <i class="fas fa-arrow-right ml-2" style="margin-left: 8px;"></i>
+                </div>
+            </a>
+
+            <!-- Original Tool: Teacher Presentations (excelpresentation.html) -->
+            <a href="excelpresentation.html" class="module-card card-pres" data-aos="fade-up" data-aos-delay="300">
+                <div class="icon-box">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                </div>
+                <h2>Teacher Presentations</h2>
+                <p>Slide decks and teaching resources for Excel instructors.</p>
+                <div class="card-link">
+                    View Slides <i class="fas fa-arrow-right ml-2" style="margin-left: 8px;"></i>
+                </div>
+            </a>
+
+            <!-- Learn Module 1: Basic Formulas -->
+            <a href="basic-formulas.html" class="module-card" data-aos="fade-up" data-aos-delay="400"
+                style="border-top: 3px solid #34d399;">
+                <div class="icon-box">
+                    <i class="fas fa-calculator"></i>
+                </div>
+                <h2>Basic Formulas</h2>
+                <p>Master the essentials: SUM, AVERAGE, COUNT. The foundation starts here.</p>
+                <div class="card-link">
+                    Start Module <i class="fas fa-arrow-right ml-2" style="margin-left: 8px;"></i>
+                </div>
+            </a>
+
+            <!-- Learn Module 2: Advanced Logic -->
+            <a href="advanced-excel.html" class="module-card" data-aos="fade-up" data-aos-delay="500"
+                style="border-top: 3px solid #60a5fa;">
+                <div class="icon-box">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <h2>Advanced Logic</h2>
+                <p>IF, VLOOKUP, HLOOKUP. Become a problem solver.</p>
+                <div class="card-link">
+                    Start Module <i class="fas fa-arrow-right ml-2" style="margin-left: 8px;"></i>
+                </div>
+            </a>
+
+            <!-- Learn Module 3: Charts -->
+            <a href="charts-graphs.html" class="module-card" data-aos="fade-up" data-aos-delay="600"
+                style="border-top: 3px solid #f472b6;">
+                <div class="icon-box">
+                    <i class="fas fa-chart-pie"></i>
+                </div>
+                <h2>Data Visualization</h2>
+                <p>Charts, Slicers, and Pivot Tables. Present like a pro.</p>
+                <div class="card-link">
+                    Start Module <i class="fas fa-arrow-right ml-2" style="margin-left: 8px;"></i>
+                </div>
+            </a>
+
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true
+        });
+    </script>
+</body>
+
+</html>

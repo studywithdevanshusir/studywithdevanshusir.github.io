@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-74VNSC0NMX"></script> 
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-74VNSC0MNX');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Revision Tour - Class 12 Premium Presentation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Fira+Code:wght@400;500&display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            overflow: hidden;
+            background: #0f172a;
+            color: white;
+        }
+
+        .code-font {
+            font-family: 'Fira Code', monospace;
+        }
+
+        /* --- ANIMATIONS --- */
+        .slide-enter {
+            animation: slideIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .slide-exit {
+            animation: slideOut 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(50px) scale(0.95);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0) scale(1);
+            }
+        }
+
+        @keyframes slideOut {
+            from {
+                opacity: 1;
+                transform: translateX(0) scale(1);
+            }
+
+            to {
+                opacity: 0;
+                transform: translateX(-50px) scale(0.95);
+            }
+        }
+
+        /* Element Animations */
+        .fade-up {
+            opacity: 0;
+            animation: fadeUp 0.6s ease forwards;
+        }
+
+        .zoom-in {
+            opacity: 0;
+            animation: zoomIn 0.5s ease forwards;
+        }
+
+        .typewriter {
+            overflow: hidden;
+            white-space: nowrap;
+            border-right: 2px solid transparent;
+            animation: typing 2s steps(40, end), blink .75s step-end infinite;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes zoomIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes typing {
+            from {
+                width: 0
+            }
+
+            to {
+                width: 100%
+            }
+        }
+
+        @keyframes blink {
+
+            from,
+            to {
+                border-color: transparent
+            }
+
+            50% {
+                border-color: #4ade80
+            }
+        }
+
+        /* Delays */
+        .delay-100 {
+            animation-delay: 0.1s;
+        }
+
+        .delay-200 {
+            animation-delay: 0.2s;
+        }
+
+        .delay-300 {
+            animation-delay: 0.3s;
+        }
+
+        .delay-500 {
+            animation-delay: 0.5s;
+        }
+
+        .delay-700 {
+            animation-delay: 0.7s;
+        }
+
+        /* Custom UI Components */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .code-panel {
+            background: #1e1e1e;
+            border-left: 4px solid #3b82f6;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .output-panel {
+            background: #000;
+            border: 1px solid #333;
+            color: #4ade80;
+            font-family: 'Fira Code', monospace;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #60a5fa 0%, #c084fc 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Speaker Notes */
+        .notes-area {
+            transition: transform 0.3s ease;
+            transform: translateY(100%);
+        }
+
+        .notes-area.visible {
+            transform: translateY(0);
+        }
+    </style>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <script src="../assets/js/navigation.js" defer></script>
+</head>
+
+<body class="h-screen w-screen flex flex-col">
+    <div id="navbar-placeholder"></div>
+
+    <!-- PROGRESS BAR -->
+    <div class="h-1 bg-gray-800 w-full fixed top-20 z-50">
+        <div id="progress-bar" class="h-full bg-gradient-to-r from-blue-500 to-purple-500 transition-all duration-500"
+            style="width: 0%"></div>
+    </div>
+
+    <!-- MAIN STAGE -->
+    <div id="slide-stage" class="flex-grow flex items-center justify-center relative p-8">
+        <!-- Content Injected Here -->
+    </div>
+
+    <!-- CONTROLS & NOTES -->
+    <div class="fixed bottom-0 w-full z-40 pointer-events-none">
+        <!-- Notes Drawer -->
+        <div id="speaker-notes"
+            class="notes-area bg-yellow-100 text-gray-800 p-4 mx-auto max-w-2xl rounded-t-xl shadow-2xl pointer-events-auto">
+            <h4 class="text-xs font-bold uppercase text-yellow-800 mb-1">🎤 Speaker Notes</h4>
+            <p id="note-content" class="text-sm">Welcome to the class.</p>
+        </div>
+
+        <!-- Control Bar -->
+        <div
+            class="flex justify-between items-center p-4 bg-gradient-to-t from-black to-transparent pointer-events-auto">
+            <div class="flex items-center space-x-4 opacity-50 hover:opacity-100 transition">
+                <button onclick="toggleNotes()" class="p-2 bg-gray-800 rounded-full hover:bg-gray-700 text-white"
+                    title="Toggle Notes"><i data-lucide="mic-2"></i></button>
+                <span id="slide-number" class="text-sm font-mono text-gray-400">01 / 65</span>
+            </div>
+            <div class="flex space-x-4">
+                <button onclick="prevSlide()"
+                    class="p-3 bg-gray-800 rounded-full hover:bg-blue-600 transition shadow-lg text-white"><i
+                        data-lucide="chevron-left"></i></button>
+                <button onclick="nextStep()"
+                    class="px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full font-bold hover:scale-105 transition shadow-lg text-white flex items-center gap-2">
+                    <span>Next</span> <i data-lucide="chevron-right" size="18"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- DATA ENGINE ---
+        const slides = [
+            // --- SECTION 1: INTRO ---
+            {
+                type: 'title',
+                title: "Python Revision Tour",
+                subtitle: "Class 12 - Chapter 1 (Complete Guide)",
+                author: "Devanshu Pratap",
+                note: "Start with high energy. Welcome students to Class 12 CS. Emphasize that this chapter is the foundation for the board exam."
+            },
+            {
+                type: 'objectives',
+                title: "🎯 Learning Objectives",
+                items: [
+                    "Review Python Basics & Execution Modes",
+                    "Master Tokens (Keywords, Identifiers, Literals)",
+                    "Understand Control Flow (If, Loops)",
+                    "Explore Data Structures (Lists, Dicts, Tuples)",
+                    "Random Module Functions"
+                ],
+                note: "Briefly read through. Mention that Random Module is a guaranteed 2-mark question."
+            },
+            {
+                type: 'concept',
+                title: "🐍 What is Python?",
+                content: "Python is a high-level, interpreted, interactive, and object-oriented programming language.",
+                image: "python-logo", // Icon placeholder
+                points: [
+                    "Developed by Guido van Rossum",
+                    "Case Sensitive Language (A ≠ a)",
+                    "Uses Indentation for blocks (No { })"
+                ],
+                note: "Stress on 'Interpreted' and 'Case Sensitive'. These are common viva questions."
+            },
+            {
+                type: 'comparison',
+                title: "Interactive vs Script Mode",
+                col1: { title: "Interactive Mode", points: ["Typed at >>> prompt", "Instant Results", "Good for testing"] },
+                col2: { title: "Script Mode", points: ["Saved as .py files", "Good for large programs", "Can be edited later"] },
+                note: "Ask: Which mode do we use for projects? Answer: Script Mode."
+            },
+
+            // --- QUIZ 1 ---
+            {
+                type: 'quiz',
+                question: "Which of these is NOT a characteristic of Python?",
+                options: ["Case Sensitive", "Compiled Language", "High Level", "Interpreted"],
+                answer: 1, // Index
+                explanation: "Python is an INTERPRETED language, not compiled like C++.",
+                note: "Pause and let them answer in chat/comments."
+            },
+
+            // --- SECTION 2: TOKENS ---
+            {
+                type: 'section',
+                title: "Unit 2: Tokens",
+                subtitle: "The smallest lexical units in a program",
+                note: "Transition to Tokens. Define 'Lexical Unit'."
+            },
+            {
+                type: 'concept',
+                title: "🧱 Types of Tokens",
+                points: [
+                    "1. Keywords (Reserved words)",
+                    "2. Identifiers (Variable names)",
+                    "3. Literals (Data values)",
+                    "4. Operators (+, -, *, etc.)",
+                    "5. Punctuators (( ), :, etc.)"
+                ],
+                note: "List them out clearly. We will dive into each."
+            },
+            {
+                type: 'code-concept',
+                title: "Keywords",
+                content: "Reserved words with special meaning.",
+                code: "import keyword\nprint(keyword.kwlist)",
+                output: "['False', 'None', 'True', 'and', 'as', 'assert'...]",
+                points: ["Cannot be used as identifiers", "All are lowercase EXCEPT: True, False, None"],
+                badge: "Board Exam Tip",
+                note: "Highlight True, False, None capitalization. Common error."
+            },
+            {
+                type: 'concept',
+                title: "🏷️ Identifiers (Naming Rules)",
+                points: [
+                    "Allowed: A-Z, a-z, 0-9, _ (underscore)",
+                    "MUST NOT start with a digit",
+                    "No special symbols (@, $, %)",
+                    "Keywords are not allowed"
+                ],
+                note: "Rule 2 is the most tested: 1var is invalid."
+            },
+            {
+                type: 'table',
+                title: "Valid vs Invalid Identifiers",
+                rows: [
+                    ["my_var", "✅ Valid", "Starts with letter"],
+                    ["_data", "✅ Valid", "Starts with underscore"],
+                    ["2ndPlace", "❌ Invalid", "Starts with digit"],
+                    ["total-sum", "❌ Invalid", "Contains hyphen"],
+                    ["break", "❌ Invalid", "It is a keyword"]
+                ],
+                note: "Walk through the table row by row."
+            },
+
+            // --- QUIZ 2 ---
+            {
+                type: 'quiz',
+                question: "Identify the VALID identifier:",
+                options: ["$money", "total_sum", "1st_rank", "for"],
+                answer: 1,
+                explanation: "$ is illegal. 1st_rank starts with digit. for is a keyword. total_sum is correct.",
+                note: "Quick check on identifier rules."
+            },
+
+            // --- SECTION 3: LITERALS ---
+            {
+                type: 'concept',
+                title: "💎 Literals (Values)",
+                points: [
+                    "String: 'Hello', \"World\", '''Multi-line'''",
+                    "Numeric: Integer (10), Float (10.5), Complex (3+4j)",
+                    "Boolean: True, False",
+                    "Special: None"
+                ],
+                note: "Mention that None is distinct from 0 or empty string."
+            },
+            {
+                type: 'code-predict',
+                title: "Predict the Output",
+                code: "x = \"Python\"\ny = '''Is\nAwesome'''\nprint(x, y)",
+                answer: "Python Is\nAwesome",
+                note: "Triple quotes preserve newlines."
+            },
+
+            // --- SECTION 4: OPERATORS ---
+            {
+                type: 'section',
+                title: "Unit 3: Operators",
+                subtitle: "Doing calculations & Logic",
+                note: "Moving to operators."
+            },
+            {
+                type: 'concept',
+                title: "⚠️ Confusing Operators",
+                points: [
+                    "/  (True Division) -> Always Float (5/2 = 2.5)",
+                    "// (Floor Division) -> Integer (5//2 = 2)",
+                    "%  (Modulus) -> Remainder (5%2 = 1)",
+                    "** (Exponent) -> Power (2**3 = 8)"
+                ],
+                badge: "Important",
+                note: "Spend time on // vs /. This is critical."
+            },
+            {
+                type: 'code-predict',
+                title: "What is the output?",
+                code: "print(10 // 3)\nprint(10 / 3)\nprint(2 ** 3)",
+                answer: "3\n3.3333...\n8",
+                note: "Ask class before revealing."
+            },
+
+            // --- SECTION 5: VARIABLES ---
+            {
+                type: 'concept',
+                title: "Dynamic Typing",
+                content: "Variables in Python do not need explicit declaration.",
+                points: [
+                    "x = 10 (x is int)",
+                    "x = 'Hello' (x becomes str)",
+                    "type(x) tells the datatype"
+                ],
+                note: "Compare with C++/Java where int x is required."
+            },
+            {
+                type: 'concept',
+                title: "🔄 Mutability (V. Imp)",
+                points: [
+                    "Immutable: int, float, str, tuple (Change creates NEW object)",
+                    "Mutable: list, dict, set (Change happens IN PLACE)"
+                ],
+                badge: "Board Favorite",
+                note: "This concept explains why list functions behave differently from string functions."
+            },
+
+            // --- QUIZ 3 ---
+            {
+                type: 'quiz',
+                question: "Which of the following is MUTABLE?",
+                options: ["String", "Tuple", "List", "Integer"],
+                answer: 2,
+                explanation: "Lists can be modified. Others are immutable.",
+                note: "Reinforce list mutability."
+            },
+
+            // --- SECTION 6: FLOW CONTROL ---
+            {
+                type: 'section',
+                title: "Unit 4: Flow Control",
+                subtitle: "If, Elif, Else & Loops",
+                note: "Logic building starts here."
+            },
+            {
+                type: 'code-concept',
+                title: "If-Elif-Else Syntax",
+                code: "marks = 85\nif marks > 90:\n    print('A')\nelif marks > 80:\n    print('B')\nelse:\n    print('C')",
+                output: "B",
+                points: ["Indentation (4 spaces) is mandatory", "Colon (:) at end of lines"],
+                note: "Point out indentation errors common in exams."
+            },
+            {
+                type: 'code-debug',
+                title: "🐛 Debug This Code",
+                problem: "x = 10\nif x = 10:\nprint('Ten')",
+                solution: "Two Errors:\n1. Use == for comparison (not =)\n2. Indentation missing for print",
+                note: "Ask students to spot the syntax errors."
+            },
+
+            // --- LOOPS ---
+            {
+                type: 'concept',
+                title: "🔁 The range() Function",
+                content: "range(start, stop, step)",
+                points: [
+                    "start: Inclusive (Default 0)",
+                    "stop: EXCLUSIVE (Must specify)",
+                    "step: Jump (Default 1)"
+                ],
+                note: "Stop is exclusive. Hammer this point home."
+            },
+            {
+                type: 'code-predict',
+                title: "Loop Output?",
+                code: "for i in range(1, 5, 2):\n    print(i, end=' ')",
+                answer: "1 3",
+                note: "Starts at 1, jumps 2 -> 3. Next is 5 which is stop (exclusive)."
+            },
+            {
+                type: 'concept',
+                title: "Break vs Continue",
+                points: [
+                    "break: Exits the loop completely",
+                    "continue: Skips current iteration, goes to next"
+                ],
+                note: "Use analogy: Break is 'stop playing', Continue is 'skip this song'."
+            },
+
+            // --- SECTION 7: DATA STRUCTURES ---
+            {
+                type: 'section',
+                title: "Unit 5: Data Structures",
+                subtitle: "Strings, Lists, Tuples, Dictionaries",
+                note: "Overview of container types."
+            },
+            {
+                type: 'code-concept',
+                title: "Strings (Slicing)",
+                code: "S = 'PYTHON'\nprint(S[0:2])\nprint(S[::-1])",
+                output: "PY\nNOHTYP",
+                points: ["Index starts at 0", "Negative index starts from -1", "[::-1] reverses string"],
+                badge: "Trick",
+                note: "Slicing questions are guaranteed."
+            },
+            {
+                type: 'code-concept',
+                title: "List Methods",
+                code: "L = [1, 2]\nL.append(3)   # [1, 2, 3]\nL.extend([4]) # [1, 2, 3, 4]\nL.pop(0)      # [2, 3, 4]",
+                output: "Lists change in place (Mutable)",
+                points: ["append() adds single item", "extend() adds multiple", "pop() removes by index"],
+                note: "Difference between append and extend is a common viva question."
+            },
+
+            // --- QUIZ 4 ---
+            {
+                type: 'quiz',
+                question: "What is the result of (1, 2) + (3, 4)?",
+                options: ["(1, 2, 3, 4)", "(4, 6)", "Error", "[(1,2), (3,4)]"],
+                answer: 0,
+                explanation: "Tuple concatenation joins them together.",
+                note: "Tuples support concatenation like strings."
+            },
+
+            // --- SECTION 8: RANDOM MODULE ---
+            {
+                type: 'section',
+                title: "Unit 6: Random Module",
+                subtitle: "Generating Numbers",
+                note: "Final technical topic."
+            },
+            {
+                type: 'concept',
+                title: "Random Functions",
+                points: [
+                    "random(): Float [0.0, 1.0)",
+                    "randint(a, b): Int [a, b] (BOTH INCLUSIVE)",
+                    "randrange(a, b): Int [a, b) (b Exclusive)"
+                ],
+                badge: "Confusing",
+                note: "randint includes the stop value. randrange does not."
+            },
+            {
+                type: 'code-predict',
+                title: "Possible Outputs?",
+                code: "import random\nprint(random.randint(1, 3))",
+                answer: "1, 2, or 3",
+                note: "Many students forget 3 is possible."
+            },
+
+            // --- CONCLUSION ---
+            {
+                type: 'summary',
+                title: "📝 Chapter Summary",
+                points: [
+                    "Python is Case Sensitive & Indented",
+                    "Input() returns String",
+                    "Lists/Dicts are Mutable; Strings/Tuples Immutable",
+                    "Loops control flow; Break exits loop",
+                    "Random module syntax is critical"
+                ],
+                note: "Summarize the key takeaways."
+            },
+            {
+                type: 'thankyou',
+                title: "Thank You!",
+                subtitle: "Next: Functions In-Depth",
+                author: "Devanshu Pratap",
+                note: "End class. Ask for doubts."
+            }
+        ];
+
+        // --- RENDER ENGINE ---
+        let currentSlide = 0;
+        let animationStep = 0;
+        let isAnimating = false; // Add animation lock
+        const stage = document.getElementById('slide-stage');
+        const progressBar = document.getElementById('progress-bar');
+        const noteContent = document.getElementById('note-content');
+        const slideNumber = document.getElementById('slide-number');
+
+        function render() {
+            const data = slides[currentSlide];
+
+            // Update Meta
+            progressBar.style.width = `${((currentSlide + 1) / slides.length) * 100}%`;
+            slideNumber.innerText = `${String(currentSlide + 1).padStart(2, '0')} / ${slides.length}`;
+            noteContent.innerText = data.note || "No notes for this slide.";
+
+            // Animation Reset
+            animationStep = 0;
+
+            let html = '';
+
+            // --- TEMPLATES ---
+
+            if (data.type === 'title') {
+                html = `
+                    <div class="text-center slide-enter">
+                        <div class="inline-block p-4 rounded-full bg-blue-600 mb-6 shadow-[0_0_50px_rgba(37,99,235,0.5)] animate-pulse">
+                            <i data-lucide="book-open" size="48" color="white"></i>
+                        </div>
+                        <h1 class="text-7xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 mb-4 tracking-tight">${data.title}</h1>
+                        <h2 class="text-3xl text-gray-300 font-light mb-8">${data.subtitle}</h2>
+                        <div class="w-32 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full mb-8"></div>
+                        <p class="text-xl font-semibold text-white">By ${data.author}</p>
+                    </div>
+                `;
+            } else if (data.type === 'section') {
+                html = `
+                    <div class="flex items-center justify-center h-full w-full slide-enter">
+                        <div class="bg-gradient-to-br from-blue-900 to-slate-900 p-16 rounded-3xl shadow-2xl border border-blue-700/50 text-center relative overflow-hidden">
+                            <div class="absolute -top-20 -left-20 w-64 h-64 bg-blue-500 blur-[100px] opacity-20"></div>
+                            <h2 class="text-6xl font-bold text-white mb-4 relative z-10">${data.title}</h2>
+                            <p class="text-2xl text-blue-200 relative z-10">${data.subtitle}</p>
+                        </div>
+                    </div>
+                `;
+            } else if (data.type === 'concept' || data.type === 'summary' || data.type === 'objectives') {
+                html = `
+                    <div class="max-w-5xl w-full slide-enter">
+                        <div class="flex items-center space-x-4 mb-8">
+                            <h2 class="text-5xl font-bold text-white">${data.title}</h2>
+                            ${data.badge ? `<span class="px-3 py-1 bg-yellow-500 text-black text-sm font-bold rounded-full animate-bounce">${data.badge}</span>` : ''}
+                        </div>
+                        <div class="grid grid-cols-1 ${data.image ? 'md:grid-cols-2' : ''} gap-8">
+                            <div class="glass-panel p-8 rounded-2xl">
+                                ${data.content ? `<p class="text-xl text-gray-300 mb-6 leading-relaxed">${data.content}</p>` : ''}
+                                <ul class="space-y-4">
+                                    ${(data.points || data.items).map((p, i) => `
+                                        <li class="point-item opacity-0 transform translate-x-4 transition-all duration-500 flex items-start space-x-3 text-lg" id="point-${i}">
+                                            <i data-lucide="check-circle" class="text-green-400 mt-1 flex-shrink-0"></i>
+                                            <span>${p}</span>
+                                        </li>
+                                    `).join('')}
+                                </ul>
+                            </div>
+                            ${data.image ? `<div class="bg-slate-800 rounded-2xl flex items-center justify-center p-8"><i data-lucide="code" size="120" class="text-blue-500 opacity-50"></i></div>` : ''}
+                        </div>
+                    </div>
+                `;
+            } else if (data.type === 'comparison') {
+                html = `
+                    <div class="w-full max-w-6xl slide-enter">
+                        <h2 class="text-4xl font-bold text-center mb-10">${data.title}</h2>
+                        <div class="grid grid-cols-2 gap-8">
+                            <div class="glass-panel p-8 rounded-xl border-t-4 border-blue-500">
+                                <h3 class="text-2xl font-bold text-blue-400 mb-6">${data.col1.title}</h3>
+                                <ul class="space-y-3">
+                                    ${data.col1.points.map((p, i) => `<li class="point-item opacity-0 text-gray-300" id="point-${i}">• ${p}</li>`).join('')}
+                                </ul>
+                            </div>
+                            <div class="glass-panel p-8 rounded-xl border-t-4 border-purple-500">
+                                <h3 class="text-2xl font-bold text-purple-400 mb-6">${data.col2.title}</h3>
+                                <ul class="space-y-3">
+                                    ${data.col2.points.map((p, i) => `<li class="point-item opacity-0 text-gray-300" id="point-${i + data.col1.points.length}">• ${p}</li>`).join('')}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            } else if (data.type === 'code-concept' || data.type === 'code-predict') {
+                html = `
+                    <div class="w-full max-w-5xl slide-enter flex flex-col h-full justify-center">
+                        <div class="flex justify-between items-end mb-6">
+                            <h2 class="text-4xl font-bold text-white">${data.title}</h2>
+                            ${data.badge ? `<span class="px-4 py-1 bg-red-500 text-white font-bold rounded uppercase text-sm tracking-wider shadow-lg">${data.badge}</span>` : ''}
+                        </div>
+                        ${data.content ? `<p class="text-lg text-gray-400 mb-6">${data.content}</p>` : ''}
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <div class="code-panel p-6 rounded-lg relative overflow-hidden group">
+                                <div class="absolute top-2 right-2 flex space-x-1">
+                                    <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                                    <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                                    <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                                </div>
+                                <pre class="code-font text-green-300 text-lg mt-4 typewriter">${data.code}</pre>
+                            </div>
+                            <div class="space-y-6">
+                                ${data.output ? `
+                                    <div class="output-panel p-4 rounded border-l-4 border-green-500 shadow-lg">
+                                        <p class="text-xs text-gray-500 uppercase mb-1">Console Output</p>
+                                        <p class="text-xl">${data.output}</p>
+                                    </div>
+                                ` : ''}
+                                ${data.answer ? `
+                                    <div id="reveal-box" class="glass-panel p-6 rounded text-center cursor-pointer transition hover:bg-white/10" onclick="this.innerHTML='<p class=\'text-2xl font-bold text-green-400 fade-up\'>${data.answer.replace(/\n/g, '<br>')}</p>'">
+                                        <p class="text-xl font-bold text-blue-300 animate-pulse">Click to Reveal Output</p>
+                                    </div>
+                                ` : ''}
+                                ${data.points ? `
+                                    <ul class="space-y-2">
+                                        ${data.points.map((p, i) => `<li class="point-item opacity-0 text-gray-300 flex items-center gap-2" id="point-${i}"><i data-lucide="arrow-right" size="16"></i> ${p}</li>`).join('')}
+                                    </ul>
+                                ` : ''}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            } else if (data.type === 'quiz') {
+                html = `
+                    <div class="w-full max-w-3xl slide-enter text-center">
+                        <span class="px-4 py-1 bg-purple-600 rounded-full text-sm font-bold uppercase tracking-wider mb-6 inline-block shadow-lg animate-bounce">Pop Quiz</span>
+                        <h2 class="text-4xl font-bold mb-10 leading-snug">${data.question}</h2>
+                        <div class="grid grid-cols-1 gap-4 text-left">
+                            ${data.options.map((opt, i) => `
+                                <button onclick="checkQuiz(this, ${i}, ${data.answer}, '${data.explanation}')" class="quiz-btn p-5 glass-panel rounded-xl hover:bg-blue-600/30 transition flex items-center group">
+                                    <span class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center mr-4 group-hover:bg-blue-500 font-bold">${String.fromCharCode(65 + i)}</span>
+                                    <span class="text-xl">${opt}</span>
+                                </button>
+                            `).join('')}
+                        </div>
+                        <div id="quiz-feedback" class="mt-8 h-16"></div>
+                    </div>
+                `;
+            } else if (data.type === 'code-debug') {
+                html = `
+                    <div class="w-full max-w-4xl slide-enter">
+                        <h2 class="text-4xl font-bold text-red-400 mb-6 flex items-center gap-3"><i data-lucide="bug"></i> ${data.title}</h2>
+                        <div class="bg-red-900/20 border border-red-500/30 p-6 rounded-xl mb-6">
+                            <pre class="code-font text-red-200 text-xl">${data.problem}</pre>
+                        </div>
+                        <div class="bg-yellow-100/10 p-6 rounded-xl text-center">
+                            <p class="text-xl font-bold text-yellow-200 mb-4">Spot the Errors!</p>
+                            <button onclick="this.nextElementSibling.classList.remove('hidden'); this.style.display='none'" class="px-6 py-2 bg-green-600 rounded-full font-bold hover:bg-green-500 transition">Show Solution</button>
+                            <div class="hidden mt-4 text-left bg-green-900/30 p-4 rounded border border-green-500/30 fade-up">
+                                <pre class="font-sans text-lg text-green-200">${data.solution}</pre>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            } else if (data.type === 'thankyou') {
+                html = `
+                    <div class="text-center slide-enter">
+                        <h1 class="text-6xl font-bold text-white mb-4">Thank You!</h1>
+                        <p class="text-2xl text-blue-300 mb-8">${data.subtitle}</p>
+                        <div class="flex justify-center gap-4">
+                            <div class="p-4 bg-white/10 rounded-full"><i data-lucide="thumbs-up"></i></div>
+                            <div class="p-4 bg-white/10 rounded-full"><i data-lucide="share-2"></i></div>
+                            <div class="p-4 bg-white/10 rounded-full"><i data-lucide="bell"></i></div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            stage.innerHTML = html;
+            lucide.createIcons();
+
+            // Auto reveal code text
+            const codeBlock = document.querySelector('.typewriter');
+            if (codeBlock) {
+                codeBlock.style.animation = 'none';
+                codeBlock.offsetHeight; /* trigger reflow */
+                codeBlock.style.animation = null;
+            }
+        }
+
+        // --- NAVIGATION LOGIC ---
+        function nextStep() {
+            // Check for progressive bullets
+            const hiddenPoints = document.querySelectorAll('.point-item:not(.opacity-100)');
+            if (hiddenPoints.length > 0) {
+                const point = hiddenPoints[0];
+                point.classList.remove('opacity-0', 'transform', 'translate-x-4');
+                point.classList.add('opacity-100', 'fade-up');
+            } else {
+                nextSlide();
+            }
+        }
+
+        function nextSlide() {
+            if (isAnimating) return; // Prevent double trigger
+
+            if (currentSlide < slides.length - 1) {
+                const currentEl = stage.firstElementChild;
+
+                // Safety check: ensure element exists
+                if (currentEl) {
+                    isAnimating = true;
+                    currentEl.classList.add('slide-exit');
+                    setTimeout(() => {
+                        currentSlide++;
+                        render();
+                        isAnimating = false;
+                    }, 400);
+                } else {
+                    // Fallback if element missing
+                    currentSlide++;
+                    render();
+                }
+            }
+        }
+
+        function prevSlide() {
+            if (isAnimating) return;
+
+            if (currentSlide > 0) {
+                currentSlide--;
+                render();
+            }
+        }
+
+        function checkQuiz(btn, idx, correctIdx, explanation) {
+            const btns = document.querySelectorAll('.quiz-btn');
+            btns.forEach(b => b.classList.add('opacity-50', 'pointer-events-none'));
+
+            const feedback = document.getElementById('quiz-feedback');
+
+            if (idx === correctIdx) {
+                btn.classList.remove('opacity-50');
+                btn.classList.add('bg-green-600', 'border-green-400');
+                feedback.innerHTML = `<div class="p-4 bg-green-500/20 border border-green-500 rounded text-green-300 fade-up font-bold">✅ Correct! ${explanation}</div>`;
+            } else {
+                btn.classList.remove('opacity-50');
+                btn.classList.add('bg-red-600', 'border-red-400');
+                feedback.innerHTML = `<div class="p-4 bg-red-500/20 border border-red-500 rounded text-red-300 fade-up font-bold">❌ Incorrect. The correct answer was Option ${String.fromCharCode(65 + correctIdx)}.</div>`;
+            }
+        }
+
+        function toggleNotes() {
+            document.getElementById('speaker-notes').classList.toggle('visible');
+        }
+
+        // --- KEYBOARD ---
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') nextStep();
+            if (e.key === 'ArrowLeft') prevSlide();
+        });
+
+        // --- INIT ---
+        render();
+
+    </script>
+    <script src="../assets/js/navigation.js"></script>
+</body>
+
+</html>
