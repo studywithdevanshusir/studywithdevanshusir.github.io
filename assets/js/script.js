@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (!document.querySelector('footer')) {
-        loadFooter();
+        // loadFooter();
     }
 
     // 3. Mobile Menu

@@ -237,10 +237,12 @@ document.addEventListener('DOMContentLoaded', () => {
                         <a href="${rootPath}notes/python-notes.html" class="dropdown-item">Python Notes</a>
                         <a href="${rootPath}notes/sql-notes.html" class="dropdown-item">SQL Notes</a>
                         <a href="${rootPath}notes/networks-notes.html" class="dropdown-item">Networks Notes</a>
+                        <div class="dropdown-divider"></div>
+                        <a href="${rootPath}tools.html" class="dropdown-item">CS Toolkit 🛠️</a>
                     </div>
                 </div>
 
-                <a href="${rootPath}tools.html" class="nav-link">Tools</a>
+                <a href="${rootPath}testimonials.html" class="nav-link">Testimonials</a>
                 <a href="${rootPath}about.html" class="nav-link">About</a>
                 <a href="${rootPath}contact.html" class="nav-link btn-cta">Contact</a>
             </div>
@@ -276,6 +278,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <a href="${rootPath}tools.html" class="dropdown-item" style="color:#60A5FA;">CS Toolkit 🛠️</a>
             
             <hr style="width:100%; border:0; border-top:1px solid rgba(255,255,255,0.1);">
+            <a href="${rootPath}testimonials.html" class="nav-link">Testimonials</a>
             <a href="${rootPath}about.html" class="nav-link">About</a>
             <a href="${rootPath}contact.html" class="nav-link btn-cta" style="margin-top:1rem;">Contact Us</a>
         </div>
